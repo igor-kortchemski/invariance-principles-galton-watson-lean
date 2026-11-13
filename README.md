@@ -1,7 +1,9 @@
 # Invariance principles for Galton–Watson trees conditioned on the number of leaves
 
 [![Lean build and axiom audit](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml?query=branch%3Amain)
-Comparator: not yet run (no comparison interface yet; see [Verify](#verify)).
+[![Comparator](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml?query=branch%3Amain)
+Local comparison and Lean/NanoDa replays pass for the seven selected statements;
+the Linux workflow and full Palomar preflight have not run.
 
 Lean 4 and Mathlib formalization of *Invariance principles for Galton–Watson
 trees conditioned on the number of leaves* by Igor Kortchemski
@@ -10,8 +12,12 @@ trees conditioned on the number of leaves* by Igor Kortchemski
 [doi:10.1016/j.spa.2012.05.013](https://doi.org/10.1016/j.spa.2012.05.013).
 **Every numbered theorem, proposition, lemma and corollary of the paper is
 proved, Theorems 1.10 and 8.1(I) in corrected form, using only the axioms
-`propext`, `Classical.choice` and `Quot.sound`, with no `sorry`.**
-Links: [statements](BGWLeaves/LeafLimits.lean) ·
+`propext`, `Classical.choice` and `Quot.sound`, with no proof holes in the development.**
+The [Palomar candidate](Challenge.lean) selects seven discrete statements:
+Theorems 1.10(i–iii), 3.1(i–ii), 7.1(ii), and corrected 8.1(I).
+The functional invariance principles remain part of the repository and are
+outside this comparison and submission. No Palomar registration is claimed.
+Links: [comparison statements](Challenge.lean) · [functional statements](BGWLeaves/LeafLimits.lean) ·
 [correspondence record](FORMALIZATION_REPORT.md) ·
 [verification](verification/README.md).
 
@@ -24,7 +30,8 @@ step law ($W_n/B_n\to X_1$, `IsRealStableAttracted`).
 
 | Paper | Lean | Statement |
 | --- | --- | --- |
-| Introduction (I), Theorem 3.1 | [`thm_ltn_i`, `thm_ltn_ii`](BGWLeaves/LeafMass.lean) | $\mathbb P_\mu[\lambda(\tau)=n]\sim\mu_0^{1/\theta}p_1(0)\gcd(b-1,d)/(h(n)n^{1/\theta+1})$, lattice case included |
+| Theorem 1.10, corrected | [`locallimit_i`, `locallimit_ii`](BGWLeaves/StableAnalysis.lean), [`locallimit_iii`](BGWLeaves/StableAnalysis/Consequences.lean) | explicit stable norming, its slow variation and the uniform scalar local limit theorem |
+| Introduction (I), Theorem 3.1 | [`thm_ltn_i`, `thm_ltn_ii`](BGWLeaves/LeafMass.lean) | $\mathbb P_\mu[\lambda(\tau)=n+1]\sim\mu_0^{1/\theta}p_1(0)\gcd(b-1,d)/(h(n)n^{1/\theta+1})$ along multiples of $\gcd(b-1,d)$ |
 | Introduction (II) | [`intro_II_general`](BGWLeaves/LeafLimitsGeneral.lean), [`intro_II`](BGWLeaves/LeafLimits.lean) | the rescaled Łukasiewicz path, contour and height of $\tau_n$ converge jointly to $(X^{exc},H^{exc},H^{exc})$ |
 | Theorem 4.5 | [`thm_inv1`](BGWLeaves/LeafLimits.lean) | the same under the conditioning $\lambda(\tau)\ge n$ |
 | Theorem 5.9 | [`thm_cvG_i`, `thm_cvG_ii`](BGWLeaves/LeafLimits.lean) | contour and height functions of $\tau_n$ |
@@ -50,6 +57,9 @@ the [correspondence record](FORMALIZATION_REPORT.md).
 
 ## Where to start
 
+- [Challenge.lean](Challenge.lean): the seven selected statements and their
+  concrete mathematical definitions, importing only Mathlib; their proofs
+  are deliberate placeholders supplied by [Solution.lean](Solution.lean).
 - [BGWLeaves/LeafLimits.lean](BGWLeaves/LeafLimits.lean): the invariance
   principles (Theorems 4.5, 5.9, 6.1, Introduction (II)).
 - [BGWLeaves/LeafMass.lean](BGWLeaves/LeafMass.lean): the number of leaves
@@ -79,19 +89,24 @@ cd invariance-principles-galton-watson-lean
 lake exe cache get
 lake build
 lake env lean scripts/AxiomAudit.lean
+lake build Challenge Solution
+# Linux, with Bubblewrap and nanoda_bin on PATH:
+lake comparator --config comparator.json
 ```
 
 Do not run `lake update`. A full build compiles about 1,000 project and
-vendored modules on top of Mathlib, and reports no `sorry`. The axiom audit
+vendored modules on top of Mathlib. Only the seven deliberate placeholders in
+`Challenge.lean` use `sorry`; that module is separate from the proved library. The axiom audit
 fails if any project or vendored declaration depends on an axiom other than
 the three above. To browse
 the code, open the cloned folder in VS Code with the Lean 4 extension.
 
 The [build workflow](.github/workflows/lean.yml) runs these checks on every
-push. No Comparator check has been run: the statements reach the vendored
-definitions of stable processes and their excursions, beyond Mathlib, and a
-self-contained comparison interface has not been written yet. The local
-results are dated in [verification/](verification/README.md).
+push. The [Comparator workflow](.github/workflows/comparator.yml) checks the
+seven discrete statements with the Linux sandbox and NanoDa. It covers only
+the declarations in [comparator.json](comparator.json). Local comparison and
+kernel replay are diagnostics; the official full Palomar verification remains
+separate. Actual results are dated in [verification/](verification/README.md).
 
 ## How it was made
 

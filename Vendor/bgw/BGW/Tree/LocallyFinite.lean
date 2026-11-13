@@ -47,21 +47,39 @@ theorem canonical_offspringAt (t : PlaneTree) : LocallyFinite.Canonical t.offspr
   induction u generalizing t with
   | nil =>
     cases j with
-    | zero => simp [offspringAt]
+    | zero =>
+      intro _
+      rfl
     | succ j =>
       intro hj
       have hn : ¬j < t.children.length := by
-        simp only [offspringAt, rootDegree] at hj
-        omega
-      simp [offspringAt, List.getElem?_eq_none (Nat.le_of_not_gt hn)]
+        intro hlt
+        exact hj ⟨Nat.succ_le_succ (Nat.zero_le j), hlt⟩
+      change ((t.children[j]?).map (fun s => s.rootDegree)).getD 0 = 0
+      rw [List.getElem?_eq_none (Nat.le_of_not_gt hn)]
+      rfl
   | cons i u ih =>
     cases i with
-    | zero => simp [offspringAt]
+    | zero =>
+      intro _
+      rfl
     | succ i =>
       cases h : t.children[i]? with
-      | none => simp [offspringAt, h]
-      | some s => simpa only [List.cons_append, offspringAt, h, Option.map_some,
-          Option.getD_some] using ih s
+      | none =>
+        intro _
+        change ((t.children[i]?).map (fun s => s.offspringAt (u ++ [j]))).getD 0 = 0
+        rw [h]
+        rfl
+      | some s =>
+        intro hj
+        have heq : t.offspringAt ((i + 1) :: u) = s.offspringAt u := by
+          change ((t.children[i]?).map (fun s => s.offspringAt u)).getD 0 = s.offspringAt u
+          rw [h]
+          rfl
+        rw [heq] at hj
+        change ((t.children[i]?).map (fun s => s.offspringAt (u ++ [j]))).getD 0 = 0
+        rw [h]
+        exact ih s hj
 
 /-- View a finite plane tree as a canonical, possibly-infinite-tree value. -/
 def toLocallyFinite (t : PlaneTree) : LocallyFinite.Tree :=

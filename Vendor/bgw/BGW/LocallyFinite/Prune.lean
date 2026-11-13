@@ -43,7 +43,9 @@ theorem canonical_pruneRaw (f : Offspring) : Canonical (pruneRaw f) := by
   | cons i u ih =>
     by_cases hi : 1 ≤ i ∧ i ≤ f []
     · simpa only [List.cons_append, pruneRaw, ite_eq_left hi] using ih (fun v => f (i :: v))
-    · simp [List.cons_append, pruneRaw, hi]
+    · simp only [List.cons_append, pruneRaw, hi, ↓reduceIte]
+      intro _
+      trivial
 
 /-- The tree obtained from an offspring field by discarding the counts at absent addresses. -/
 def prune (f : Offspring) : Tree := ⟨pruneRaw f, canonical_pruneRaw f⟩

@@ -1,15 +1,16 @@
 # Metadata of the formalization, schema v0.4 (as in the Palomar template of 28 October 2026).
 version: v0.4
 project:
-  name: Invariance principles for Galton–Watson trees conditioned on the number of leaves
+  name: Discrete asymptotics for Galton–Watson trees conditioned on leaves
   description: >-
-    Lean 4 and Mathlib formalization of every numbered result of the paper:
-    the asymptotics of the probability that a critical Galton–Watson tree has
-    n leaves, the joint convergence of the rescaled Łukasiewicz path, contour
-    and height function of a tree conditioned to have n leaves to the excursion
-    of a stable Lévy process and its height process, the maximum degree, and
-    the extension to vertices with degree in a given set. Theorems 1.10 and
-    8.1(I) are formalized in corrected form.
+    Lean 4 and Mathlib formalization of the scalar local limit theorem with
+    corrected stable norming (Theorem 1.10), the admissible leaf counts and
+    their probability asymptotics (Theorem 3.1, Introduction (I)), maximum
+    degree concentration under the paper's hypothesis H (Theorem 7.1(ii)),
+    and corrected probability asymptotics for the number of vertices with
+    degree in an arbitrary set (Theorem 8.1(I)). Seven declarations are
+    selected for comparison. The repository also contains the functional
+    invariance principles, which are outside this submission's scope.
   authors:
     - Igor Kortchemski
   license: Apache-2.0
@@ -40,15 +41,16 @@ related_formalizations:
       are vendored in Vendor/bgw (Apache-2.0).
 status:
   scope: >-
-    Every numbered theorem, proposition, lemma, corollary and remark with
-    mathematical content, and the claims of the Introduction, are proved,
-    except the claims that the contour and height functions determine the
-    tree. Theorems 1.10 (norming constants) and 8.1(I) (arithmetic factor) are
-    proved in corrected form; Theorem 5.1, Proposition 5.3, Lemma 5.7 and
-    Remark 7.3 in a precise form of an ill-posed printed display. Lemma 5.8,
-    Theorems 5.9, 6.1, 7.1(i) and the GH(P) claims carry the paper's Section 5
-    assumption that supp μ ∖ {0} is non-lattice; Introduction (II) and
-    Theorem 8.1(II) are also proved without it.
+    This submission selects Theorem 1.10(i–iii) with corrected norming,
+    Theorem 3.1(i–ii) including lattice cases, Theorem 7.1(ii), and corrected
+    Theorem 8.1(I). The last is proved for arbitrary degree sets of positive
+    offspring mass, without the printed finite-or-cofinite restriction or
+    aperiodicity assumption. The exact seven declarations are listed in
+    comparator.json and restated in Challenge.lean with concrete definitions.
+    Its seven deliberate theorem placeholders are excluded from sorry_count;
+    no definition is left unspecified. The full development and its broader
+    coverage record remain in the repository; functional convergence and
+    Gromov–Hausdorff–Prokhorov claims are outside the comparison and submission.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
@@ -56,7 +58,7 @@ automation:
   methods:
     - method: agent
       models: [claude-opus-5-5, claude-sonnet-5-5, gpt-6.1-sol, gpt-6-luna, gpt-6-astra, moonshotai/kimi-k3.1-pro, deepseek-v4.1-flash]
-      framework: Claude Code coordinator with Codex, Open Math OS and Claude Code workers
+      framework: Claude Code coordinator with Codex, Open Math OS and Claude Code workers; Codex submission preparation
       tool_setup: >-
         Lean 4.35.0 and Mathlib v4.35.0, the lean-autoformalization skills,
         statements frozen after independent audits before proof work, and
@@ -75,18 +77,23 @@ automation:
     not human peer review, and no human has reviewed the proofs line by line.
 fidelity:
   divergences: >-
-    See status.scope for the corrected and restricted statements. The
-    functional limit theorems hold for any norming sequence of the step law.
-    Some proofs take different routes from the paper (FORMALIZATION_REPORT.md,
-    "Differences of route"): Proposition 1.6 through a weighted cyclic lemma,
-    Theorem 3.1(ii) through the walk indexed by leaves (with the lattice case
-    the paper omits), and the convergence on [0,1] in Theorems 5.9 and 6.1
-    through an oscillation control at the end point.
+    Theorem 1.10 uses (−Γ(1−θ))^(1/θ) for θ < 2 and includes the factor 1/2
+    under the square root for θ = 2 with infinite variance. Theorem 8.1(I)
+    replaces the printed gcd(b−1,d) by the gcd of degrees in supp μ ∩ A and
+    of k−1 for degrees outside A, and is strengthened as stated in status.scope.
+    The printed false versions are not claimed proved. Theorem 3.1(ii)
+    follows the walk indexed by leaves, including the lattice case omitted
+    from the printed proof. See FORMALIZATION_REPORT.md for the full record.
 review:
   status: agent-audited; proofs kernel-checked, not human-reviewed
   reviewers: [Claude Sonnet 5.5, Claude Opus 5.5, GPT-6.1 Sol and GPT-6 Astra audit agents]
   notes: >-
-    No Comparator check has been run; see verification/README.md.
+    The new Challenge has not received an independent statement review.
+    Local exact comparison, Lean and NanoDa replays, and the 6,705-declaration
+    transitive axiom audit passed on 13 November 2026; evidence is recorded
+    in verification/README.md. These diagnostics are distinct from the
+    unrun official Linux Comparator and full Palomar verification.
+    No Palomar registration is claimed.
 alignment:
   namespace: BGWLeaves
   statements:
@@ -94,42 +101,21 @@ alignment:
       lean: BGWLeaves.thm_ltn_i, BGWLeaves.thm_ltn_ii
       module: BGWLeaves.LeafMass
       status: proved
-    - source: Introduction (II)
-      lean: BGWLeaves.intro_II_general, BGWLeaves.intro_II
-      module: BGWLeaves.LeafLimitsGeneral, BGWLeaves.LeafLimits
-      status: proved
     - source: Theorem 1.10
       lean: BGWLeaves.StableAnalysis.locallimit_i, BGWLeaves.StableAnalysis.locallimit_ii, BGWLeaves.StableAnalysis.locallimit_iii
       module: BGWLeaves.StableAnalysis, BGWLeaves.StableAnalysis.Consequences
       status: proved in corrected form
       note: The constant is (−Γ(1−θ))^{1/θ} for θ < 2, and a factor 1/2 is added under the square root for θ = 2 with infinite variance.
-    - source: Theorem 4.5
-      lean: BGWLeaves.thm_inv1
-      module: BGWLeaves.LeafLimits
+    - source: Theorem 7.1(ii)
+      lean: BGWLeaves.thm_max_ii
+      module: BGWLeaves.MaxDegree
       status: proved
-    - source: Theorem 5.9
-      lean: BGWLeaves.thm_cvG_i, BGWLeaves.thm_cvG_ii
-      module: BGWLeaves.LeafLimits
-      status: proved
-      note: Under the Section 5 assumption that supp μ ∖ {0} is non-lattice.
-    - source: Theorem 6.1
-      lean: BGWLeaves.thm_cvW3
-      module: BGWLeaves.LeafLimits
-      status: proved
-      note: Under the Section 5 assumption that supp μ ∖ {0} is non-lattice.
-    - source: Theorem 7.1
-      lean: BGWLeaves.thm_max_i, BGWLeaves.thm_max_ii
-      module: BGWLeaves.MaxDegreeLimit, BGWLeaves.MaxDegree
-      status: proved
+      note: Under HypH, along leaf counts with positive probability; bounded and unbounded support are both included.
     - source: Theorem 8.1 (I)
       lean: BGWLeaves.thm81_corrected_general
       module: BGWLeaves.GeneralAInf
       status: proved in corrected form
       note: The factor gcd(b−1, d) is replaced by the gcd of the degrees in supp μ ∩ A and of k−1 for k ∈ supp μ ∖ A, along n ≡ 1 modulo it.
-    - source: Theorem 8.1 (II)
-      lean: BGWLeaves.thm_general_II
-      module: BGWLeaves.GeneralAFunctional
-      status: proved
 acknowledgements: >-
   Lean, Mathlib, the Bienaymé–Galton–Watson trees formalization, and Rémy
   Degenne's brownian-motion and kolmogorov_extension4 projects, whose notices

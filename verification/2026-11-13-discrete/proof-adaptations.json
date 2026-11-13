@@ -1,0 +1,14 @@
+[
+  {
+    "file": "Vendor/bgw/BGW/LocallyFinite/Prune.lean",
+    "declaration": "canonical_pruneRaw",
+    "signature_unchanged": true,
+    "only_proof_body_changed": true
+  },
+  {
+    "file": "Vendor/bgw/BGW/Tree/LocallyFinite.lean",
+    "declaration": "canonical_offspringAt",
+    "signature_unchanged": true,
+    "only_proof_body_changed": true
+  }
+]

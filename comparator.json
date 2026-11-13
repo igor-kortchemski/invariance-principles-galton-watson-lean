@@ -1,0 +1,16 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "BGWLeaves.StableAnalysis.locallimit_i",
+    "BGWLeaves.StableAnalysis.locallimit_ii",
+    "BGWLeaves.StableAnalysis.locallimit_iii",
+    "BGWLeaves.thm_ltn_i",
+    "BGWLeaves.thm_ltn_ii",
+    "BGWLeaves.thm81_corrected_general",
+    "BGWLeaves.thm_max_ii"
+  ],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

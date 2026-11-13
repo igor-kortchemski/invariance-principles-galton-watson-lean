@@ -17,3 +17,9 @@ path = "Vendor/bgw"
 
 [[lean_lib]]
 name = "BGWLeaves"
+
+[[lean_lib]]
+name = "Challenge"
+
+[[lean_lib]]
+name = "Solution"

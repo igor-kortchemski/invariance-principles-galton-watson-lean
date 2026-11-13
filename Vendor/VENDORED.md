@@ -20,3 +20,10 @@ their package configurations, licenses and file notices preserved:
 Only the modules in the import closure of `BGWLeaves` are included (770, 26
 and 4 files). The packages keep their own Lake configurations and Lean options
 and are path dependencies of this project.
+
+For the discrete comparison interface, the proofs of
+`BGW.LocallyFinite.canonical_pruneRaw` and
+`BGW.PlaneTree.canonical_offspringAt` use explicit steps in place of broad
+simplification. This removes module-private proof auxiliaries from the
+definitions reached by the compared statements. Their types and the tree
+definitions are unchanged; the same helper proofs occur in `Challenge.lean`.

@@ -1,0 +1,14 @@
+Axiom audit passed: 6705 declarations (644 theorems) of the project and vendored modules; allowed axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BGWLeaves.intro_II_general' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.intro_II' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.thm_ltn_ii' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.thm_cvG_ii' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.thm_cvW3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.thm_max_i' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.thm_max_ii' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.thm81_corrected_general' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.thm_general_II' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.intro_GHP_leaf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BGWLeaves.StableAnalysis.locallimit_i' depends on axioms: [propext, Classical.choice, Quot.sound]

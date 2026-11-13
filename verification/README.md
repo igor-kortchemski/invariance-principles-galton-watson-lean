@@ -85,7 +85,7 @@ distance equations. The laws, codings and joint limiting law are concrete.
   2,214 lines. See [layout](2026-11-13-functional/layout.json).
 - **Preservation:** every original proof and dependency file is byte-identical
   to the earlier complete Linux build and audit at `3fd1915`
-  ([run 43402042414](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/runs/43402042414)).
+  ([run 43402042414](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/actions/runs/43402042414)).
   The [preservation record](2026-11-13-functional/proof-preservation.json)
   records the individual hashes. The development checkout and its freeze
   records were not edited.
@@ -94,7 +94,7 @@ The [machine record](2026-11-13-functional/local-comparison.json) binds the
 comparison and replays to the final Lean inputs, toolchain, Lake files and
 configuration. Large exports and compiled tools are not committed. These are
 local macOS diagnostics, without the Linux sandbox; the exact-commit official
-full preflight is recorded by the [workflow runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml).
+full preflight is recorded by the [workflow runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/actions/workflows/palomar-full.yml).
 The expanded Challenge is self-reviewed, not independently reviewed. No
 Palomar submission or registration is claimed by these checks.
 
@@ -106,7 +106,7 @@ November 2026 it passed for the first commit, `1dec62b` (GitHub Actions run
 43380746073, ubuntu-24.04): a clean build of 4,522 jobs, no `sorry`, and the
 axiom audit on 6,705 declarations.
 The same workflow also passed at the preparation baseline `73edc6f`
-([run 43387354297](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/runs/43387354297)),
+([run 43387354297](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/actions/runs/43387354297)),
 before the new interface and helper-proof adaptations. The new Linux
 [Comparator workflow](../.github/workflows/comparator.yml) runs the sandboxed
 NanoDa-backed check on demand. The [full-preflight workflow](../.github/workflows/palomar-full.yml)

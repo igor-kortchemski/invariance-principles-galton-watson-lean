@@ -1,11 +1,11 @@
 # Invariance principles for Galton–Watson trees conditioned on the number of leaves
 
-[![Lean build and axiom audit](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml?query=branch%3Amain)
-[![Comparator and full Palomar preflight](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml?query=branch%3Amain)
+[![Lean build and axiom audit](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/actions/workflows/lean.yml?query=branch%3Amain)
+[![Comparator and full Palomar preflight](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/actions/workflows/palomar-full.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/actions/workflows/palomar-full.yml?query=branch%3Amain)
 Comparison, kernel replay and exact-commit verification evidence is recorded
 in [verification/](verification/README.md).
-[Linux Comparator runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml)
-and [full Palomar preflight runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml)
+[Linux Comparator runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/actions/workflows/comparator.yml)
+and [full Palomar preflight runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/actions/workflows/palomar-full.yml)
 identify the exact commits they check.
 
 Lean 4 and Mathlib formalization of *Invariance principles for Galton–Watson
@@ -95,8 +95,8 @@ in [lake-manifest.json](lake-manifest.json). Install Lean with
 then run:
 
 ```bash
-git clone https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean.git
-cd invariance-principles-galton-watson-lean
+git clone https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves.git
+cd invariance-principles-galton-watson-leaves
 lake exe cache get
 lake build
 lake env lean scripts/AxiomAudit.lean
@@ -138,4 +138,4 @@ packages under [Vendor/](Vendor/VENDORED.md), whose notices are preserved. The
 license does not cover the paper. Maintainer: Igor Kortchemski. To cite the
 mathematics, cite the paper; to cite this formalization, see
 [CITATION.cff](CITATION.cff). Report problems in the
-[issue tracker](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/issues).
+[issue tracker](https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves/issues).

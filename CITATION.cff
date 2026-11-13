@@ -7,7 +7,7 @@ type: software
 authors:
   - family-names: Kortchemski
     given-names: Igor
-repository-code: https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean
+repository-code: https://github.com/igor-kortchemski/invariance-principles-galton-watson-leaves
 license: Apache-2.0
 keywords:
   - Lean 4

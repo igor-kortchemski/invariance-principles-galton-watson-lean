@@ -19,7 +19,7 @@ jobs:
   palomar:
     uses: PalomarRegistry/PalomarSubmission/.github/workflows/submission.yml@14aa8d6b3c2f14a8540605e37144560b9a00e7e7
     with:
-      repository: igor-kortchemski/invariance-principles-galton-watson-lean
+      repository: igor-kortchemski/invariance-principles-galton-watson-leaves
       commit: ${{ inputs.commit }}
       pipeline_commit: 14aa8d6b3c2f14a8540605e37144560b9a00e7e7
       request_id: ${{ inputs.request_id }}

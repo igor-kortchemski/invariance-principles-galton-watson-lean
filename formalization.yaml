@@ -1,7 +1,7 @@
 # Metadata of the formalization, schema v0.4 (as in the Palomar template of 28 October 2026).
 version: v0.4
 project:
-  name: Discrete asymptotics for Galton–Watson trees conditioned on leaves
+  name: Invariance principles for Galton–Watson trees conditioned on the number of leaves
   description: >-
     Lean 4 and Mathlib formalization of the scalar local limit theorem with
     corrected stable norming (Theorem 1.10), the admissible leaf counts and

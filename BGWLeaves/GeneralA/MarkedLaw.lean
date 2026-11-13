@@ -172,7 +172,7 @@ private theorem finiteAEvent_mem (t : PlaneTree) (n : ℕ) :
   · intro ht
     exact ⟨t, ht, rfl⟩
 
-/-- The frozen count event, including possible infinite trees, has exactly the
+/-- The count event `{zetaA A T = n}` of the statement, including possible infinite trees, has exactly the
 finite-tree weight series in the critical nondegenerate case. -/
 theorem bienaymeLaw_zetaA_eq_tsum {μ : PMF ℕ} (hc : BGW.StableTrees.IsCritical μ)
     (hne : μ 1 ≠ 1) (n : ℕ) :

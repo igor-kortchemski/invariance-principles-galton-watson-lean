@@ -5,11 +5,11 @@ public import BGWLeaves.Vervaat
 import BGWLeaves.Vervaat.Discrete
 
 /-!
-# M9 provider `Transfer`
+# Maximum degree: steps versus degrees and the transfer of the cyclic maximum
 
-Provider for steps versus degrees and the transfer of the cyclic maximum (Vervaat): `maxDegree_lt_iff`, `lt_maxDegree_iff`, `maximum_increments`, `maxDegree_eq_zero_iff`, `two_le_maxDegree_of_two_le_leaves`, `transfer_vervaat_invariant`, `exists_isMarkTime_of_le`, `walkWord_take`, `IsMarkTime.last_step`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.MaxDegree`; they are exported in namespace `BGWLeaves.MaxDegree.Transfer` with exactly the types of the
-statements file.
+Proofs for steps versus degrees and the transfer of the cyclic maximum (Vervaat): `maxDegree_lt_iff`, `lt_maxDegree_iff`, `maximum_increments`, `maxDegree_eq_zero_iff`, `two_le_maxDegree_of_two_le_leaves`, `transfer_vervaat_invariant`, `exists_isMarkTime_of_le`, `walkWord_take`, `IsMarkTime.last_step`.  The theorems are those stated in
+`BGWLeaves.MaxDegree`; they are exported in namespace `BGWLeaves.MaxDegree.Transfer` with exactly the types stated
+there.
 -/
 
 @[expose] public section

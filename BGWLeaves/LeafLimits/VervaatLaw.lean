@@ -6,17 +6,17 @@ import BGWLeaves.LeafLimits.Helpers
 import Mathlib.MeasureTheory.Measure.Dirac.Basic
 
 /-!
-# M13 provider `VervaatLaw`
+# Corollary 6.7: the law of the Łukasiewicz path as a Vervaat transform
 
-Provider for Corollary 6.7: the registered hole `cor_vervaatC` of `BGWLeaves.LeafLimits`, exported in
-namespace `BGWLeaves.LeafLimits.VervaatLaw` with exactly the type of the statements file.
+Proof of Corollary 6.7: `cor_vervaatC` of `BGWLeaves.LeafLimits`, exported in
+namespace `BGWLeaves.LeafLimits.VervaatLaw` with exactly the type stated there.
 
 Route.  Both sides factor through a word: on `{λ = n}` the tree path is `x ↦ stepPath x (B |x|)` at the
 increment word `x` of the tree (`rescaledLuka_eq_stepPath`), and on `{W_{T_n} = -1}` the Vervaat
 transform of the walk path is the same map at the Vervaat transform of the walk word
-(`vervaatD_stepPath_vervaat`, provider `Helpers`; `|V(x)| = |x| = T_n`).  The two laws of the words,
+(`vervaatD_stepPath_vervaat`, module `Helpers`; `|V(x)| = |x| = T_n`).  The two laws of the words,
 on the countable space `List ℤ` with its discrete σ-algebra (a `local` instance), agree on atoms: this
-is Proposition 6.5 (`prop_vervaatdiscrete`, tranche 1), after intersecting the atoms with the
+is Proposition 6.5 (`prop_vervaatdiscrete`), after intersecting the atoms with the
 conditioning events.  No positivity of `P_μ[λ = n]` is needed (both conditional measures are `0`
 together).
 -/

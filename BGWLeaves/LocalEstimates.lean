@@ -4,41 +4,39 @@ public import BGWLeaves.LocalEstimates.Defs
 import BGWLeaves.LocalEstimates.Proof
 
 /-!
-# Local estimates for forests and marked walks (M7): the results still to be proved
+# Local estimates for forests and marked walks
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`: Lemma 5.4 (`lem:technical`), Corollary 5.5
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source): Lemma 5.4 (`lem:technical`), Corollary 5.5
 (`cor:tejhnique`, with `eq:amontrer`), Lemma 5.11 (`lem:technical2`), Lemma 5.12 (`lem:g`, `eq:e`),
 Lemma 5.13 (`lem:techniqueutile`, with `eq:psi`, `eq:retenir`, `eq:cvdd`, `eq:cvmoche`,
 `eq:lemtechnique0`, `eq:lemtechnique1`, `eq:lemtechnique2`) and Lemma 6.11 (`lem:technic3`).
 
-Each declaration here is a statement audited for freezing; its proof is to be supplied in the provider
-modules `BGWLeaves.LocalEstimates.*` (imported through `BGWLeaves.LocalEstimates.Proof`).  Definitions and
-proved bridges are in `BGWLeaves.LocalEstimates.Defs` (and the shared ones in
+The proofs are in the modules `BGWLeaves.LocalEstimates.*` (imported through `BGWLeaves.LocalEstimates.Proof`).
+Definitions and bridges are in `BGWLeaves.LocalEstimates.Defs` (and the shared ones in
 `BGWLeaves.Conditioning.Defs`).  The declarations `eq_e`, `lem_techniqueutile`, `lem_technical`,
-`chi_zero_asymp`, `normB_pos_eventually` and `G0_eq_G0fv` are proved assemblies of other statements of
-this file and need no provider declaration.
+`chi_zero_asymp`, `normB_pos_eventually` and `G0_eq_G0fv` are proved here from other statements of
+this file.
 
-Integration with M5 and M6 (audit changes C1-C3, C6): the helper `lemma_passage_unit` is dropped (Lemma 4.3
-is `BGWLeaves.lemma_passage` with `U ≡ 1`, `M = 1`, used by the provider of `lem_g`); `markTime_concentration`
-is dropped (it is `BGWLeaves.lem_CVf2_i`, used by the provider of `chi_window`); `psi`, `psiStar`, `chi`
-(called `chiProb` in the draft), `forestLaw`, `forestLeafGeEvent`, `forestSizeGeEvent` are those of
+Lemma 4.3 is used as `BGWLeaves.lemma_passage` with `U ≡ 1`, `M = 1` (in the proof of `lem_g`); the
+concentration of the mark times is `BGWLeaves.lem_CVf2_i` (in the proof of `chi_window`); `psi`, `psiStar`,
+`chi`, `forestLaw`, `forestLeafGeEvent`, `forestSizeGeEvent` are those of
 `BGWLeaves.Conditioning.Defs` (`ℝ≥0∞`-valued, hence the `.toReal` below); `chi_window` has the extra
 hypothesis `ε < 1/μ₀`.
 
 Layout.
-* Norming ratios and arithmetic of `Y` (provider `NormRatios`): `mu0_ne_one`, `nonLattice_etaLaw_iff`,
+* Norming ratios and arithmetic of `Y` (module `NormRatios`): `mu0_ne_one`, `nonLattice_etaLaw_iff`,
   `hS_of_nonLattice`, `normB_ratio_tendsto`, `normBp_ratio_tendsto`, `normBp_div_normB_infVar`,
   `normBp_div_normB_finVar`.
-* Lemma 5.11 (provider `SizeTailKernel`): `sizeTailProb_eq_tsum`, `tailSum_bound`, `sizeTail_riemann`,
+* Lemma 5.11 (module `SizeTailKernel`): `sizeTailProb_eq_tsum`, `tailSum_bound`, `sizeTail_riemann`,
   `lem_technical2`; the kernel `sizeTailKernel`: `sizeTailKernel_eq_integral`, `sizeTailKernel_scaling`,
   `sizeTailKernel_lipschitz`, `qKernel_one_lipschitzOn`, `qKernel_scaling`.
-* Lemma 5.12, Lemma 5.4(i), Corollary 5.5 (provider `LeafWindow`): `forestSize_window_small`, `lem_g`,
+* Lemma 5.12, Lemma 5.4(i), Corollary 5.5 (module `LeafWindow`): `forestSize_window_small`, `lem_g`,
   `eq_e`, `thresholdInv_spec`, `lem_technical_i`, `mn_ratio_tendsto`, `eq_amontrer`, `cor_tejhnique_i`,
   `cor_tejhnique_ii`.
-* Lemma 5.13 and Lemma 5.4(ii) (provider `Technique`): `aN_tendsto`, `aN_majorant`, `aTilde_eq`, `eq_psi`,
+* Lemma 5.13 and Lemma 5.4(ii) (module `Technique`): `aN_tendsto`, `aN_majorant`, `aTilde_eq`, `eq_psi`,
   `eq_retenir`, `bN_bounded`, `bN_sub_Qn`, `Kn_tendsto_*`, `eq_cvmoche`, `bN_tendsto_signed`,
   `lem_techniqueutile`, `eq_lemtechnique0/1/2`, `eq_cvdd`, `lem_technical_ii`, `lem_technical`.
-* Lemma 6.11 (provider `Chi`): `chi_eq_tsum`, `chi_window`, `chi_retenir`, `chi_Bprime_infVar`,
+* Lemma 6.11 (module `Chi`): `chi_eq_tsum`, `chi_window`, `chi_retenir`, `chi_Bprime_infVar`,
   `chi_Bprime_finVar_corrected`, `lem_technic3`, `chi_zero_asymp`.
 -/
 
@@ -54,20 +52,20 @@ set_option linter.unusedSectionVars false
 
 /-! ## 2. Arithmetic and analytic helpers -/
 
-/-- Helper: `μ₀ < 1` for a critical law with `μ 1 ≠ 1` (the proof is inline in the sealed `lem_GdesDev_tree`). -/
+/-- Helper: `μ₀ < 1` for a critical law with `μ 1 ≠ 1` (the proof is inline in `lem_GdesDev_tree`). -/
 theorem mu0_ne_one {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) : μ 0 ≠ 1 := by
   exact BGWLeaves.LocalEstimates.NormRatios.mu0_ne_one hc hne
 
 /-- The printed standing assumption of Section 5 ("`supp μ ∖ {0}` is non-lattice", line 1269) is
 `¬ IsLatticeLaw (etaLaw μ)`: `etaLaw μ` is the law of `Y = K - 1` given `K ≥ 1`, whose support is
-`{k - 1 : k ∈ supp μ ∖ {0}}`; a shift by `1` does not change latticeness (`b' = b + 1`).  ROUTINE. -/
+`{k - 1 : k ∈ supp μ ∖ {0}}`; a shift by `1` does not change latticeness (`b' = b + 1`). -/
 theorem nonLattice_etaLaw_iff {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) :
     ¬ IsLatticeLaw (etaLaw μ) ↔
       ¬ ∃ (b' : ℤ) (d' : ℕ), 2 ≤ d' ∧ ∀ k : ℕ, μ k ≠ 0 → k ≠ 0 → (d' : ℤ) ∣ (k : ℤ) - b' := by
   exact BGWLeaves.LocalEstimates.NormRatios.nonLattice_etaLaw_iff hc hne
 
-/-- `hS` of the sealed `Y`-law interfaces (`etaLaw_norming`, `llt_etaLaw_nonlattice`) follows from `Y` being
-non-lattice (a point mass is lattice: `δ_a` is carried by `a + 2ℤ`).  ROUTINE. -/
+/-- `hS` of the `Y`-law statements (`etaLaw_norming`, `llt_etaLaw_nonlattice`) follows from `Y` being
+non-lattice (a point mass is lattice: `δ_a` is carried by `a + 2ℤ`). -/
 theorem hS_of_nonLattice {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hnl : ¬ IsLatticeLaw (etaLaw μ)) :
     ∃ k₁ k₂ : ℕ, 1 ≤ k₁ ∧ k₁ < k₂ ∧ μ k₁ ≠ 0 ∧ μ k₂ ≠ 0 := by
@@ -79,7 +77,7 @@ variable {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) (hap 
   (hDA : ∃ b, StableDomain μ θ b)
 include hc hne hap hDA
 
-/-- `B_n > 0` for large `n` (from `locallimit_i`, as in the sealed `hSlow_slowlyVarying`). -/
+/-- `B_n > 0` for large `n` (from `locallimit_i`, as in `hSlow_slowlyVarying`). -/
 theorem normB_pos_eventually : ∀ᶠ n : ℕ in atTop, 0 < norming (stepLaw μ) θ n := by
   obtain ⟨b, hb⟩ := hDA
   have := isProbabilityMeasure_stepLaw μ
@@ -91,8 +89,7 @@ theorem normB_pos_eventually : ∀ᶠ n : ℕ in atTop, 0 < norming (stepLaw μ)
 lines 1795, 1743-1744; "`B'_n ∼ c^{1/θ} B'_{q_n(u)}`", line 1866): if `u_n / n → l > 0` then
 `B_{u_n}/B_n → l^{1/θ}`.  From `B_n = h(n) n^{1/θ}`, `h` slowly varying (`locallimit_ii`), `B` monotone: for `δ > 0` eventually
 `(l-δ)n ≤ u_n ≤ (l+δ)n`, so `B_{(l-δ)n} ≤ B_{u_n} ≤ B_{(l+δ)n}` and the pointwise limits `(l ± δ)^{1/θ}` squeeze
-(no uniform convergence theorem is needed because of the monotonicity).  ANALYSIS-small (named proof
-obligation of the roadmap). -/
+(no uniform convergence theorem is needed because of the monotonicity). -/
 theorem normB_ratio_tendsto {u : ℕ → ℝ} {l : ℝ} (hl : 0 < l)
     (hu : Tendsto (fun n : ℕ => u n / n) atTop (𝓝 l)) :
     Tendsto (fun n : ℕ => normB μ θ (u n) / normB μ θ n) atTop (𝓝 (l ^ (1 / θ))) := by
@@ -108,7 +105,7 @@ theorem normBp_ratio_tendsto {u : ℕ → ℝ} {l : ℝ} (hl : 0 < l)
 finite-variance ratio otherwise), **in the form used in 5.13 and 6.11**:
 `B'_n / B_{⌊n/μ₀⌋} → c^{1/θ}` if `σ² = ∞` (from `lem_hhp` and `normB_ratio_tendsto`: `B'_n/B_n → (1-μ₀)^{-1/θ}`,
 `B_n/B_{n/μ₀} → μ₀^{1/θ}`), and `→ √μ₀ σ'/σ` if `σ² < ∞` (`finiteVariance_norming_ratio_eta`; this is
-**not** `c^{1/θ}`, R3). -/
+**not** `c^{1/θ}`, correction 4 of `FORMALIZATION_REPORT.md`). -/
 theorem normBp_div_normB_infVar
     (hinf : ¬ Integrable (fun z : ℤ => (z : ℝ) ^ 2) (stepLaw μ)) :
     Tendsto (fun n : ℕ => norming (etaLaw μ) θ n / normB μ θ ((n : ℝ) / (μ 0).toReal)) atTop
@@ -125,15 +122,15 @@ theorem normBp_div_normB_finVar
 /-! ## 3. Lemma 5.11 (`lem:technical2`): the uniform size-tail kernel
 
 The paper cites Le Gall (`LGIto`, finite variance) and `Kautre` Lemma 3.2(ii) (general index).  It can be
-derived here from the sealed uniform local limit theorem (`llt_abstract` / `llt_stepLaw`), the unmarked
-Kemperman formula and regular variation, so it is stated as a **target**, not as a cited input:
+derived here from the uniform local limit theorem (`llt_abstract` / `llt_stepLaw`), the unmarked
+Kemperman formula and regular variation, so it is proved, not taken as a cited input:
 `P_j[ζ ≥ n] = ∑_{p ≥ n} (j/p) P[W_p = -j]`; replace `P[W_p = -j]` by `p₁(-j/B_p)/B_p` with error `≤ ε` uniform
 in `p ≥ N`, `j ∈ ℤ`; the error sum is `≤ ε j ∑_{p≥n} 1/(p B_p) ≤ ε C α` (sharp Karamata tail sum, as in the proof
 of `sizeTail_asymp`); the main term is a Riemann sum of `s ↦ q_s(j/B_n)` (Potter bounds for the tail). -/
 
 /-- Kemperman at the level of the tail: `P_j[ζ ≥ n] = ∑_{p ≥ n} (j/p) P[W_p = -j]` for `j ≥ 1`, `n ≥ 1`
 (critical: infinite forests are null).  From `firstHit_law`, `kemperman_unmarked`, `intWalkProb_stepLaw`
-and `ae_finiteVertices_bienaymeLaw`.  ROUTINE+. -/
+and `ae_finiteVertices_bienaymeLaw`. -/
 theorem sizeTailProb_eq_tsum {n j : ℕ} (hn : 1 ≤ n) (hj : 1 ≤ j) :
     sizeTailProb μ n j =
       ∑' p : ℕ, if n ≤ p then ((j : ℝ) / p) * intWalkProb (stepLaw μ) p (-(j : ℤ)) else 0 := by
@@ -158,8 +155,8 @@ theorem sizeTail_riemann {α : ℝ} (hα : 0 < α) {ε : ℝ} (hε : 0 < ε) :
   exact BGWLeaves.LocalEstimates.SizeTailKernel.sizeTail_riemann hc hne hap hDA hα hε
 
 /-- **Lemma 5.11 (`lem:technical2`)**, line 1750: `lim_n sup_{1 ≤ j ≤ αB_n} |P_j[ζ(f) ≥ n] - ∫_1^∞ q_s(j/B_n) ds| = 0`
-(`α > 0` fixed; the argument of `q_s` is `j/B_n`, **not** `j/B_{n/μ₀}`).  Hypotheses: `(H_θ)`.  Target (derived
-from the sealed LLT; the paper cites Le Gall and `Kautre`). -/
+(`α > 0` fixed; the argument of `q_s` is `j/B_n`, **not** `j/B_{n/μ₀}`).  Hypotheses: `(H_θ)`.  Derived
+from the local limit theorem; the paper cites Le Gall and `Kautre`. -/
 theorem lem_technical2 {α : ℝ} (hα : 0 < α) {ε : ℝ} (hε : 0 < ε) :
     ∃ N : ℕ, ∀ n : ℕ, N ≤ n → ∀ j : ℕ, 1 ≤ j → (j : ℝ) ≤ α * normB μ θ n →
       |sizeTailProb μ n j - sizeTailKernel θ 1 ((j : ℝ) / normB μ θ n)| ≤ ε := by
@@ -170,7 +167,7 @@ theorem lem_technical2 {α : ℝ} (hα : 0 < α) {ε : ℝ} (hε : 0 < ε) :
 /-- `P_j[n - γ n^{3/4} ≤ ζ ≤ n] → 0` uniformly in `1 ≤ j ≤ αB_n`, `γ = μ₀^{-1} + 1`: the displayed claim in the
 proof of 5.12 (line 1767).  By unmarked Kemperman `P_j[ζ = k] = (j/k) P[W_k = -j]`, the uniform LLT
 (`llt_stepLaw`), `B_k ≥ B_n/2` on the window (regular variation) and `|x p₁(-x)| ≤ M`: each of the
-`≈ γ n^{3/4}` terms is `≤ (M + 2αε)/k`.  ANALYSIS-small. -/
+`≈ γ n^{3/4}` terms is `≤ (M + 2αε)/k`. -/
 theorem forestSize_window_small {α : ℝ} (hα : 0 < α) {ε : ℝ} (hε : 0 < ε) :
     ∃ N : ℕ, ∀ n : ℕ, N ≤ n → ∀ j : ℕ, 1 ≤ j → (j : ℝ) ≤ α * normB μ θ n →
       (forestLaw μ j).real (forestSizeWindow (μ 0).toReal j n) ≤ ε := by
@@ -186,8 +183,8 @@ variable {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) (hap 
 include hc hne hap hDA
 
 /-- **Lemma 5.12 (`lem:g`)**, line 1760: for `α > 0`,
-`lim_n sup_{1 ≤ j ≤ αB_n} |P_j[ζ(f) ≥ n] - P_j[λ(f) ≥ μ₀ n - n^{3/4}]| = 0`.  Proof: Lemma 4.3 of
-M6 (`BGWLeaves.lemma_passage` with `U ≡ 1`, `M = 1`, `isBoundedTest_one`; the cutoff is
+`lim_n sup_{1 ≤ j ≤ αB_n} |P_j[ζ(f) ≥ n] - P_j[λ(f) ≥ μ₀ n - n^{3/4}]| = 0`.  Proof: Lemma 4.3
+(`BGWLeaves.lemma_passage` with `U ≡ 1`, `M = 1`, `isBoundedTest_one`; the cutoff is
 `leafCutoff μ n = ⌈μ₀ n - n^{3/4}⌉₊`, equivalent to the real threshold by `mem_forestLeafGeEvent_real_iff`
 up to the null set of infinite forests) and `forestSize_window_small` (and `oe_{1/2}(n) → 0`). -/
 theorem lem_g {α : ℝ} (hα : 0 < α) {ε : ℝ} (hε : 0 < ε) :
@@ -336,15 +333,15 @@ end Htheta4
 
 /-! ## 8. Lemma 5.13 (`lem:techniqueutile`) and the proof of Lemma 5.4(ii)
 
-Sub-targets (kept visible, in the order of the proof, lines 1823-1966).  Throughout `0 < ε <
-(1-μ₀)/(2μ₀)` (the printed "`0 < ε < 1`" is not enough for the uniform bound of `b_n`, see README D4). -/
+Intermediate statements (kept visible, in the order of the proof, lines 1823-1966).  Throughout `0 < ε <
+(1-μ₀)/(2μ₀)` (the printed "`0 < ε < 1`" is not enough for the uniform bound of `b_n`). -/
 
 section Mu0
 
 variable {μ : PMF ℕ} (h0 : μ 0 ≠ 0) (h1 : μ 0 ≠ 1)
 include h0 h1
 
-/-- **First half of Lemma 5.13**: for fixed `u ∈ ℝ`, `a_n(u) → F₀(u)`, `F₀(u) = √μ₀ F(μ₀^{3/2}u)` (sealed `F0`).
+/-- **First half of Lemma 5.13**: for fixed `u ∈ ℝ`, `a_n(u) → F₀(u)`, `F₀(u) = √μ₀ F(μ₀^{3/2}u)` (`F0`).
 By the strong LLT for the Bernoulli walk (`strongLLT`, `Bernoulli` is non-lattice in the paper's sense,
 `E S_1 = μ₀`, `Var S_1 = μ₀(1-μ₀)`, `stableDensity_two`), line 1856. -/
 theorem aN_tendsto (u : ℝ) :
@@ -360,7 +357,7 @@ theorem aN_majorant {ε : ℝ} (hε0 : 0 < ε) (hε1 : ε < (1 - (μ 0).toReal) 
   exact BGWLeaves.LocalEstimates.Technique.aN_majorant h0 h1 hε0 hε1
 
 /-- `a_n(u)` and the index-shifted `ã_n(u) = √n P[S_{r_n(u)-1} = n-1]` of Lemma 6.11 (line 2223) are related by
-`C(p-1,n-1) = (n/p) C(p,n)`: `ã_n(u) = n/(μ₀ r_n(u)) · a_n(u)` (`r_n(u) ≥ 1`).  ROUTINE (`Nat.succ_mul_choose_eq`). -/
+`C(p-1,n-1) = (n/p) C(p,n)`: `ã_n(u) = n/(μ₀ r_n(u)) · a_n(u)` (`r_n(u) ≥ 1`).  Proof: `Nat.succ_mul_choose_eq`. -/
 theorem aTilde_eq {n : ℕ} (hn : 1 ≤ n) (u : ℝ) (hr : 1 ≤ rN μ n u) :
     Real.sqrt n * binomProb (μ 0).toReal (rN μ n u - 1) (n - 1) =
       (n : ℝ) / ((μ 0).toReal * rN μ n u) * aN μ n u := by
@@ -447,7 +444,7 @@ theorem eq_cvmoche (u : ℝ) {α : ℝ} (hα : 0 < α) {ε' : ℝ} (hε' : 0 < �
       |Qn μ θ n u j - G0 μ θ u ((j : ℝ) / norming (etaLaw μ) θ n)| ≤ ε' := by
   exact BGWLeaves.LocalEstimates.Technique.eq_cvmoche hc hne hap hDA hnl u hα hε'
 
-/-- **Second half of Lemma 5.13, signed form** (the target of the proof): for fixed `u`,
+/-- **Second half of Lemma 5.13, signed form**: for fixed `u`,
 `sup_{|j| ≤ αB_n} |b_n(u,j) - G₀(u, j/B'_n)| → 0`, `j ∈ ℤ` (the printed range is `1 ≤ j ≤ αB_n`; the signed range is
 needed by Lemma 6.11 and costs nothing: `bN_sub_Qn` is uniform in `j ∈ ℤ`, `eq_cvmoche` for `|j| ≤ αB_n`). -/
 theorem bN_tendsto_signed (u : ℝ) {α : ℝ} (hα : 0 < α) {ε' : ℝ} (hε' : 0 < ε') :
@@ -519,10 +516,11 @@ theorem eq_lemtechnique0_infVar
         cC μ ^ (1 / θ) * Scalar.stableDensity θ (-((j : ℝ) / normB μ θ ((n : ℝ) / (μ 0).toReal)))| ≤ ε' := by
   exact BGWLeaves.LocalEstimates.Technique.eq_lemtechnique0_infVar hc hne hap hDA hnl hinf hα hε0 hε1 hε'
 
-/-- **`eq:lemtechnique0` for `σ² < ∞`, CORRECTED** (replaces the printed `c^{1/2} p₁(-j/B_{n/μ₀})`, R3): with
+/-- **`eq:lemtechnique0` for `σ² < ∞`, CORRECTED** (replaces the printed `c^{1/2} p₁(-j/B_{n/μ₀})`,
+correction 4 of `FORMALIZATION_REPORT.md`): with
 `r = √μ₀ σ'/σ` (`σ² = variance (stepLaw μ)`, `σ'² = variance (etaLaw μ)`),
 `sup_{1 ≤ j ≤ αB_n} |μ₀ ∫_{-ε√n}^{ε√n} a_n(u) b_n(u,j) du - r p₁(-j/B_{n/μ₀})| → 0`.
-The Gaussian convolution is the sealed `gaussian_convolution_identity`: `μ₀ ∫ F₀ G₀ = r p₁(r x)` at `x = j/B'_n`,
+The Gaussian convolution is `gaussian_convolution_identity`: `μ₀ ∫ F₀ G₀ = r p₁(r x)` at `x = j/B'_n`,
 and `r x = j/B_{n/μ₀} + o(1)` since `B'_n = σ'√(n/2)`.  The printed claim is false in finite variance (`r < √c`,
 `r_lt_sqrt_c`); the final limit of 5.4(ii) survives because the prefactor `j/B'_n` then cancels `r`. -/
 theorem eq_lemtechnique0_finVar_corrected
@@ -536,9 +534,9 @@ theorem eq_lemtechnique0_finVar_corrected
           Scalar.stableDensity θ (-((j : ℝ) / normB μ θ ((n : ℝ) / (μ 0).toReal)))| ≤ ε' := by
   exact BGWLeaves.LocalEstimates.Technique.eq_lemtechnique0_finVar_corrected hc hne hap hDA hnl hfin hα hε0 hε1 hε'
 
-/-- The finite-variance case is `θ = 2` and `G₀` is the sealed `G0fv`: `G0 μ 2 u x = G0fv μ₀ σ' x u`
-(`c^{1/2} = √c`, `c^{3/2} = c √c`, `stableDensity_two`).  Connects the printed `G₀` with the sealed Gaussian
-identity. -/
+/-- The finite-variance case is `θ = 2` and `G₀` is `G0fv`: `G0 μ 2 u x = G0fv μ₀ σ' x u`
+(`c^{1/2} = √c`, `c^{3/2} = c √c`, `stableDensity_two`).  Connects the printed `G₀` with the Gaussian
+identity `gaussian_convolution_identity`. -/
 theorem G0_eq_G0fv
     (hfin : Integrable (fun z : ℤ => (z : ℝ) ^ 2) (stepLaw μ)) (hθ : θ = 2) (u x : ℝ) :
     G0 μ θ u x = G0fv (μ 0).toReal (Real.sqrt (variance (etaLaw μ))) x u := by
@@ -560,7 +558,7 @@ theorem G0_eq_G0fv
 
 /-- **Lemma 5.4(ii) (`lem:technical`, line 1412)**: for `α > 0`,
 `lim_n sup_{1 ≤ j ≤ αB_n} |n ψ_n(j) - q_1(j/B_{n/μ₀})| = 0` (`q_1(x) = x p₁(-x)`).  Hypotheses: `(H_θ)` and
-the non-lattice assumption of §5 (`hnl`); without it the statement is false (README, lattice case).
+the non-lattice assumption of §5 (`hnl`); without it the statement is false (lattice case).
 Proof: `eq_psi`, `eq_retenir`, `eq_cvdd`, `eq_lemtechnique1`, then `eq_lemtechnique0_infVar` or
 `eq_lemtechnique0_finVar_corrected`, and the ratio `B'_n/B_{n/μ₀}` (`normBp_div_normB_infVar` / `_finVar`) which cancels
 against the prefactor `j/B'_n ≤ α'`. -/
@@ -583,8 +581,8 @@ end Htheta5
 /-! ## 9. Lemma 6.11 (`lem:technic3`)
 
 `χ_n(j) = P_j[W_{T_n} = -1]` (`chi`, `ℝ≥0∞`-valued; its `.toReal`).  Statement for **signed** `j`, `|j| ≤ αB_n`.  Hypotheses: `(H_θ)` and
-`hnl` (the printed proof uses the local limit theorem for `W'`, hence `Y` non-lattice; README, D5).  The
-sub-targets follow the printed proof (lines 2204-2236). -/
+`hnl` (the printed proof uses the local limit theorem for `W'`, hence `Y` non-lattice).  The
+intermediate statements follow the printed proof (lines 2204-2236). -/
 
 section Chi
 
@@ -594,8 +592,8 @@ include hc hne hap hDA hnl
 
 /-- Exact decomposition at the last marked step (line 2208-2216): for `n ≥ 1` and **every** `j ∈ ℤ`,
 `χ_n(j) = μ₀ ∑_{q ≥ 0} P[S_{n-1+q} = n-1] P[W'_q = n-1-j]` (the time of the `n`-th mark is `T_n = n + q`; the last step is
-the mark; `eq:LambdaUtile` for `p = n-1+q` marks `n-1`, endpoint `-j`).  The sealed `pi_leafMarkedBridges` has
-`j ≥ 1` natural; this is its signed, infinite-walk form (NEW, ROUTINE+).  The series is a sum of probabilities. -/
+the mark; `eq:LambdaUtile` for `p = n-1+q` marks `n-1`, endpoint `-j`).  `pi_leafMarkedBridges` has
+`j ≥ 1` natural; this is its signed, infinite-walk form.  The series is a sum of probabilities. -/
 theorem chi_eq_tsum {n : ℕ} (hn : 1 ≤ n) (j : ℤ) :
     (chi μ n j).toReal =
       (μ 0).toReal * ∑' q : ℕ, binomProb (μ 0).toReal (n - 1 + q) (n - 1) *
@@ -605,7 +603,7 @@ theorem chi_eq_tsum {n : ℕ} (hn : 1 ≤ n) (j : ℤ) :
 
 /-- Localization (line 2208): for `ε > 0`, `|χ_n(j) - μ₀ ∑_{|k - n/μ₀| ≤ εn} P[S_{k-1} = n-1] P[W'_{k-n} = n-1-j]| ≤ C e^{-c√n}`,
 uniformly in `j ∈ ℤ` (the error is `P[|T_n - n/μ₀| > εn] ≤ P[|T_n/n - 1/μ₀| > n^{-1/4}]` for large `n`, i.e. Lemma 6.2(i),
-`BGWLeaves.lem_CVf2_i`).  The hypothesis `hε1 : ε < 1/μ₀` is the audit change C6: it makes the lower
+`BGWLeaves.lem_CVf2_i`).  The hypothesis `hε1 : ε < 1/μ₀` makes the lower
 limit of the window positive, so that `toNat` is the identity (for `ε > 1/μ₀` and `n = 1` the window starts at
 `k = 0` and a spurious term appears). -/
 theorem chi_window {ε : ℝ} (hε : 0 < ε) (hε1 : ε < 1 / (μ 0).toReal) :
@@ -641,7 +639,7 @@ theorem chi_Bprime_infVar (hinf : ¬ Integrable (fun z : ℤ => (z : ℝ) ^ 2) (
   exact BGWLeaves.LocalEstimates.Chi.chi_Bprime_infVar hc hne hap hDA hnl hinf hα hε'
 
 /-- The same for `σ² < ∞`, **CORRECTED** (the printed intermediate has `c^{1/2}`; it must be `r = √μ₀ σ'/σ`,
-R3, line 2238-2240 of the manuscript). -/
+correction 4 of `FORMALIZATION_REPORT.md`, lines 2238-2240). -/
 theorem chi_Bprime_finVar_corrected (hfin : Integrable (fun z : ℤ => (z : ℝ) ^ 2) (stepLaw μ))
     {α : ℝ} (hα : 0 < α) {ε' : ℝ} (hε' : 0 < ε') :
     ∃ N : ℕ, ∀ n : ℕ, N ≤ n → ∀ j : ℤ, |(j : ℝ)| ≤ α * normB μ θ n →

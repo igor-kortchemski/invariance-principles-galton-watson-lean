@@ -744,7 +744,7 @@ private theorem leafProb_negativeBinomial_series {μ : PMF ℕ} (hc : IsCritical
           intWalkProb (etaLaw μ) k n) := by ring
     _ = _ := by rw [choose_weight]; ring
 
-/-- The exact leaf-time walk identity, with the same `n+1` indexing as the target. -/
+/-- The exact leaf-time walk identity, with the same `n+1` indexing as `ltn_ii_tendsto`. -/
 private theorem leafProb_leafTimeLaw {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (n : ℕ) :
     leafProb μ (n + 1) =

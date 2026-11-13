@@ -5,11 +5,11 @@ public import BGW.Probability.WeakConvergence
 public import BGW.StableTrees.JointExcursion
 
 /-!
-# M12 provider `Perturbation`
+# Lemma 5.7: random time and space perturbation
 
-Provider for Lemma 5.7 (random time and space perturbation).  It will provide the registered holes
-`lem_CVproba` and `lem_CVproba_pair` of `BGWLeaves.ClassicalLimits`, exported in namespace
-`BGWLeaves.ClassicalLimits.Perturbation` with exactly the types of the statements file.
+Proof of Lemma 5.7 (random time and space perturbation): `lem_CVproba` and `lem_CVproba_pair` of
+`BGWLeaves.ClassicalLimits`, exported in namespace `BGWLeaves.ClassicalLimits.Perturbation` with exactly
+the types stated there.
 -/
 
 @[expose] public section

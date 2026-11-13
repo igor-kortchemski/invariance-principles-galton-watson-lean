@@ -5,26 +5,26 @@ public import BGWLeaves.GeneralA.Defs
 public import BGWLeaves.StableAnalysis
 
 /-!
-# Exact leaf counts (M4b): definitions and proved bridges
+# Exact leaf counts: definitions and bridges
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Section 3 (exact leaf counts): Theorem 3.1
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source), Section 3 (exact leaf counts): Theorem 3.1
 (`thm:ltn`, lines 864-882), the remark after it (line 880), Remark 3.2 (line 885), Corollary 3.3
 (`cor:Lambda`, lines 890-896), Section 3.1 (`eq:Y`, line 904, `eq:ll`, line 915) and Section 3.2
 (the lattice case and the periodic remark, lines 1074-1096).
 
-This file contains every definition of milestone M4b and the proved bridges.  It contains no proof
-holes.  The definitions of Section 2 (`IsOe`, `finiteTreeEvent`, `supDev`, `childCountAt`, `Lambda`,
+This file contains the definitions for the exact leaf counts and the bridges.  The definitions of
+Section 2 (`IsOe`, `finiteTreeEvent`, `supDev`, `childCountAt`, `Lambda`,
 `treeLeafDev`) are those of `BGWLeaves.LeafConcentration.Defs`, which is imported here.  The
-statements still to be proved are in `BGWLeaves.LeafMass`; their proofs are supplied by the provider
-modules `BGWLeaves.LeafMass.*` (imported through `BGWLeaves.LeafMass.Proof`).
+main statements are in `BGWLeaves.LeafMass`; their proofs are in the modules
+`BGWLeaves.LeafMass.*` (imported through `BGWLeaves.LeafMass.Proof`).
 
 Conventions.
 * Offspring law `μ : PMF ℕ`; the law of a Galton-Watson tree is `bienaymeLaw μ.toMeasure` on
   `LocallyFinite.Tree`; `P_μ[λ(τ) = m]` is `leafProb μ m`, the mass of the event `leafCountEvent m`
   (the tree is finite and has exactly `m` leaves).  Infinite trees are null in the critical case.
-* The laws on `ℤ` of M3 (`stepLaw μ`, `etaLaw μ`, `intWalkProb`, `norming`, `IsStableAttracted`,
+* The laws on `ℤ` of `BGWLeaves.StableAnalysis` (`stepLaw μ`, `etaLaw μ`, `intWalkProb`, `norming`, `IsStableAttracted`,
   `IsLatticeLaw`, `HasSpan`, `mean`, `variance`) are used as they are.
-* `B_n = norming (stepLaw μ) θ n` is the CORRECTED norming (`MANUSCRIPT_RECOMMENDATIONS.md` R2, R4);
+* `B_n = norming (stepLaw μ) θ n` is the CORRECTED norming (corrections 1 and 2 of `FORMALIZATION_REPORT.md`);
   `h = hSlow μ θ` is the slowly varying function with `B_n = h(n) n^{1/θ}`.
 -/
 
@@ -58,7 +58,7 @@ noncomputable def leafProb (μ : PMF ℕ) (m : ℕ) : ℝ :=
 
 /-- The slowly varying function `h` of Theorem 3.1 (`B_n = h(n) n^{1/θ}`, introduced before
 Lemma 1.11 of the paper): `h(x) = B_{⌊x⌋} / x^{1/θ}` with `B_n = norming (stepLaw μ) θ n` (the
-corrected norming of M3).  That it is slowly varying is `hSlow_slowlyVarying`. -/
+corrected norming).  That it is slowly varying is `hSlow_slowlyVarying`. -/
 noncomputable def hSlow (μ : PMF ℕ) (θ : ℝ) : ℝ → ℝ :=
   fun x => norming (stepLaw μ) θ ⌊x⌋₊ / x ^ (1 / θ)
 
@@ -104,7 +104,7 @@ def leafMonoid (μ : PMF ℕ) : AddSubmonoid ℕ :=
 
 /-! ## 3.2 The law of `Y`: a proved bridge -/
 
-/-- The finite-variance norming of `W'` (`largetrees_final.tex`, line 920: `B'_n = σ' √(n/2)`,
+/-- The finite-variance norming of `W'` (line 920: `B'_n = σ' √(n/2)`,
 `σ'² = Var(Y)`): proved from `integrable_sq_etaLaw` and `norming_of_integrable_sq`. -/
 theorem norming_etaLaw_finiteVariance {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hfin : Integrable (fun z : ℤ => (z : ℝ) ^ 2) (stepLaw μ)) (n : ℕ) :

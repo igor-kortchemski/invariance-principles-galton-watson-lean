@@ -3,11 +3,11 @@ module
 public import BGWLeaves.Vervaat.Cyclic
 
 /-!
-# M5 provider `TimeReversal`
+# Time reversal of the walk (6.8)
 
-Provider for time reversal of the walk (6.8).  The theorems proved here were the registered holes of
-`BGWLeaves.Vervaat`; they are exported in namespace `BGWLeaves.Vervaat.TimeReversal` with exactly the types of the
-statements file.
+Proofs for the time reversal of the walk (6.8).  The theorems are those stated in
+`BGWLeaves.Vervaat`; they are exported in namespace `BGWLeaves.Vervaat.TimeReversal` with exactly the types
+stated there.
 -/
 
 @[expose] public section

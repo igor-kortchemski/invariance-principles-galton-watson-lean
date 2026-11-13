@@ -3,10 +3,9 @@ module
 public import BGWLeaves.StableAnalysis
 
 /-!
-# Scalar stable analysis (M3): proved consequences of the statements
+# Scalar stable analysis: consequences of the main statements
 
-Proved declarations that use at least one of the statements of `BGWLeaves.StableAnalysis`; they
-inherit whatever those statements depend on.
+Declarations that use at least one of the statements of `BGWLeaves.StableAnalysis`.
 -/
 
 @[expose] public section

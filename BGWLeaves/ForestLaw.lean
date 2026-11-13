@@ -4,9 +4,9 @@ public import BGWLeaves.ForestLaw.Defs
 import BGWLeaves.ForestLaw.Proof
 
 /-!
-# The forest law and Proposition 1.6 (M2)
+# The forest law and Proposition 1.6
 
-Source: arXiv:1110.2163v4, Section 1.3 (lines 503–562): the law of `j` independent
+Source: arXiv:1110.2163v4, Section 1.3 (lines 503–562 of the LaTeX source): the law of `j` independent
 Galton–Watson trees, `eq:LambdaUtile` and Proposition 1.6 (`prop:K`).
 -/
 

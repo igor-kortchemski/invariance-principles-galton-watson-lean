@@ -14,24 +14,24 @@ public import Mathlib.Probability.ConditionalProbability
 public import Mathlib.Probability.Distributions.Uniform
 
 /-!
-# Vervaat transform, mark times, time reversal, uniform trees (M5): definitions and proved bridges
+# Vervaat transform, mark times, time reversal, uniform trees: definitions and bridges
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Section 6.2(i) (`lem:CVf2`, line 2004), 6.3
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source), Section 6.2(i) (`lem:CVf2`, line 2004), 6.3
 (`def:vervaat`), 6.4 (`lem:cool`), 6.5 (`prop:vervaatdiscrete`), 6.8 (`prop:timereversal`, line 2147)
 and 7.3 (`rem:uniformtree`, lines 2459-2486).
 
-This file contains every definition of milestone M5 and the proved elementary bridges.  It contains no
-proof holes.  The statements still to be proved are in `BGWLeaves.Vervaat`; their proofs are supplied by
-the provider modules `BGWLeaves.Vervaat.*` (imported through `BGWLeaves.Vervaat.Proof`).
+This file contains the definitions for the Vervaat transform, the mark times, the time reversal and the
+uniform trees, and the elementary bridges.  The main statements are in `BGWLeaves.Vervaat`; their proofs are
+in the modules `BGWLeaves.Vervaat.*` (imported through `BGWLeaves.Vervaat.Proof`).
 
 Conventions.
 * Walk laws: `Measure.infinitePi (fun _ : ℕ => μ)` on `ℕ → ℕ`, the step at time `i` being `ω i - 1`
-  (as in M2b and M4a); `Λ` is `walkLeafCount` of `BGWLeaves.LeafConcentration.Defs`.
+  (as in `BGWLeaves.Passage` and `BGWLeaves.LeafConcentration`); `Λ` is `walkLeafCount` of
+  `BGWLeaves.LeafConcentration.Defs`.
 * Words are `List ℤ`; the countable discrete spaces `List ℤ` and `Fin (m+1) → ℤ` are handled by atoms
   (there is no measurable-space instance on `List ℤ`).
 * Conditioning is `ProbabilityTheory.cond`: conditioning on a null event gives the zero measure.
-* Not in this package (see the README): the maximum-degree principles and the window `eq:better` of
-  Remark 7.3, which depend on tranche-2 input.
+* The maximum-degree principles and the window `eq:better` of Remark 7.3 are in `BGWLeaves.MaxDegree`.
 -/
 
 @[expose] public section
@@ -42,7 +42,7 @@ open MeasureTheory ProbabilityTheory Filter BGW
 open BGW.StableTrees BGW.LocallyFinite BGWLeaves.StableAnalysis
 open scoped ENNReal Topology
 
-/-! ## 0. Walk words, marks, the Vervaat transform (NEW definitions) -/
+/-! ## 0. Walk words, marks, the Vervaat transform -/
 
 /-- `W_k = ∑_{i<k} (ω i - 1)`, the walk of Section 1.3 (same expression as `IsFirstHit`). -/
 def walkSum (ω : ℕ → ℕ) (k : ℕ) : ℤ := ∑ i ∈ Finset.range k, ((ω i : ℤ) - 1)
@@ -74,7 +74,7 @@ def SBar (k n : ℕ) : Set (List ℤ) :=
     ∀ m : ℕ, 1 ≤ m → m < k → -1 < (x.take m).sum}
 
 /-- `T_n = k`: `k` is the first time at which `Λ(k) = n` (`eq:notations`,
-`T_u = inf {k ≥ 0 ; Λ(k) = ⌊u⌋}`, here for integer `u = n`).  `Λ` is `walkLeafCount` (M4a). -/
+`T_u = inf {k ≥ 0 ; Λ(k) = ⌊u⌋}`, here for integer `u = n`).  `Λ` is `walkLeafCount`. -/
 def IsMarkTime (n : ℕ) (ω : ℕ → ℕ) (k : ℕ) : Prop :=
   walkLeafCount ω k = n ∧ ∀ q < k, walkLeafCount ω q < n
 
@@ -88,7 +88,7 @@ def vervaatAtMark (n : ℕ) (x : List ℤ) : Set (ℕ → ℕ) :=
   {ω | ∃ k, IsMarkTime n ω k ∧ walkSum ω k = -1 ∧ vervaat (walkWord ω k) = x}
 
 /-- Tree side: the finite tree has `n` leaves and Łukasiewicz increment word
-`(W_1(τ), W_2(τ) - W_1(τ), …, W_ζ(τ) - W_{ζ-1}(τ)) = x` (`PlaneTree.increments`, as in M4a). -/
+`(W_1(τ), W_2(τ) - W_1(τ), …, W_ζ(τ) - W_{ζ-1}(τ)) = x` (`PlaneTree.increments`, as in `BGWLeaves.LeafConcentration`). -/
 def treeWordLeaves (n : ℕ) (x : List ℤ) : Set LocallyFinite.Tree :=
   finiteTreeEvent fun t => t.increments = x ∧ t.degreeCount 0 = n
 

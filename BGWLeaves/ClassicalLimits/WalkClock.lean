@@ -11,9 +11,9 @@ public import BGW.StableTrees.StableProcessMarkov
 public import BGW.StableTrees.StableProcessCompactness
 
 /-!
-# M12 provider `WalkClock`
+# Lemma 6.2(ii): the walk at the leaf clock
 
-Provider for Lemma 6.2(ii), `lem_CVf2_ii`, at the frozen statement's exact type.
+Proof of Lemma 6.2(ii), `lem_CVf2_ii`, with exactly the type stated in `BGWLeaves.ClassicalLimits`.
 The FCLT is applied along `N_n = max ⌊n/μ₀⌋ 1`, absorbing the spatial normalization into
 its deterministic index. Lemma 6.2(i) and Borel–Cantelli give the strong clock law;
 `Perturbation.lem_CVproba` then handles `T_{an}/(a N_n)`. Clipping at the fixed horizon

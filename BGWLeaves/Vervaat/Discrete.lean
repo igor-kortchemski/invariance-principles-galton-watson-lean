@@ -4,11 +4,13 @@ public import BGWLeaves.Vervaat.Cyclic
 public import BGWLeaves.Vervaat.TimeReversal
 
 /-!
-# M5 provider `Discrete`
+# The discrete Vervaat identity (6.5)
 
-Provider for the discrete Vervaat identity (6.5): `vervaatAtMark_eq`, `vervaatAtMark_eq_empty`, `treeWordLeaves_prob`, `bridgeAtMark_eq_iUnion`, `leafCountEvent_eq_iUnion`, `measurableSet_bridgeAtMark`, `measurableSet_leafCountEvent`, `prop_vervaatdiscrete_joint`, `prop_vervaatdiscrete_total`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.Vervaat`; they are exported in namespace `BGWLeaves.Vervaat.Discrete` with exactly the types of the
-statements file.
+Proofs of the discrete Vervaat identity (6.5): `vervaatAtMark_eq`, `vervaatAtMark_eq_empty`,
+`treeWordLeaves_prob`, `bridgeAtMark_eq_iUnion`, `leafCountEvent_eq_iUnion`, `measurableSet_bridgeAtMark`,
+`measurableSet_leafCountEvent`, `prop_vervaatdiscrete_joint`, `prop_vervaatdiscrete_total`.  The theorems are
+those stated in `BGWLeaves.Vervaat`; they are exported in namespace `BGWLeaves.Vervaat.Discrete` with exactly
+the types stated there.
 -/
 
 @[expose] public section

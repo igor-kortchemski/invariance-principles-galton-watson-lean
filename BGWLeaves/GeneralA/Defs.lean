@@ -5,12 +5,12 @@ public import BGWLeaves.StableAnalysis.Defs
 /-!
 # Theorem 8.1(I) for a general set `A` (corrected, finite variance): definitions
 
-Source: arXiv:1110.2163v4, Section 8, Theorem 8.1(I), `largetrees_final.tex` lines 2495-2515.
+Source: arXiv:1110.2163v4, Section 8, Theorem 8.1(I), lines 2495-2515 of the LaTeX source.
 
 The printed constant `gcd(b-1,d)` of Theorem 8.1(I) is false in general
-(`MANUSCRIPT_RECOMMENDATIONS.md` R1).  The statement formalized in `BGWLeaves.GeneralA` is the
+(correction 5 of `FORMALIZATION_REPORT.md`).  The statement formalized in `BGWLeaves.GeneralA` is the
 **corrected** one, with the arithmetic factor `arithFactor μ A` below, in the finite-variance case
-only; the printed claim is not counted as proved, and the infinite-variance cases stay open.
+only; the printed claim is not proved.  The infinite-variance cases are in `BGWLeaves.GeneralAInf`.
 -/
 
 @[expose] public section

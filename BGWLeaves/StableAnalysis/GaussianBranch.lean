@@ -12,7 +12,7 @@ Let `ν` be a probability law on `ℤ` with `ν {z < -1} = 0`, finite mean and i
 `T(x) = ν {z > x}` and `K = truncSecondMoment ν`.
 
 * (B3-a) `T` regularly varying of index `-2` implies that `K` is slowly varying and unbounded.
-* (C3) If `K` is slowly varying and unbounded then `g_n = gaussQuantile ν n` satisfies
+* If `K` is slowly varying and unbounded then `g_n = gaussQuantile ν n` satisfies
   `g_n² = n K(g_n)` eventually, `g_{⌊l n⌋} / g_n → l^{1/2}`, and the norming `a_n = norming ν 2 n`
   satisfies `a_{⌊l n⌋} / a_n → l^{1/2}`.
 * (B3-b) If `K` is slowly varying and unbounded, then the integrated tail
@@ -367,7 +367,7 @@ theorem truncSecondMoment_slowlyVarying_of_regVary (ν : Measure ℤ) [IsProbabi
 end B3a
 
 
-/-! ## 4. (C3) The Gaussian crossing sequence -/
+/-! ## 4. The Gaussian crossing sequence -/
 
 section C3
 
@@ -654,7 +654,7 @@ private theorem gauss_ratio (hK : SlowlyVarying (truncSecondMoment ν))
   rw [← hsq', Real.sqrt_sq (div_nonneg hgm.le hgn.le)]
 
 
-/-- **(C3-a)** If `K = truncSecondMoment ν` is slowly varying and unbounded, then eventually
+/-- If `K = truncSecondMoment ν` is slowly varying and unbounded, then eventually
 `g_n = gaussQuantile ν n` is positive and the crossing is an equality:
 `g_n² = n K(g_n)` (`K` is right continuous, being constant on `[k, k+1)`). -/
 theorem gaussQuantile_sq_eventually (hK : SlowlyVarying (truncSecondMoment ν))
@@ -663,7 +663,7 @@ theorem gaussQuantile_sq_eventually (hK : SlowlyVarying (truncSecondMoment ν))
       gaussQuantile ν n ^ 2 = n * truncSecondMoment ν (gaussQuantile ν n) :=
   gauss_eventually hK hKinf
 
-/-- **(C3-b)** `g_n → ∞`, and hence `K(g_n) → ∞`. -/
+/-- `g_n → ∞`, and hence `K(g_n) → ∞`. -/
 theorem gaussQuantile_tendsto_atTop (hK : SlowlyVarying (truncSecondMoment ν))
     (hKinf : Tendsto (truncSecondMoment ν) atTop atTop) :
     Tendsto (fun n : ℕ => gaussQuantile ν n) atTop atTop :=
@@ -675,7 +675,7 @@ theorem truncSecondMoment_gaussQuantile_tendsto_atTop
     Tendsto (fun n : ℕ => truncSecondMoment ν (gaussQuantile ν n)) atTop atTop :=
   hKinf.comp (gauss_tendsto_atTop' hK hKinf)
 
-/-- **(C3-c)** The Gaussian crossing sequence is regularly varying of index `1/2`:
+/-- The Gaussian crossing sequence is regularly varying of index `1/2`:
 `g_{⌊l n⌋} / g_n → l^{1/2}`. -/
 theorem gaussQuantile_floor_div (hK : SlowlyVarying (truncSecondMoment ν))
     (hKinf : Tendsto (truncSecondMoment ν) atTop atTop) {l : ℝ} (hl : 0 < l) :
@@ -688,7 +688,7 @@ private theorem norming_eq_aux (hinf : ¬ Integrable (fun z : ℤ => (z : ℝ) ^
     norming ν 2 n = Real.sqrt (n * truncSecondMoment ν (gaussQuantile ν n) / 2) := by
   simp only [norming, hinf, ite_false, lt_irrefl]
 
-/-- **(C3-d)** Eventually `a_n = norming ν 2 n = g_n / √2` (since `g_n² = n K(g_n)`). -/
+/-- Eventually `a_n = norming ν 2 n = g_n / √2` (since `g_n² = n K(g_n)`). -/
 theorem norming_two_eventually_eq (hK : SlowlyVarying (truncSecondMoment ν))
     (hKinf : Tendsto (truncSecondMoment ν) atTop atTop) :
     ∀ᶠ n : ℕ in atTop, norming ν 2 n = gaussQuantile ν n / Real.sqrt 2 := by
@@ -696,7 +696,7 @@ theorem norming_two_eventually_eq (hK : SlowlyVarying (truncSecondMoment ν))
   rw [norming_eq_aux (not_integrable_of_tendsto_atTop hKinf), ← hn.2,
     Real.sqrt_div (sq_nonneg _), Real.sqrt_sq hn.1.le]
 
-/-- **(C3-e)** The norming of the Gaussian branch is regularly varying of index `1/2`:
+/-- The norming of the Gaussian branch is regularly varying of index `1/2`:
 `a_{⌊l n⌋} / a_n → l^{1/2}`, for `a_n = norming ν 2 n = √(n K(g_n) / 2)`. -/
 theorem norming_two_floor_div (hK : SlowlyVarying (truncSecondMoment ν))
     (hKinf : Tendsto (truncSecondMoment ν) atTop atTop) {l : ℝ} (hl : 0 < l) :

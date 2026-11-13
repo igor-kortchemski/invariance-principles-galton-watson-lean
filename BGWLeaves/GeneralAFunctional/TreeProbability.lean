@@ -5,7 +5,7 @@ public import BGWLeaves.ClassicalLimits.Perturbation
 public import BGW.StableTrees.RealAttractionBounds
 
 /-! Elementary probability perturbations for the random total-size clock.
-Adapted from the proved leaf-conditioned contour/height provider. -/
+Adapted from the leaf-conditioned contour/height module `BGWLeaves.LeafLimits.ContourHeight`. -/
 
 @[expose] public section
 namespace BGWLeaves.GeneralAFunctional.TreeProbability

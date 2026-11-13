@@ -4,13 +4,12 @@ public import BGWLeaves.GeneralA.Defs
 import BGWLeaves.GeneralA.Proof
 
 /-!
-# Theorem 8.1(I), corrected statement for finite variance (M8)
+# Theorem 8.1(I), corrected statement for finite variance
 
 Source: arXiv:1110.2163v4, Section 8, Theorem 8.1(I).  **The statement formalized here is the
-corrected one**: it replaces the printed constant `gcd(b-1,d)` (false in general, see
-`MANUSCRIPT_RECOMMENDATIONS.md` R1 and `FORMALIZATION_REPORT.md` D1) by `arithFactor μ A`, and it
-covers the finite-variance case (`θ = 2`) only.  The printed claim is not proved and not counted;
-the infinite-variance cases are open.  Approved by the owner on 5 November 2026.
+corrected one**: it replaces the printed constant `gcd(b-1,d)` (false in general, see correction 5 of
+`FORMALIZATION_REPORT.md`) by `arithFactor μ A`, and it covers the finite-variance case (`θ = 2`) only.
+The printed claim is not proved.  The infinite-variance cases are in `BGWLeaves.GeneralAInf`.
 -/
 
 @[expose] public section
@@ -28,7 +27,7 @@ theorem arithFactor_isGreatest {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 �
 
 /-- **Theorem 8.1(I), finite variance, CORRECTED.**  The statement formalized here is the
 corrected one, replacing the printed constant `gcd(b-1,d)` of Theorem 8.1(I) (false in general,
-`MANUSCRIPT_RECOMMENDATIONS.md` R1) by `e = arithFactor μ A`: for `μ` critical, aperiodic, of finite
+correction 5 of `FORMALIZATION_REPORT.md`) by `e = arithFactor μ A`: for `μ` critical, aperiodic, of finite
 variance `σ²`, and `A` with `m = μ(A) > 0`, `P(ζ_A = n) = 0` unless `n ≡ 1 (mod e)`, and
 `n^{3/2} P(ζ_A = n) → e √(2m) / (2σ√π)` along `n = e j + 1`, `j → ∞`. -/
 theorem thm81_finiteVariance_corrected {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)

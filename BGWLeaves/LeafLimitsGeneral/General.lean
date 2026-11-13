@@ -5,9 +5,9 @@ public import BGWLeaves.LeafLimitsGeneral.JointLattice
 /-!
 # Introduction (II) along admissible leaf counts, with no non-lattice assumption
 
-The provider follows the marked-block lattice local limits, admissible denominator
+The proof follows the marked-block lattice local limits, admissible denominator
 asymptotics, and residue-projected densities through the joint functional limit.
-The frozen statements file is deliberately left for the coordinator to seal.
+The statement is `BGWLeaves.intro_II_general` (`BGWLeaves.LeafLimitsGeneral`).
 -/
 
 @[expose] public section

@@ -8,7 +8,7 @@ public import BGWLeaves.LeafLimits.BridgeTerminal
 public import Mathlib.MeasureTheory.Integral.Indicator
 
 /-!
-# M15: terminal oscillation control of the A-marked bridge path (O_A)
+# Terminal oscillation control of the A-marked bridge path (O_A)
 
 `aBridge_terminal_oscillation` derives, from the prefix convergence (P_A) of the A-marked bridge path
 `(W_{⌊T_n t⌋} / B_{T_n})_{0 ≤ t ≤ 1}` under `P[· | W_{T_n} = -1]` (`T_n` the `n`-th A-mark time), the
@@ -412,8 +412,9 @@ theorem aBridgeLaw_osc_le {μ : PMF ℕ} {A : Set ℕ} {B : ℕ → ℝ} {n : �
 set_option linter.unusedVariables false in
 /-- (O_A) terminal oscillation control of the A-marked bridge path (the `hosc` hypothesis of BGW's
 `Skorokhod.tendsto_of_tendsto_restrict_of_oscillation`, `T = 1`), from the prefix convergence (P_A), by the
-reversal of the preterminal increments conditionally on the final marked increment, whose size is
-negligible (`J_n / B → 0` in probability). -/
+reversal of the preterminal increments conditionally on the final marked increment.  No bound on the final
+increment is needed: the jump to the endpoint is controlled by the endpoint event `{|X_a| ≥ η/2}` (see the
+module header). -/
 theorem aBridge_terminal_oscillation {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} {A : Set ℕ} (hA : A.Nonempty)
     (hc : IsCritical μ) (hne : μ 1 ≠ 1) (hap : Aperiodic μ)
     (hB : IsRealStableAttracted (realOffspringStepLaw μ) θ B)

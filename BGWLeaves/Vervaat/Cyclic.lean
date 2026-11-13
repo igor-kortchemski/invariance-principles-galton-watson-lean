@@ -3,11 +3,12 @@ module
 public import BGWLeaves.Vervaat.Defs
 
 /-!
-# M5 provider `Cyclic`
+# The Vervaat transform and the Cyclic Lemma (6.3, 6.4)
 
-Provider for the Vervaat transform and the Cyclic Lemma (6.3, 6.4): `vervaatIdx_mem`, `mem_SBar_iff`, `vervaat_mem_SBar`, `vervaatIdx_unique`, `walkWord_atom`, `sum_walkWord`, `lem_cool_i_joint`, `lem_cool_i`, `lem_cool_ii`, `vervaat_prob_eq`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.Vervaat`; they are exported in namespace `BGWLeaves.Vervaat.Cyclic` with exactly the types of the
-statements file.
+Proofs for the Vervaat transform and the Cyclic Lemma (6.3, 6.4): `vervaatIdx_mem`, `mem_SBar_iff`,
+`vervaat_mem_SBar`, `vervaatIdx_unique`, `walkWord_atom`, `sum_walkWord`, `lem_cool_i_joint`, `lem_cool_i`,
+`lem_cool_ii`, `vervaat_prob_eq`.  The theorems are those stated in `BGWLeaves.Vervaat`; they are exported in
+namespace `BGWLeaves.Vervaat.Cyclic` with exactly the types stated there.
 -/
 
 @[expose] public section

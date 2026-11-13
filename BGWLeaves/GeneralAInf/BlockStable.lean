@@ -6,11 +6,11 @@ public import Mathlib.Analysis.SpecialFunctions.Complex.LogDeriv
 public import Mathlib.Topology.Order.IntermediateValue
 
 /-!
-# M10 provider `BlockStable`
+# The A-time step law is in the domain of attraction
 
-Provider for the characteristic-function route to the domain of attraction of the A-time step law `ν = blockStep μ A`: `blockStep_firstMoment`, `blockStep_charFun_identity`, `blockStep_isStableAttracted` (the only new analytic ingredient: `φ_ν = φ_α / (1 - φ_W + φ_α)`, Lévy continuity), and the time-changed norming `b_n = B_{⌊n/μ(A)⌋}`: `monotone_norming_floor`, `norming_floor_ratio`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.GeneralAInf`; they are exported in namespace `BGWLeaves.GeneralAInf.BlockStable` with exactly the types of the
-statements file.
+The characteristic-function route to the domain of attraction of the A-time step law `ν = blockStep μ A`: `blockStep_firstMoment`, `blockStep_charFun_identity`, `blockStep_isStableAttracted` (the only new analytic ingredient: `φ_ν = φ_α / (1 - φ_W + φ_α)`, Lévy continuity), and the time-changed norming `b_n = B_{⌊n/μ(A)⌋}`: `monotone_norming_floor`, `norming_floor_ratio`.  The theorems are those stated in
+`BGWLeaves.GeneralAInf`; they are exported in namespace `BGWLeaves.GeneralAInf.BlockStable` with exactly the types
+stated there.
 -/
 
 @[expose] public section
@@ -19,8 +19,7 @@ namespace BGWLeaves.GeneralAInf.BlockStable
 
 /- The logarithm helpers below resolve the complex phase using compactness and
 an anchored continuous logarithm on an interval. The first-order defect then
-transfers through the block CF identity and the floor time change. No frozen
-statement file is imported. -/
+transfers through the block CF identity and the floor time change. -/
 
 
 open MeasureTheory ProbabilityTheory Filter BGW BGW.StableTrees

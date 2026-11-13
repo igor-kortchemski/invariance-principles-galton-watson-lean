@@ -3,11 +3,12 @@ module
 public import BGWLeaves.Conditioning.Defs
 
 /-!
-# M6 provider `Basics`
+# Conditioning: measurability, one-tree bridges and positivity
 
-Provider for measurability of the lifted functionals, the bridges `psi_one`, `psiStar_one` to the one-tree objects, `forestLaw_infinite_null`, `sizeGeEvent_ne_zero`, `leafGeEvent_ne_zero`, `leafCutoff_surjective`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.Conditioning`; they are exported in namespace `BGWLeaves.Conditioning.Basics` with exactly the types of the
-statements file.
+Proofs of the measurability of the lifted functionals, the bridges `psi_one`, `psiStar_one` to the one-tree
+objects, `forestLaw_infinite_null`, `sizeGeEvent_ne_zero`, `leafGeEvent_ne_zero`, `leafCutoff_surjective`.
+The theorems are those stated in `BGWLeaves.Conditioning`; they are exported in namespace
+`BGWLeaves.Conditioning.Basics` with exactly the types stated there.
 -/
 
 @[expose] public section

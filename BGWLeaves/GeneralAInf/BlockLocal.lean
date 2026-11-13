@@ -7,11 +7,12 @@ public import BGWLeaves.LeafMass.YLaw
 public import BGWLeaves.GeneralA.Arithmetic
 
 /-!
-# M10 provider `BlockLocal`
+# Theorem 8.1(I): the lattice local limit for the A-time walk
 
-Provider for the lattice local limit for the A-time walk `ν` at the point `-1` (`LeafMass.YLaw.llt_lattice_abstract`) and its uniform forest version: `thm81_corrected_general` (the proof target of 8.1(I)) and `eq_gen_corrected`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.GeneralAInf`; they are exported in namespace `BGWLeaves.GeneralAInf.BlockLocal` with exactly the types of the
-statements file.
+Proofs of the lattice local limit for the A-time walk `ν` at the point `-1`
+(`LeafMass.YLaw.llt_lattice_abstract`) and of its uniform forest version: `thm81_corrected_general` (the
+corrected Theorem 8.1(I)) and `eq_gen_corrected`.  The theorems are those stated in `BGWLeaves.GeneralAInf`;
+they are exported in namespace `BGWLeaves.GeneralAInf.BlockLocal` with exactly the types stated there.
 -/
 
 @[expose] public section

@@ -7,48 +7,45 @@ public import BGWLeaves.LocalEstimates
 import BGWLeaves.MaxDegree.Proof
 
 /-!
-# Maximum degree of large trees (M9): the results still to be proved
+# Maximum degree of large trees, finite variance
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`: Theorem 7.1(ii) (`thm:max`, finite variance, lines 2328-2486),
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source): Theorem 7.1(ii) (`thm:max`, finite variance, lines 2328-2486),
 Lemma 7.2 (`lem:MM`, Meir and Moon) and the discrete lemmas of the proof of 7.1 (`eq:Deltanon`, `eq:i`, truncation to
 the first half of the marks, reverse half, density bounds, tightness of the midpoint of the bridge), Remark 7.3
 (`eq:better`, the window for the uniform tree law).
 
-Each declaration here is a statement audited for freezing; its proof is to be supplied in the provider
-modules `BGWLeaves.MaxDegree.*` (imported through `BGWLeaves.MaxDegree.Proof`).  Definitions and proved
-bridges are in `BGWLeaves.MaxDegree.Defs`.  The declarations `eq_Deltanon`, `eq_Deltanon_upper`,
+The proofs are in the modules `BGWLeaves.MaxDegree.*` (imported through `BGWLeaves.MaxDegree.Proof`).
+Definitions and bridges are in `BGWLeaves.MaxDegree.Defs`.  The declarations `eq_Deltanon`, `eq_Deltanon_upper`,
 `bridgeStepsLt_subset_prefix`, `lower_half_le`, `bridgeStepsGt_subset_split`, `chi_density_bound`,
-`thm_max_ii`, `thm_max_ii_tendsto`, `neBot_leafProb_ne_zero` and `rem_uniformtree_window` are proved
-assemblies of other statements of this file (and of the principles) and need no provider declaration.
+`thm_max_ii`, `thm_max_ii_tendsto`, `neBot_leafProb_ne_zero` and `rem_uniformtree_window` are proved here
+from other statements of this file (and of the principles).
 
 Layout.
 * hypothesis `𝓗` and the law: `HypH.mu_zero_pos`, `HypH.mu_zero_lt_one`,
   `HypH.not_isLatticeLaw_etaLaw_of_unbounded`, `stepTail_eq_offTail`, `offTail_*`, `tendsto_offTail`,
   `bigD_spec`, `eventually_bigD_spec`, `bigD_mono`, `tendsto_bigD_atTop_iff`, `bigD_eq_of_bounded`,
-  `lem_MM` (Lemma 7.2), `MM_lower_limit`, `MM_upper_limit` (provider `Law`).
+  `lem_MM` (Lemma 7.2), `MM_lower_limit`, `MM_upper_limit` (module `Law`).
 * steps versus degrees and the transfer of the cyclic maximum: `maxDegree_lt_iff`, `lt_maxDegree_iff`,
   `maximum_increments`, `maxDegree_eq_zero_iff`, `two_le_maxDegree_of_two_le_leaves`,
   `transfer_vervaat_invariant`, `exists_isMarkTime_of_le`, `walkWord_take`, `IsMarkTime.last_step`
-  (provider `Transfer`).
+  (module `Transfer`).
 * the first half of the marks (`eq:i`) and the reverse half: `bridge_reverse_half`, `eq_i_lower`, `eq_i_upper`
-  (provider `Bridge`).
+  (module `Bridge`).
 * the density bounds and the tightness of the midpoint of the bridge (discrete replacement of
   `eq:trucsuperutile`): `chi_sup_bound`, `chi_zero_lower`, `wald_second_moment`, `bridge_midpoint_tight`
-  (provider `Concentration`).
+  (module `Concentration`).
 * the principles and the inputs of the case split of 7.1(ii): `maxDegree_lower_principle`,
   `maxDegree_upper_principle` (both WITH `hnl`), `thm_max_ii_of_bounded`, `leafProb_ne_zero_frequently`,
-  `displayedLaw_not_isLatticeLaw_etaLaw` (provider `Principles`).
+  `displayedLaw_not_isLatticeLaw_etaLaw` (module `Principles`).
 * Remark 7.3 (`eq:better`): `rem_uniformtree_window` (assembly).
 
-Integration with M5, M6, M7 (audit changes C1-C3, C5, C6 of the M9 audit): the two principles, left out of
-`BGWLeaves.Vervaat`, are restated here with the hypothesis `hnl : ¬ IsLatticeLaw (etaLaw μ)`; `thm_max_ii`
+Structure: the two principles are stated with the hypothesis `hnl : ¬ IsLatticeLaw (etaLaw μ)`; `thm_max_ii`
 keeps the printed strength (`HypH` only, no `hnl`) and is a case split (unbounded support: `HypH` gives `hnl`;
 bounded support: elementary argument `thm_max_ii_of_bounded`); `chi_density_bound` is derived from
-`chi_sup_bound` and `chi_zero_lower`; `chiAt` of the draft is `BGWLeaves.chi`.  The window `eq:better` of
-Remark 7.3 no longer needs tranche-2 input: the discrete tightness `bridge_midpoint_tight` replaces the
-bridge convergence `eq:trucsuperutile`.
+`chi_sup_bound` and `chi_zero_lower`.  The window `eq:better` of Remark 7.3 needs no functional limit
+theorem: the discrete tightness `bridge_midpoint_tight` replaces the bridge convergence `eq:trucsuperutile`.
 
-Deferred (tranche 2), NOT stated: see the comment at the end of this file.
+Not stated here: see the comment at the end of this file.
 -/
 
 @[expose] public section
@@ -71,10 +68,10 @@ theorem HypH.mu_zero_pos {μ : PMF ℕ} (h : HypH μ) : 0 < (μ 0).toReal := by
 theorem HypH.mu_zero_lt_one {μ : PMF ℕ} (h : HypH μ) : (μ 0).toReal < 1 := by
   exact BGWLeaves.MaxDegree.Law.HypH.mu_zero_lt_one h
 
-/-- **`𝓗` and unbounded support give `hnl`** (audit change C1): if the support of `μ` is unbounded, then `μ(k) > 0`
+/-- **`𝓗` and unbounded support give `hnl`**: if the support of `μ` is unbounded, then `μ(k) > 0`
 for all large `k` (for `R < ∞` because `μ(n)^{1/n} → 1/R > 0`; for `R = ∞` because the non-increasing sequence
 `μ(k)^{1/k}` stays positive once positive), so `etaLaw μ` (the law of `K - 1` given `K ≥ 1`) has two consecutive
-atoms and is not lattice.  ROUTINE.  (For bounded support `hnl` can fail under `𝓗`, e.g.
+atoms and is not lattice.  (For bounded support `hnl` can fail under `𝓗`, e.g.
 `μ = (0.6, 0.2, 0, 0.1, 0, 0.1)`.) -/
 theorem HypH.not_isLatticeLaw_etaLaw_of_unbounded {μ : PMF ℕ} (h : HypH μ)
     (hub : ∀ K : ℕ, ∃ k : ℕ, K < k ∧ μ k ≠ 0) : ¬ IsLatticeLaw (etaLaw μ) := by
@@ -281,8 +278,8 @@ step is the mark `-1`, `W_{k-1} = 0`, `Λ(k-1) = n - 1`; reversal of the first `
 preserves the conditional law, exchanges the steps after the `m`-th mark (there are `n-1-m` marks among them,
 and the step before them, in reversed order, is the `m`-th mark) with the steps before the `(n-m)`-th mark;
 the extra last step `-1` and the step `-1` at `T_{n-m}` do not matter for `q ≥ -1`, and for `q < -1` both events are
-the whole bridge mass (every step is `≥ -1` and both words are nonempty): so the draft hypothesis `-1 ≤ q` is
-dropped (audit change C6).
+the whole bridge mass (every step is `≥ -1` and both words are nonempty): so no hypothesis `-1 ≤ q` is
+needed.
 NOTE the index: it is `n - m` (`= ⌈n/2⌉` for `m = ⌊n/2⌋`), not `m`; the paper's single "`n/2`" hides this. -/
 theorem bridge_reverse_half (μ : Measure ℕ) [IsProbabilityMeasure μ] {n m : ℕ} (hm : 1 ≤ m) (hmn : m < n)
     (q : ℝ) :
@@ -295,21 +292,21 @@ theorem bridge_reverse_half (μ : Measure ℕ) [IsProbabilityMeasure μ] {n m : 
 /-! ## 6. Density bounds and the first-half estimate (`eq:i`) -/
 
 /-- `χ_n(j) ≤ C/√n`, uniformly in the starting point `j ∈ ℤ` and all `n ≥ 1` (`χ_k(j) = P_j[W_{T_k} = -1]` is
-`BGWLeaves.chi`, the draft `chiAt`).  A global bound, NOT part of 6.11 which has the window `|j| ≤ αB_n`; from the
-exact decomposition `chi_eq_tsum` of M7 and the uniform local limit bound for `W'`, `sup_x P[W'_q = x] ≤ C/√(q+1)`. -/
+`BGWLeaves.chi`).  A global bound, NOT part of 6.11 which has the window `|j| ≤ αB_n`; from the
+exact decomposition `chi_eq_tsum` and the uniform local limit bound for `W'`, `sup_x P[W'_q = x] ≤ C/√(q+1)`. -/
 theorem chi_sup_bound {μ : PMF ℕ} (h : HypH μ) (hnl : ¬ IsLatticeLaw (etaLaw μ)) :
     ∃ C : ℝ, 0 < C ∧ ∀ n : ℕ, 1 ≤ n → ∀ j : ℤ, (chi μ n j).toReal ≤ C / Real.sqrt n := by
   exact BGWLeaves.MaxDegree.Concentration.chi_sup_bound h hnl
 
-/-- `χ_n(0) ≥ c/√n` for large `n` (the remark after 6.11: `χ_n(0) ∼ p₁(0)/B_{n/μ₀}`; M7 `chi_zero_asymp`). -/
+/-- `χ_n(0) ≥ c/√n` for large `n` (the remark after 6.11: `χ_n(0) ∼ p₁(0)/B_{n/μ₀}`; `chi_zero_asymp`). -/
 theorem chi_zero_lower {μ : PMF ℕ} (h : HypH μ) (hnl : ¬ IsLatticeLaw (etaLaw μ)) :
     ∃ c : ℝ, 0 < c ∧ ∀ᶠ n : ℕ in atTop, c / Real.sqrt n ≤ (chi μ n 0).toReal := by
   exact BGWLeaves.MaxDegree.Concentration.chi_zero_lower h hnl
 
 /-- **Density bound** ("By Lemma 6.11 there exists `C > 0` such that for every `n` large enough,
 `χ_{n-⌊n/2⌋}(W_{T_{n/2}})/χ_n(0) ≤ C` on the event `A_n^α`", lines 2410-2412).  `m n` is `⌊n/2⌋` or `⌈n/2⌉`
-(`n/2 ≤ m n ≤ (n+1)/2`).  Derived from `chi_sup_bound` and `chi_zero_lower` (audit change C3): the bound holds for
-ALL `j ∈ ℤ`, so the window `|j| ≤ α√n` of the draft is dropped.  `hnl` is the hypothesis of those two. -/
+(`n/2 ≤ m n ≤ (n+1)/2`).  Derived from `chi_sup_bound` and `chi_zero_lower`: the bound holds for
+ALL `j ∈ ℤ`, so no window `|j| ≤ α√n` is needed.  `hnl` is the hypothesis of those two. -/
 theorem chi_density_bound {μ : PMF ℕ} (h : HypH μ) (hnl : ¬ IsLatticeLaw (etaLaw μ))
     {m : ℕ → ℕ} (hm : ∀ n, n / 2 ≤ m n ∧ m n ≤ (n + 1) / 2) :
     ∃ C : ℝ, 0 < C ∧ ∃ N : ℕ, ∀ n : ℕ, N ≤ n → ∀ j : ℤ,
@@ -346,8 +343,8 @@ theorem chi_density_bound {μ : PMF ℕ} (h : HypH μ) (hnl : ¬ IsLatticeLaw (e
 
 /-- **`eq:i` (lower bound)** (line 2418): for `m = ⌊n/2⌋` or `⌈n/2⌉`, `α > 0`, uniformly in the threshold `p`,
 `P[M(Z^{T_m}) < p | W_{T_n} = -1] ≤ P[|W_{T_m}| ≥ α√n | W_{T_n} = -1] + C P[W_1 < p]^{⌊n/(4μ₀)⌋} + C e^{-c√n}`.
-Steps of the paper: `lem:CVf2(i)` (concentration of `T_m` in `[n/(4μ₀), n/μ₀]`), `lem:absolueC2` (strong Markov,
-M6), `chi_density_bound`, then `M(Z^{T_m}) < p` and `T_m ≥ n/(4μ₀)` imply `M(Z^{⌊n/4μ₀⌋}) < p`, whose probability
+Steps of the paper: `lem:CVf2(i)` (concentration of `T_m` in `[n/(4μ₀), n/μ₀]`), `lem:absolueC2` (strong Markov),
+`chi_density_bound`, then `M(Z^{T_m}) < p` and `T_m ≥ n/(4μ₀)` imply `M(Z^{⌊n/4μ₀⌋}) < p`, whose probability
 is `P[W_1 < p]^{⌊n/4μ₀⌋} = (1 - stepTail μ p)^{⌊n/4μ₀⌋}`.  `oe_{1/2}(n)` is absorbed in `C e^{-c√n}`. -/
 theorem eq_i_lower {μ : PMF ℕ} (h : HypH μ) (hnl : ¬ IsLatticeLaw (etaLaw μ))
     {m : ℕ → ℕ} (hm : ∀ n, n / 2 ≤ m n ∧ m n ≤ (n + 1) / 2) {α : ℝ} (hα : 0 < α) :
@@ -382,7 +379,7 @@ theorem wald_second_moment {μ : PMF ℕ} (h : HypH μ) (m : ℕ) :
 
 /-- **Tightness of the midpoint under the bridge law, WITHOUT any functional limit** (the discrete form of
 `eq:trucsuperutile`, line 2269; the paper derives it from the convergence `eq:cvBr`, which needs `lem:CVf2(ii)` and
-`prop:bridge(ii)`, the cited bridge law).  Here: `lem_absolueC2_k` (M6) with `f = 1{|W_{T_m}| ≥ α√n}`, the global bound
+`prop:bridge(ii)`, the cited bridge law).  Here: `lem_absolueC2_k` with `f = 1{|W_{T_m}| ≥ α√n}`, the global bound
 `chi_sup_bound`, the lower bound `chi_zero_lower`, and Chebyshev with `wald_second_moment`:
 `P[|W_{T_m}| ≥ α√n | W_{T_n} = -1] ≤ (C√n/(c√(n-m))) σ² m/(μ₀ α² n) ≤ C'/α²`. -/
 theorem bridge_midpoint_tight {μ : PMF ℕ} (h : HypH μ) (hnl : ¬ IsLatticeLaw (etaLaw μ))
@@ -397,11 +394,10 @@ theorem bridge_midpoint_tight {μ : PMF ℕ} (h : HypH μ) (hnl : ¬ IsLatticeLa
 /-- **The argument of the proof of Theorem 7.1(ii), isolated for arbitrary thresholds** (the sentence "the proof of
 Theorem 7.1 shows that it is sufficient to verify ..." of Remark 7.3), lower bound: for critical aperiodic `μ` of
 finite variance and real `p_n` with `(1 - P[W_1 ≥ p_n])^{n/4μ₀} → 0`, `P[Δ(τ_n) < p_n + 1] → 0`.
-Chain (providers `Bridge`, `Concentration`): `eq_Deltanon`, `lower_half_le`, `eq_i_lower`, `bridge_midpoint_tight`,
+Chain (modules `Bridge`, `Concentration`): `eq_Deltanon`, `lower_half_le`, `eq_i_lower`, `bridge_midpoint_tight`,
 with `lem_CVf2_i` (6.2(i)), `lem_absolueC2` (6.10) and `lem_technic3` (6.11).  The hypothesis
-`hnl : ¬ IsLatticeLaw (etaLaw μ)` is the one of 6.11 (audit change C1): the statement is believed true without it
-but is only provable from the sealed 6.11 with it; `Theorem 7.1(ii)` does not use it for bounded support
-(`thm_max_ii_of_bounded`).  The statement is restated here from the M5 draft (it is not in `BGWLeaves.Vervaat`). -/
+`hnl : ¬ IsLatticeLaw (etaLaw μ)` is the one of 6.11: the proof uses 6.11, which needs it;
+`Theorem 7.1(ii)` does not use it for bounded support (`thm_max_ii_of_bounded`). -/
 theorem maxDegree_lower_principle {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hfin : Integrable (fun z : ℤ => (z : ℝ) ^ 2) (stepLaw μ))
     (hnl : ¬ IsLatticeLaw (etaLaw μ)) {p : ℕ → ℝ}
@@ -427,12 +423,12 @@ theorem maxDegree_upper_principle {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 
 
 /-! ## 9. Theorem 7.1(ii) (`thm:max`), finite variance -/
 
-/-- **Bounded support, elementary argument** (audit change C1, no 6.11, no `hnl`).  For `𝓗` with `μ(k) = 0` for
+/-- **Bounded support, elementary argument** (no 6.11, no `hnl`).  For `𝓗` with `μ(k) = 0` for
 `k > K` and `μ(K) ≠ 0` (`K ≥ 1` follows from `𝓗`): `D(n) = K` eventually, `Δ ≤ K` always, and
 `P_μ[λ = n, Δ < K] = (1/n) P[W_{T_n} = -1, all steps ≤ K-2] ≤ (1/n) ∑_{k ≥ n} (1-μ(K))^k = (1-μ_K)^n/(n μ_K)`
 (Vervaat identity `transfer_vervaat_invariant`, joint form of 6.5; `T_n ≥ n`), while `P_μ[λ = n] ≥ c n^{-3/2}`
-along the non-null `n` (sealed Theorem 3.1, arithmetic form, `LeafMass`).  So `P[Δ < K | λ = n] → 0` along the
-non-null `n`, lattice or not.  The conclusion is exactly that of `thm_max_ii`.  ROUTINE+. -/
+along the non-null `n` (Theorem 3.1, arithmetic form, `LeafMass`).  So `P[Δ < K | λ = n] → 0` along the
+non-null `n`, lattice or not.  The conclusion is exactly that of `thm_max_ii`. -/
 theorem thm_max_ii_of_bounded {μ : PMF ℕ} (h : HypH μ) {K : ℕ} (hK : μ K ≠ 0)
     (hb : ∀ k : ℕ, K < k → μ k = 0) {ε : ℝ} (hε : 0 < ε) {δ : ℝ} (hδ : 0 < δ) :
     ∃ N : ℕ, ∀ n : ℕ, N ≤ n → leafProb μ n ≠ 0 →
@@ -453,7 +449,7 @@ specialisation of the printed claim).  Proof, a case split on the support (`tend
   `maxDegree_lower_principle` (`p_n = (1-ε) D(n) - 1`, `MM_lower_limit`) and `maxDegree_upper_principle`
   (`q_n = (1+ε) D(n) - 1`, `MM_upper_limit`) give `P[Δ < (1-ε)D] → 0` and `P[Δ > (1+ε)D] → 0`;
 * bounded support: `thm_max_ii_of_bounded`.
-This is a proved assembly of those statements (hole-free apart from them). -/
+This is proved here from those statements. -/
 theorem thm_max_ii {μ : PMF ℕ} (h : HypH μ) {ε : ℝ} (hε : 0 < ε) {δ : ℝ} (hδ : 0 < δ) :
     ∃ N : ℕ, ∀ n : ℕ, N ≤ n → leafProb μ n ≠ 0 →
       1 - δ ≤ ((bienaymeLaw μ.toMeasure)[|leafCountEvent n]).real
@@ -504,15 +500,15 @@ theorem thm_max_ii {μ : PMF ℕ} (h : HypH μ) {ε : ℝ} (hε : 0 < ε) {δ : 
       by_contra hk0
       exact absurd (le_csSup hbdd hk0) (not_le.2 hk)) hε hδ
 
-/-- `P_μ[λ(τ) = n] > 0` for infinitely many `n` (audit change C5; for `hc hne`, lattice or not): the trees with
+/-- `P_μ[λ(τ) = n] > 0` for infinitely many `n` (for `hc hne`, lattice or not): the trees with
 `n = 1 + a(k-1)` leaves (a root of degree `k ≥ 2` with `μ(k) > 0`, then `a` iterated branchings) have positive mass,
-for infinitely many `n`.  ROUTINE. -/
+for infinitely many `n`. -/
 theorem leafProb_ne_zero_frequently {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) :
     ∃ᶠ n : ℕ in atTop, leafProb μ n ≠ 0 := by
   exact BGWLeaves.MaxDegree.Principles.leafProb_ne_zero_frequently hc hne
 
 /-- The filter `atTop ⊓ 𝓟 {n | P_μ[λ = n] ≠ 0}` of the non-null indices is `NeBot`, so the `Tendsto`
-statement `thm_max_ii_tendsto` along it is not vacuous (audit change C5). -/
+statement `thm_max_ii_tendsto` along it is not vacuous. -/
 theorem neBot_leafProb_ne_zero {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) :
     (atTop ⊓ 𝓟 {n : ℕ | leafProb μ n ≠ 0}).NeBot :=
   Filter.frequently_iff_neBot.1 (leafProb_ne_zero_frequently hc hne)
@@ -541,7 +537,7 @@ theorem thm_max_ii_tendsto {μ : PMF ℕ} (h : HypH μ) {ε : ℝ} (hε : 0 < ε
 
 /-- The displayed law of Remark 7.3 (`μ(2), μ(3) > 0`: consecutive atoms) satisfies `hnl`: the law of `K - 1` given
 `K ≥ 1` has the consecutive atoms `1` and `2`, so it is not lattice (the displayed law has full support from `2`).
-ROUTINE.  Needed by the principles. -/
+Needed by the principles. -/
 theorem displayedLaw_not_isLatticeLaw_etaLaw {μ : PMF ℕ} (hμ : IsDisplayedLaw μ) :
     ¬ IsLatticeLaw (etaLaw μ) := by
   exact BGWLeaves.MaxDegree.Principles.displayedLaw_not_isLatticeLaw_etaLaw hμ
@@ -553,7 +549,7 @@ theorem displayedLaw_not_isLatticeLaw_etaLaw {μ : PMF ℕ} (hμ : IsDisplayedLa
 
 Assembled from `maxDegree_lower_principle` and `maxDegree_upper_principle` (WITH `hnl`, from
 `displayedLaw_not_isLatticeLaw_etaLaw`) and the displayed limits `rem_uniformtree_tail_lower` /
-`rem_uniformtree_tail_upper` of `BGWLeaves.Vervaat`.  The window no longer needs any tranche-2 input: the
+`rem_uniformtree_tail_upper` of `BGWLeaves.Vervaat`.  The window needs no functional limit theorem: the
 discrete tightness of the midpoint of the bridge (`bridge_midpoint_tight`, inside the principles) replaces
 `eq:trucsuperutile`.  Note the shift of one: the upper principle gives `Δ ≤ q_n + 1`, so it is applied with
 `c/2` and the extra `1` is absorbed since `log_b log_b n → ∞`. -/
@@ -610,16 +606,15 @@ theorem rem_uniformtree_window {μ : PMF ℕ} (hμ : IsDisplayedLaw μ) {c : ℝ
       cond_isProbabilityMeasure hn
     exact measureReal_le_one
 
-/-! ## Deferred to tranche 2: NOT stated in this module
+/-! ## Not stated in this module
 
-* **Theorem 7.1(i)** (`1 < θ < 2`, `μ₀^{1/θ} Δ(τ_n)/B_n → Δ̄(X^exc)` in law): a functional statement.  Its
-  tranche-2 inputs: the convergence `eq:thmcvW32` (Theorem 6.1 `thm:cvW3` with Remark `rem:changement`), the
-  continuity of the largest-jump functional `Δ̄` on the Skorokhod space `D([0,1], ℝ)` (J1), and `Δ̄(X^exc) > 0`
-  almost surely (`θ < 2`, infinite activity).  Only the discrete part is here (`maximum_increments`,
-  `maxDegree_eq_zero_iff`, `two_le_maxDegree_of_two_le_leaves`); the convention `Δ̄(Z) = max(0, sup of the jumps)`
-  must be fixed there (one-vertex tree).
+* **Theorem 7.1(i)** (`1 < θ < 2`, `μ₀^{1/θ} Δ(τ_n)/B_n → Δ̄(X^exc)` in law): a functional statement, in
+  `BGWLeaves.MaxDegreeLimit`.  Its inputs: the convergence `eq:thmcvW32` (Theorem 6.1 `thm:cvW3` with Remark
+  `rem:changement`), the continuity of the largest-jump functional `Δ̄` on the Skorokhod space `D([0,1], ℝ)` (J1),
+  and `Δ̄(X^exc) > 0` almost surely (`θ < 2`, infinite activity).  Only the discrete part is here
+  (`maximum_increments`, `maxDegree_eq_zero_iff`, `two_le_maxDegree_of_two_le_leaves`).
 * **The case `θ = 2`, `σ² = ∞` of the Introduction, item (i)** (`μ₀^{1/θ} Δ(τ_n)/B_n → Δ̄(X) = 0`, `X` Brownian):
-  not printed in Theorem 7.1(i), which treats `1 < θ < 2` only; also tranche 2.
+  not printed in Theorem 7.1(i), which treats `1 < θ < 2` only; also in `BGWLeaves.MaxDegreeLimit`.
 * **The paper's route to `eq:trucsuperutile`** (convergence of the bridge `eq:cvBr`, which needs `lem:CVf2(ii)` and
   `prop:bridge(ii)`, cited Chaumont and Bertoin): bypassed, replaced by the discrete `bridge_midpoint_tight`.
 * The finite-variance consequence of the Introduction, item (ii), `Δ(τ_n)/D(n) → 1` in probability, is

@@ -6,23 +6,22 @@ public import BGWLeaves.StableAnalysis.Defs
 public import Mathlib.Probability.Independence.Basic
 
 /-!
-# Leaf concentration (M4a): definitions and proved bridges
+# Leaf concentration: definitions and bridges
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Section 2: Definition 2.1 (`def:Lambda`),
+Source: arXiv:1110.2163v4, Section 2: Definition 2.1 (`def:Lambda`),
 Lemma 2.2 (`lem:phi`), the notation `oe_ε(n)` of Definition and Remark 2.3-2.4 (`rem:oe`),
 Lemma 2.5 (`lem:GdesDev`), Corollary 2.6 (`cor:GD2mieux`) and Lemma 2.7 (`lem:GdesDev2`).
 
-This file contains every definition of milestone M4a and the proved bridges between the tree
-counter `Λ_τ` of Definition 2.1 and the walk counter `Λ` of Section 1.3.  It contains no proof
-holes.  The statements still to be proved are in `BGWLeaves.LeafConcentration`; their proofs are
-supplied by the provider modules `BGWLeaves.LeafConcentration.*` (imported through
-`BGWLeaves.LeafConcentration.Proof`).
+This file contains the definitions for the leaf concentration and the bridges between the tree
+counter `Λ_τ` of Definition 2.1 and the walk counter `Λ` of Section 1.3.  The main statements are in
+`BGWLeaves.LeafConcentration`; their proofs are in the modules `BGWLeaves.LeafConcentration.*`
+(imported through `BGWLeaves.LeafConcentration.Proof`).
 
 Conventions.
-* Offspring law `μ : PMF ℕ` (as in the M3 interface); the law of one Galton-Watson tree is
+* Offspring law `μ : PMF ℕ` (as in `BGWLeaves.StableAnalysis`); the law of one Galton-Watson tree is
   `LocallyFinite.bienaymeLaw μ.toMeasure` on `LocallyFinite.Tree`, the law of a forest of `j`
   independent trees is `Measure.pi (fun _ : Fin j => bienaymeLaw μ.toMeasure)`, and the walk with
-  steps `ω i - 1` is `Measure.infinitePi (fun _ : ℕ => μ.toMeasure)` (as in M2b).
+  steps `ω i - 1` is `Measure.infinitePi (fun _ : ℕ => μ.toMeasure)` (as in `BGWLeaves.Passage`).
 * Finite trees are `PlaneTree`; an event `Q` of finite trees is lifted to `LocallyFinite.Tree` by
   `finiteTreeEvent Q`.  Infinite trees never belong to it.
 * Conditioning is `ProbabilityTheory.cond` (`μ[|s]`): the conditional law of a null event is the
@@ -69,7 +68,7 @@ def walkLeafCount (ω : ℕ → ℕ) (k : ℕ) : ℕ :=
   ((Finset.range k).filter fun i => (ω i : ℤ) - 1 = -1).card
 
 /-- `walkLeafCount` is the count of zero offspring numbers among the first `k` steps, in the form
-used by M2b (`firstHit_leaves_law`). -/
+used by `firstHit_leaves_law` (`BGWLeaves.Passage`). -/
 theorem walkLeafCount_eq_card_fin (ω : ℕ → ℕ) (k : ℕ) :
     walkLeafCount ω k = (Finset.univ.filter fun i : Fin k => ω i = 0).card := by
   unfold walkLeafCount

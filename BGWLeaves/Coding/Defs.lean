@@ -14,18 +14,18 @@ public import BGW.Tree.Height
 public import BGW.Tree.Excursion
 
 /-!
-# Tranche 2, package M11 `Coding`: definitions and proved bridges
+# `Coding`: definitions and bridges
 
-Source: arXiv:1110.2163v4 (`.orchestration/t2-arch/paper_utf8.tex` line numbers): the coding functions
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source): the coding functions
 of the Introduction (`def:fonctions`, lines 471-496; `intro:enc`, lines 226-232 and 496), the
 leaf-conditioned laws of Introduction (II) (line 254), and the extension of `W` and `H` of §5.2
 (lines 1356-1362).
 
-This file contains every definition of package M11 and the PROVED bridges (no proof hole, no axiom).
-It will be frozen whole.  The statements still to be proved are in `BGWLeaves.Coding`.
+This file contains the definitions of the codings and their bridges to BGW.  The main statements are in
+`BGWLeaves.Coding`.
 
-Conventions (tranche 2).
-* A random tree is `BGW.LocallyFinite.Tree` under `bienaymeLaw μ.toMeasure` (tranche 1).
+Conventions (for the coding and limit modules).
+* A random tree is `BGW.LocallyFinite.Tree` under `bienaymeLaw μ.toMeasure`.
 * `ζ(τ) = treeSize τ` (`0` for an infinite tree: those are null in the critical case).
 * The leaf-conditioned law `P_μ[· | λ = n]` is the `ProbabilityMeasure` `leafTreeLaw μ n`
   (the Dirac mass at the one-vertex tree when `P_μ[λ = n] = 0`, as BGW's `exactTreeLaw`).
@@ -42,7 +42,7 @@ Conventions (tranche 2).
   instead extends `W_i(τ) = 0` for `i ≥ ζ`, which conflicts with `W_ζ = -1` at `i = ζ`.  At time
   scale `z = ζ` only the indices `i ≤ ζ` occur on `[0,1]`, and the two conventions differ only at
   `t = 1` (value `-1/B_ζ` here, `0` with the line-1357 extension): the normalized discrepancy is at most
-  `1/|B_ζ|`, which tends to `0` in every limit theorem of the tranche.
+  `1/|B_ζ|`, which tends to `0` in every limit theorem of the project.
 * Measurability.  `ProbabilityMeasure.map` takes no measurability proof, so every map pushed forward in
   a statement has a proved measurability lemma here.  All maps of trees are handled by one principle
   (`measurable_of_eq_of_not_finiteVertices`): the finite trees form a countable set of points of the
@@ -76,7 +76,7 @@ noncomputable def leafTreeLaw (μ : PMF ℕ) (n : ℕ) : ProbabilityMeasure Loca
 
 open Classical in
 /-- `P_μ[· | λ ≥ n]` as a probability measure (Theorem 4.5); junk Dirac if the event is null
-(never for critical `μ` with `μ 1 ≠ 1`: `leafGeEvent_ne_zero`, tranche 1). -/
+(never for critical `μ` with `μ 1 ≠ 1`: `leafGeEvent_ne_zero`). -/
 noncomputable def leafGeTreeLaw (μ : PMF ℕ) (n : ℕ) : ProbabilityMeasure LocallyFinite.Tree :=
   if h : bienaymeLaw μ.toMeasure (leafGeEvent n) ≠ 0 then
     ⟨(bienaymeLaw μ.toMeasure)[|leafGeEvent n], cond_isProbabilityMeasure h⟩
@@ -117,7 +117,7 @@ noncomputable def codingTripleAt (μ0 θ : ℝ) (B : ℕ → ℝ) (n : ℕ) (τ 
     rescaledHeight (treeSize τ) (μ0 ^ (1 - 1 / θ) * B n / n) τ)
 
 /-- The limit `(X^exc, H^exc, H^exc)` of Intro (II): the joint law `excLaw θ` of
-`(X, H)` under `N(· | ζ = 1)` (BGW, C22.R-H), with the height duplicated (a joint law, not a
+`(X, H)` under `N(· | ζ = 1)` (BGW), with the height duplicated (a joint law, not a
 product of marginals). -/
 noncomputable def excTripleLaw (θ : ℝ) :
     ProbabilityMeasure (Skorokhod.D 1 ℝ × C(Set.Icc (0 : ℝ) 1, ℝ) × C(Set.Icc (0 : ℝ) 1, ℝ)) :=
@@ -330,7 +330,7 @@ theorem treeIncrements_toLocallyFinite (t : PlaneTree) :
   rw [Equiv.symm_apply_apply]
 
 /-- For a finite tree, the Łukasiewicz path at its own size is BGW's word step path of the increment
-word (C33.5 input); in particular `treeSize τ = (treeIncrements τ).length`. -/
+word (input of `vervaatD_stepPath_vervaat`); in particular `treeSize τ = (treeIncrements τ).length`. -/
 theorem rescaledLuka_eq_stepPath (τ : LocallyFinite.Tree) (hτ : FiniteVertices τ) (b : ℝ) :
     rescaledLuka (treeSize τ) b τ = Skorokhod.stepPath (PathTail.treeIncrements τ) b := by
   obtain ⟨t, rfl⟩ := (exists_toLocallyFinite_iff τ).2 hτ

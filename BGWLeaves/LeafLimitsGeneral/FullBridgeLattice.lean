@@ -521,7 +521,8 @@ theorem bridge_prefix_tendsto {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} (hc : 
   · exact bridge_prefix_tendsto_pos hc hne hap hB hqtop hq h ha1
 
 /-- The stopped leaf-clock bridge converges on the whole interval. Prefix convergence is
-combined with the independent terminal-reversal provider by C11b. -/
+combined with the terminal-reversal control by
+`Skorokhod.tendsto_of_tendsto_restrict_of_oscillation`. -/
 theorem tendsto_bridgeWalkPath {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} (hc : IsCritical μ)
     (hne : μ 1 ≠ 1) (hap : Aperiodic μ)
     (hB : IsRealStableAttracted (realOffspringStepLaw μ) θ B)

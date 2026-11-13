@@ -288,8 +288,8 @@ theorem secondMomentMeasure_laplace (ν : Measure ℤ) (s : ℝ) :
   rw [hset, setIntegral_univ]
   simp only [sq_abs]
 
-/-- An Abelian second-moment expansion, obtained directly from the proved
-Laplace--Karamata provider. This is integrated twice below to obtain the
+/-- An Abelian second-moment expansion, obtained directly from the
+Laplace--Karamata module. This is integrated twice below to obtain the
 one-step Laplace remainder. -/
 theorem dampedSecondMoment_div_tail_tendsto (ν : Measure ℤ) [IsProbabilityMeasure ν]
     (hstep : ν {z : ℤ | z < -1} = 0) {θ : ℝ} (hθ1 : 1 < θ) (hθ2 : θ < 2)

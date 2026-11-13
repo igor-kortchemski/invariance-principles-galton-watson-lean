@@ -6,24 +6,24 @@ public import BGW.StableTrees.RealAttraction
 public import BGW.StableTrees.NonmonotoneNorming
 
 /-!
-# M11 provider `Norming`
+# BGW's admissible normings and the corrected norming
 
-Provider for the bridge between BGW's admissible normings (`IsRealStableAttracted`) and the corrected
-norming of tranche 1: the registered holes `isRealStableAttracted_norming` and
+Proofs of the bridge between BGW's admissible normings (`IsRealStableAttracted`) and the corrected
+norming `norming (stepLaw μ) θ`: `isRealStableAttracted_norming` and
 `stableDomain_of_isRealStableAttracted` of `BGWLeaves.Coding`, exported in namespace
-`BGWLeaves.Coding.Norming` with exactly the types of the statements file.
+`BGWLeaves.Coding.Norming` with exactly the types stated there.
 
-Route.  Tranche 1's `BGWLeaves.StableAnalysis.{intWalk, IsStableAttracted}` and BGW's
+Route.  The project's `BGWLeaves.StableAnalysis.{intWalk, IsStableAttracted}` and BGW's
 `BGW.StableTrees.Attraction.{intWalk, IsStableAttracted}` are two copies of the same definitions:
 the walks agree by induction (`intWalk_eq`), hence the two attraction predicates are equivalent
 (`isStableAttracted_toBGW`, `isStableAttracted_ofBGW`).
-* `isRealStableAttracted_norming`: tranche 1's `locallimit_i` (with `mean_stepLaw`) gives the
+* `isRealStableAttracted_norming`: `locallimit_i` (with `mean_stepLaw`) gives the
   attraction with the corrected norming; BGW's public `Attraction.IsStableAttracted.isRealStableAttracted`
   concludes (`realOffspringStepLaw μ = castLaw (stepLaw μ)` by definition).
 * `stableDomain_of_isRealStableAttracted`: the real attraction gives BGW's integer attraction with
   centering `0` (`isStableAttracted_of_isRealStableAttracted`, re-derived from the public
   `sumLaw_castLaw` and `integral_exp_neg_mul_stableLaw`, since BGW's version is private); then
-  tranche 1's `locallimit_i`, `locallimit_ii` (monotonicity) and `IsStableAttracted.exists_stableDomain`
+  `locallimit_i`, `locallimit_ii` (monotonicity) and `IsStableAttracted.exists_stableDomain`
   give the domain of attraction, and `norming_isEquivalent` (inverted) the ratio.
 -/
 
@@ -44,7 +44,7 @@ theorem intWalk_eq (ν : Measure ℤ) :
   | succ m ih =>
       simp only [BGWLeaves.StableAnalysis.intWalk, BGW.StableTrees.Attraction.intWalk, ih]
 
-/-- Tranche 1's attraction predicate implies BGW's (same fields). -/
+/-- The project's attraction predicate implies BGW's (same fields). -/
 theorem isStableAttracted_toBGW {ν : Measure ℤ} {θ m : ℝ} {a : ℕ → ℝ}
     (h : BGWLeaves.StableAnalysis.IsStableAttracted ν θ m a) :
     BGW.StableTrees.Attraction.IsStableAttracted ν θ m a := by
@@ -52,7 +52,7 @@ theorem isStableAttracted_toBGW {ν : Measure ℤ} {θ m : ℝ} {a : ℕ → ℝ
   rw [intWalk_eq] at hw
   exact ⟨h1, h2, X, hX, hL, hw⟩
 
-/-- BGW's attraction predicate implies tranche 1's (same fields). -/
+/-- BGW's attraction predicate implies the project's (same fields). -/
 theorem isStableAttracted_ofBGW {ν : Measure ℤ} {θ m : ℝ} {a : ℕ → ℝ}
     (h : BGW.StableTrees.Attraction.IsStableAttracted ν θ m a) :
     BGWLeaves.StableAnalysis.IsStableAttracted ν θ m a := by

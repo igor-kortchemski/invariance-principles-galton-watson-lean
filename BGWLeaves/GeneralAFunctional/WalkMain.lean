@@ -21,7 +21,7 @@ open BGWLeaves.GeneralAFunctional.Walk BGWLeaves.GeneralAFunctional.WalkVervaat
 open scoped ENNReal NNReal Topology
 
 /-- The full A-marked bridge principle, from proper prefixes and terminal
-oscillation control by C11b. -/
+oscillation control (`Skorokhod.tendsto_of_tendsto_restrict_of_oscillation`). -/
 theorem tendsto_aBridgeWalkPath {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} {A : Set ℕ}
     (hA : A.Nonempty) (hc : IsCritical μ) (hne : μ 1 ≠ 1) (hap : Aperiodic μ)
     (hB : IsRealStableAttracted (realOffspringStepLaw μ) θ B)
@@ -56,7 +56,7 @@ theorem tendsto_aBridgeWalkPath {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} {A :
         hpre ha0 ha1 halim)
 
 /-- (W_A) The walk side of Theorem 8.1(II), with the original random total-size
-normalization. The signature is exactly that of `m15-split/Parts.lean`. -/
+normalization. -/
 theorem general_walk_tendsto {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} {A : Set ℕ} (hA : A.Nonempty)
     (hc : IsCritical μ) (hne : μ 1 ≠ 1) (hap : Aperiodic μ)
     (hB : IsRealStableAttracted (realOffspringStepLaw μ) θ B)

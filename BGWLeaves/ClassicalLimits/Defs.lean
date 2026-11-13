@@ -13,16 +13,15 @@ public import Mathlib.MeasureTheory.Constructions.BorelSpace.ContinuousMap
 public import Mathlib.MeasureTheory.Function.StronglyMeasurable.Basic
 
 /-!
-# Tranche 2, package M12 `ClassicalLimits`: definitions and proved bridges
+# `ClassicalLimits`: definitions and bridges
 
-Source: arXiv:1110.2163v4 (`.orchestration/t2-arch/paper_utf8.tex`): Lemma 5.7 (`lem:CVproba`,
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source): Lemma 5.7 (`lem:CVproba`,
 line 1487) and Lemma 6.2(ii) (`lem:CVf2`, line 2009, notation of line 1999).
 
-This file contains the definitions of package M12 (the random walk of Proposition 1.4 and its leaf clock
-`T_u`) and the PROVED measurability bridges for the maps pushed forward in the statements of
-`BGWLeaves.ClassicalLimits`: the joint time-space scaling of Lemma 5.7 (`measurable_timeSpaceScale`,
-`measurable_timeSpaceScaleC`) and the path of Lemma 6.2(ii) (`measurable_leafClockPath`).  No proof
-hole, no axiom.  It will be frozen whole.
+This file contains the definitions for `BGWLeaves.ClassicalLimits` (the random walk of Proposition 1.4
+and its leaf clock `T_u`) and the measurability bridges for the maps pushed forward in its statements:
+the joint time-space scaling of Lemma 5.7 (`measurable_timeSpaceScale`,
+`measurable_timeSpaceScaleC`) and the path of Lemma 6.2(ii) (`measurable_leafClockPath`).
 -/
 
 @[expose] public section
@@ -36,7 +35,7 @@ open scoped ENNReal NNReal Topology
 /-! ## Definitions (Lemma 6.2(ii)) -/
 
 /-- The law of the walk of Proposition 1.4 (steps `ω i - 1`, `ω i ∼ μ` i.i.d.) as a probability
-measure (tranche 1's `iidWalk μ`). -/
+measure (`iidWalk μ`). -/
 noncomputable def walkLawPM (μ : PMF ℕ) : ProbabilityMeasure (ℕ → ℕ) :=
   ⟨iidWalk μ, by unfold iidWalk; infer_instance⟩
 
@@ -44,7 +43,7 @@ noncomputable def walkLawPM (μ : PMF ℕ) : ProbabilityMeasure (ℕ → ℕ) :=
 noncomputable def walkIncr (ω : ℕ → ℕ) : ℕ → ℝ := fun i => (ω i : ℝ) - 1
 
 /-- `T_u = inf{k : Λ(k) = ⌊u⌋}` (line 1999) as a natural number (junk `0` if `T_u = ∞`, a null event
-for `μ 0 ≠ 0`, tranche 1's `walkLeafTime_ne_top_ae`). -/
+for `μ 0 ≠ 0`, `walkLeafTime_ne_top_ae`). -/
 noncomputable def leafClock (ω : ℕ → ℕ) (u : ℝ) : ℕ := (walkLeafTime ω ⌊u⌋₊).toNat
 
 /-- `(W_{⌊(t/a) T_{an}⌋} / B_{⌊n/μ₀⌋})_{0 ≤ t ≤ a}` of Lemma 6.2(ii), as an element of `D([0,a])`

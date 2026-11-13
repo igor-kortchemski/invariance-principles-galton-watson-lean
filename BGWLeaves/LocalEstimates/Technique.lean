@@ -12,11 +12,13 @@ import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
-# M7 provider `Technique`
+# Lemma 5.13 and the proof of Lemma 5.4(ii)
 
-Analytic estimates for Lemma 5.13 and the Lemma 5.4(ii) chain: `aN_*`, `aTilde_eq`, `eq_psi`, `eq_retenir`, `bN_*`, `Kn_tendsto_*`, `eq_cvmoche`, `eq_lemtechnique0/1/2`, `eq_cvdd`. Includes the exact discretization `eq_retenir` and the final assembly `lem_technical_ii`. The exported theorems fill registered holes of
-`BGWLeaves.LocalEstimates`; they are exported in namespace `BGWLeaves.LocalEstimates.Technique` with exactly the types of the
-statements file.
+Analytic estimates for Lemma 5.13 and the Lemma 5.4(ii) chain: `aN_*`, `aTilde_eq`, `eq_psi`, `eq_retenir`,
+`bN_*`, `Kn_tendsto_*`, `eq_cvmoche`, `eq_lemtechnique0/1/2`, `eq_cvdd`. Includes the exact discretization
+`eq_retenir` and the final assembly `lem_technical_ii`. The theorems are those stated in
+`BGWLeaves.LocalEstimates`; they are exported in namespace `BGWLeaves.LocalEstimates.Technique` with exactly
+the types stated there.
 -/
 
 @[expose] public section

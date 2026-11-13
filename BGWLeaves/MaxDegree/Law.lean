@@ -3,11 +3,11 @@ module
 public import BGWLeaves.MaxDegree.Defs
 
 /-!
-# M9 provider `Law`
+# Maximum degree: hypothesis `𝓗`, the tails and Lemma 7.2
 
-Provider for hypothesis `𝓗`, the tails and Lemma 7.2: `HypH.mu_zero_pos`, `HypH.mu_zero_lt_one`, `stepTail_eq_offTail`, `offTail_antitone`, `offTail_of_nonpos`, `offTail_one`, `tendsto_offTail`, `bigD_spec`, `eventually_bigD_spec`, `bigD_mono`, `tendsto_bigD_atTop_iff`, `bigD_eq_of_bounded`, `lem_MM`, `MM_lower_limit`, `MM_upper_limit`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.MaxDegree`; they are exported in namespace `BGWLeaves.MaxDegree.Law` with exactly the types of the
-statements file.
+Proofs for hypothesis `𝓗`, the tails and Lemma 7.2: `HypH.mu_zero_pos`, `HypH.mu_zero_lt_one`, `stepTail_eq_offTail`, `offTail_antitone`, `offTail_of_nonpos`, `offTail_one`, `tendsto_offTail`, `bigD_spec`, `eventually_bigD_spec`, `bigD_mono`, `tendsto_bigD_atTop_iff`, `bigD_eq_of_bounded`, `lem_MM`, `MM_lower_limit`, `MM_upper_limit`.  The theorems are those stated in
+`BGWLeaves.MaxDegree`; they are exported in namespace `BGWLeaves.MaxDegree.Law` with exactly the types stated
+there.
 -/
 
 @[expose] public section

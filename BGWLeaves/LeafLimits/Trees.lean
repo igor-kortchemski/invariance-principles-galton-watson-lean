@@ -13,36 +13,36 @@ public import BGW.MetricMeasure.RootedUnderlyingGH
 public import Mathlib.Topology.ContinuousMap.SecondCountableSpace
 
 /-!
-# M13 provider `Trees`
+# Gromov-Hausdorff and GHP consequences
 
-Provider for the GH and GHP consequences: the registered holes `cvG_GHP`, `cvG_GH` and
+Proofs of the GH and GHP consequences `cvG_GHP`, `cvG_GH` and
 `intro_GHP_leaf` of `BGWLeaves.LeafLimits`, exported in namespace `BGWLeaves.LeafLimits.Trees` with exactly
-the types of the statements file (`cvG_GH` uses the Borel σ-algebra of `GHSpace`, declared as LOCAL
-instances `BGWLeaves.ghMeasurableSpace`, `BGWLeaves.ghBorelSpace` in the statements file; this provider
-declares its own local instances `borel GHSpace` and `⟨rfl⟩`, definitionally equal to those, so that the
-statements file closes the hole by `exact`).
+the types stated there (`cvG_GH` uses the Borel σ-algebra of `GHSpace`, declared as LOCAL
+instances `BGWLeaves.ghMeasurableSpace`, `BGWLeaves.ghBorelSpace` in `BGWLeaves.LeafLimits`; this module
+declares its own local instances `borel GHSpace` and `⟨rfl⟩`, definitionally equal to those, so that
+`BGWLeaves.LeafLimits` proves `cvG_GH` by `exact`).
 
 Route (the joint Remark 5.10 `rem_changement` is NOT used).
-* The contour part of Remark 5.10 (`tendsto_rescaledContour_remark`): Theorem 5.9(ii) (provider
+* The contour part of Remark 5.10 (`tendsto_rescaledContour_remark`): Theorem 5.9(ii) (module
   `ContourHeight`, `thm_cvG_ii`) gives `(B_ζ/ζ) C_{2ζ·}(τ_n) → H^exc`; the amplitude ratio
   `(μ₀^{1-1/θ} B_n/n)/(B_ζ/ζ) = μ₀^{1-1/θ} (ζ/n)/(B_ζ/B_n) → μ₀^{1-1/θ} μ₀^{-1}/μ₀^{-1/θ} = 1` in
-  probability (`ζ/n → 1/μ₀`, provider `Helpers`, and the uniform regular variation of `B`, BGW
-  `IsRealStableAttracted.uniform_ratio`, as in the M14 provider `Jump`); Slutsky (BGW
+  probability (`ζ/n → 1/μ₀`, module `Helpers`, and the uniform regular variation of `B`, BGW
+  `IsRealStableAttracted.uniform_ratio`, as in `BGWLeaves.MaxDegreeLimit.Jump`); Slutsky (BGW
   `tendsto_map_prodMk_of_tendsto_of_error`) and the continuity of `(f, c) ↦ c • f`.  On
   `{λ = n}`, `ζ ≥ n`, so the identity `c_n C = R · (B_ζ/ζ) C` holds almost surely for `n` large.
 * The paper contour `C_{2ζ s}` of BGW (`paperContourFunction`) is `rescaledContour` at the random size
   (`rescaledContour_treeSize_eq_smul`, from BGW `paperContourFunction_eq_contourLin`).
-* `cvG_GHP`: BGW C38 `tendsto_rooted_laws_of_paperContour_remarkDivisor` with `N k = q k`,
-  `B' k = B (q k)` (positive for ALL `k` after a shift of the sequence, audit B-7), `hsize` from
+* `cvG_GHP`: BGW `tendsto_rooted_laws_of_paperContour_remarkDivisor` with `N k = q k`,
+  `B' k = B (q k)` (positive for ALL `k` after a shift of the sequence), `hsize` from
   `ζ/n → 1/μ₀`, `hNB` from `B_n/n → 0` (Potter bound, BGW `IsRealStableAttracted.potter_upper`).
-* `cvG_GH`: BGW C37 `Coding.tendsto_map_forgetToGH`.
-* `intro_GHP_leaf`: BGW C39 `LeafMeasure.tendsto_rooted_leaf_laws_of_contour_of_top`, with `hleaf` from
-  `tendsto_leafIndex_discrepancy` (provider `Helpers`), `hratio` from BGW `tendsto_ratio_remarkDivisor`,
-  `hlim` from the paper-clock contour convergence through BGW
-  `tendsto_map_contour_of_tendsto_map_paperContour` (audit B-7 adapter), with
+* `cvG_GH`: BGW `Coding.tendsto_map_forgetToGH`.
+* `intro_GHP_leaf`: BGW `LeafMeasure.tendsto_rooted_leaf_laws_of_contour_of_top`, with `hleaf` from
+  `tendsto_leafIndex_discrepancy` (module `Helpers`), `hratio` from BGW `tendsto_ratio_remarkDivisor`,
+  `hlim` from the paper-clock contour convergence through the BGW adapter
+  `tendsto_map_contour_of_tendsto_map_paperContour`, with
   `tendsto_real_size_lt_of_ratio`.
 
-This module does not import the statements file `BGWLeaves.LeafLimits`.
+This module does not import `BGWLeaves.LeafLimits`.
 -/
 
 @[expose] public section
@@ -53,7 +53,7 @@ open MeasureTheory ProbabilityTheory Filter BGW
 open BGW.StableTrees BGW.LocallyFinite BGWLeaves.StableAnalysis
 open scoped ENNReal NNReal Topology
 
-/-- The Borel structure on `GHSpace` (as in the statements file and in BGW): local. -/
+/-- The Borel structure on `GHSpace` (as in `BGWLeaves.LeafLimits` and in BGW): local. -/
 noncomputable local instance ghMeasurableSpace : MeasurableSpace GromovHausdorff.GHSpace :=
   borel GromovHausdorff.GHSpace
 
@@ -342,7 +342,7 @@ theorem tendsto_rescaledContour_remark {μ : PMF ℕ} {θ : ℝ} {B : ℕ → �
   congr 1
   field_simp
 
-/-! ## Rescaled trees: the adapters to BGW C38/C39 -/
+/-! ## Rescaled trees: the adapters to BGW's GHP convergence theorems -/
 
 /-- The inverse of BGW's divisor of Remark 5.10 is the amplitude `μ₀^{1-1/θ} B_n/n`. -/
 private theorem inv_remarkDivisor (μ₀ θ : ℝ) (q : ℕ → ℕ) (B : ℕ → ℝ) (k : ℕ) :
@@ -362,14 +362,14 @@ private theorem scale_congr {x y : ℝ} (hxy : x = y) (hx : 0 < x) (hy : 0 < y)
   subst hxy
   rfl
 
-/-- A shift of the sequence makes `q` and `B ∘ q` positive at every index (audit B-7). -/
+/-- A shift of the sequence makes `q` and `B ∘ q` positive at every index. -/
 private theorem exists_shift {ν : ProbabilityMeasure ℝ} {θ : ℝ} {B : ℕ → ℝ}
     (hB : IsRealStableAttracted ν θ B) {q : ℕ → ℕ} (hqtop : Tendsto q atTop atTop) :
     ∃ K0 : ℕ, ∀ k, 0 < q (k + K0) ∧ 0 < B (q (k + K0)) := by
   obtain ⟨K0, hK0⟩ := eventually_atTop.1 (hqtop.eventually ((eventually_ge_atTop 1).and hB.pos))
   exact ⟨K0, fun k => hK0 (k + K0) (Nat.le_add_left _ _)⟩
 
-/-- Lower tail of the size (hypothesis `hsize` of BGW C38): `P(ζ < c n) → 0` for `c < 1/μ₀`. -/
+/-- Lower tail of the size (hypothesis `hsize` of BGW `tendsto_rooted_laws_of_paperContour_remarkDivisor`): `P(ζ < c n) → 0` for `c < 1/μ₀`. -/
 private theorem tendsto_size_lt {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hDA : ∃ a, StableDomain μ θ a) {q : ℕ → ℕ}
     (hqtop : Tendsto q atTop atTop) (hq : ∀ k, LeafAdmissible μ (q k)) (hq1 : ∀ k, 0 < q k)
@@ -389,7 +389,7 @@ private theorem tendsto_size_lt {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (
   rw [abs_sub_comm, abs_of_pos (by linarith)]
   linarith
 
-/-- The paper-clock contour convergence in BGW's form (hypothesis `hlim` of C38). -/
+/-- The paper-clock contour convergence in BGW's form (hypothesis `hlim` of `tendsto_rooted_laws_of_paperContour_remarkDivisor`). -/
 private theorem tendsto_paperContour_remark {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} (hc : IsCritical μ)
     (hne : μ 1 ≠ 1) (hap : Aperiodic μ) (hB : IsRealStableAttracted (realOffspringStepLaw μ) θ B)
     (hnl : ¬ IsLatticeLaw (etaLaw μ)) {q : ℕ → ℕ}
@@ -467,7 +467,7 @@ private theorem intro_GHP_leaf_of_pos {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ
   rw [scaledLeafTreeGHP, dite_eq_left (remark_pos hp hq1 hBq k)]
   exact scale_congr (inv_remarkDivisor _ _ q B k) _ _ _
 
-/-! ## The three holes -/
+/-! ## The three statements: `cvG_GHP`, `cvG_GH`, `intro_GHP_leaf` -/
 
 /-- **GH claim after 5.10 (lines 1593-1597)**, rooted measured GHP form (vertex measure). -/
 theorem cvG_GHP {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)

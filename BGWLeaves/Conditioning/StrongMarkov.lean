@@ -6,13 +6,14 @@ import Mathlib.Probability.Independence.InfinitePi
 import Mathlib.Probability.Independence.Integration
 
 /-!
-# M6 provider `StrongMarkov`
+# Lemma 6.10: the strong Markov property at the leaf times
 
-Provider for Lemma 6.10: `walkLeafTime_ne_top_ae`, `walkLeafTime_add`, `strongMarkov_leafTime`, `absolueC2_core`, `lem_absolueC2_k`.  The theorems proved here are the registered holes of
-`BGWLeaves.Conditioning`; they are exported in namespace `BGWLeaves.Conditioning.StrongMarkov` with exactly the types of the
-statements file.
+Proof of Lemma 6.10: `walkLeafTime_ne_top_ae`, `walkLeafTime_add`, `strongMarkov_leafTime`, `absolueC2_core`,
+`lem_absolueC2_k`.  The theorems are those stated in `BGWLeaves.Conditioning`; they are exported in namespace
+`BGWLeaves.Conditioning.StrongMarkov` with exactly the types stated there.
 
-Proof outline.  `walkLeafTime ω k = m` iff `IsMarkTime k ω m` (M5), so `T_k < ∞` a.s. is M5's `ae_exists_markTime`.
+Proof outline.  `walkLeafTime ω k = m` iff `IsMarkTime k ω m` (`BGWLeaves.Vervaat`), so `T_k < ∞` a.s. is
+`ae_exists_markTime`.
 `walkLeafTime_add` is deterministic bookkeeping with the additivity `Λ(t+s) = Λ(t) + Λ(θ_t ω)(s)`.  The strong
 Markov property decomposes on `{T_k = m}`, an event depending on the first `m` coordinates only, which are
 independent of the tail `θ_m ω ∼ iidWalk μ` (`iIndepFun.indepFun_set`).  `absolueC2_core` sums over the

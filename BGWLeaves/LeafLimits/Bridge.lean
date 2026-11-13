@@ -16,7 +16,7 @@ public import Mathlib.MeasureTheory.Measure.Portmanteau
 public import BGWLeaves.LeafConcentration.OeLemmas
 
 /-!
-# M13 provider `Bridge`
+# The bridge invariance principle of Theorem 6.1
 
 The bridge invariance principle inside Theorem 6.1, for arbitrary admissible normings.
 Lemma 6.10 gives the exact stopped-prefix density. The signed local estimate 6.11 and regular
@@ -26,7 +26,8 @@ conditioning denominator transfers exponential clock concentration to the bridge
 
 For a target prefix `a`, Lemma 5.7 is applied first at `b > a`, with the time factor
 `b T_n/T_(bn)` and a positive modification off the good event. The whole-interval result combines
-these prefixes with the independent `BridgeTerminal` provider by C11b.
+these prefixes with the terminal control of `BridgeTerminal` by
+`Skorokhod.tendsto_of_tendsto_restrict_of_oscillation`.
 -/
 
 @[expose] public section
@@ -1109,7 +1110,8 @@ theorem bridge_prefix_tendsto {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} (hc : 
   · exact bridge_prefix_tendsto_pos hc hne hap hB hnl hqtop hq h ha1
 
 /-- The stopped leaf-clock bridge converges on the whole interval. Prefix convergence is
-combined with the independent terminal-reversal provider by C11b. -/
+combined with the terminal-reversal control of `BridgeTerminal` by
+`Skorokhod.tendsto_of_tendsto_restrict_of_oscillation`. -/
 theorem tendsto_bridgeWalkPath {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} (hc : IsCritical μ)
     (hne : μ 1 ≠ 1) (hap : Aperiodic μ)
     (hB : IsRealStableAttracted (realOffspringStepLaw μ) θ B)

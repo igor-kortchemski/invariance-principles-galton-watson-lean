@@ -4,15 +4,14 @@ public import BGWLeaves.Coding.Defs
 public import BGWLeaves.Vervaat.Defs
 
 /-!
-# Tranche 2, package M14 `MaxDegreeLimit`: proved bridges
+# `MaxDegreeLimit`: bridges
 
-Source: arXiv:1110.2163v4 (`.orchestration/t2-arch/paper_utf8.tex`): Theorem 7.1(i) (`thm:max`,
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source): Theorem 7.1(i) (`thm:max`,
 line 2357) and the remark of line 2351.
 
-Package M14 has no new definition: the maximal out-degree `Δ(τ)` is tranche 1's `maxDegree` of the plane
-tree `toPlaneTree τ` (package M11).  This file contains the PROVED measurability of the rescaled maximal
-degree pushed forward in the statements of `BGWLeaves.MaxDegreeLimit`.  No proof hole, no axiom.  It will
-be frozen whole.
+There is no new definition: the maximal out-degree `Δ(τ)` is `maxDegree` of the plane
+tree `toPlaneTree τ` (`BGWLeaves.Coding.Defs`).  This file contains the measurability of the rescaled maximal
+degree pushed forward in the statements of `BGWLeaves.MaxDegreeLimit`.
 -/
 
 @[expose] public section

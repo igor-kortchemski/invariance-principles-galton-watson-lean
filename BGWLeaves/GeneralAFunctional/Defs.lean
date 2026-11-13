@@ -5,12 +5,12 @@ public import BGWLeaves.GeneralA.Defs
 public import BGW.StableTrees.ExactContourBasic
 
 /-!
-# Theorem 8.1(II), functional part (M15): definitions
+# Theorem 8.1(II), functional part: definitions
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Theorem 8.1 (`thm:general`, lines 2494–2508 of the UTF-8 copy
-`.orchestration/t2-arch/paper_utf8.tex`; Section 8 starts at line 2486).
+Source: arXiv:1110.2163v4, Theorem 8.1 (`thm:general`, lines 2494–2508 of the LaTeX source;
+Section 8 starts at line 2486).
 
-* `ζ_A(τ)` is tranche 1's `zetaA A τ` (the number of vertices of `τ` whose number of children lies in `A`,
+* `ζ_A(τ)` is `zetaA A τ` (the number of vertices of `τ` whose number of children lies in `A`,
   `ℕ∞`-valued).
 * `ZetaAAdmissible μ A n`: `P_μ[ζ_A(τ) = n] > 0`, for finite trees (infinite trees are null under criticality
   and `μ 1 ≠ 1`: BGW `ae_finiteVertices_bienaymeLaw`). The event is measurable (`measurableSet_zetaAEvent`:

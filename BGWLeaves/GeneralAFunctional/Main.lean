@@ -11,7 +11,7 @@ public import BGW.Skorokhod.ContinuousEmbedding
 public import BGW.Skorokhod.ScalingMultiplication
 
 /-! Theorem 8.1(II): the joint prefix limit and terminal marginal controls
-retain the excursion coupling. The checked walk provider discharges the sole
+retain the excursion coupling. The walk limit `WalkMain.general_walk_tendsto` discharges the sole
 walk hypothesis of the private assembly theorem. -/
 @[expose] public section
 namespace BGWLeaves.GeneralAFunctional.Main
@@ -388,7 +388,7 @@ private theorem assembly_of_walk {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} (hc
 
 
 
-/-- Theorem 8.1(II), with the frozen arbitrary-norming signature. -/
+/-- Theorem 8.1(II), with an arbitrary admissible norming. -/
 theorem thm_general_II {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} {A : Set ℕ} (hA : A.Nonempty)
     (hc : IsCritical μ) (hne : μ 1 ≠ 1) (hap : Aperiodic μ)
     (hB : IsRealStableAttracted (realOffspringStepLaw μ) θ B)

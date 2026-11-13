@@ -7,11 +7,11 @@ import BGWLeaves.Passage
 public import Mathlib.NumberTheory.FrobeniusNumber
 
 /-!
-# Exact leaf counts (M4b): the arithmetic provider
+# Exact leaf counts: arithmetic
 
 Proofs of `int_gcd_eq_arithFactor`, `exists_isSuppSpan`, `leafProb_eq_zero_of_not_dvd` and
-`ltn_i_arith` (the exact types of the frozen statements of `BGWLeaves.LeafMass`), together with the
-helpers they need (public, not frozen): `arithFactor_zero_eq_setGcd` (`arithFactor μ {0}` is the
+`ltn_i_arith` (with exactly the types stated in `BGWLeaves.LeafMass`), together with the
+public helpers they need: `arithFactor_zero_eq_setGcd` (`arithFactor μ {0}` is the
 gcd of the nonnegative steps `{k - 1 : k ∈ supp μ, k ≥ 1}` of `Y`), `leafProb_pos_iff_mem_leafMonoid`
 (`P[λ = n + 1] > 0` iff `n` is a sum of steps of `Y`), `leafMonoid_dvd`, `leafMonoid_eventually`,
 `pi_eta_real_eq_intWalkProb` and `leafProb_series` (`P[λ = m] = ∑_p P[ζ = p, λ = m]`, each term

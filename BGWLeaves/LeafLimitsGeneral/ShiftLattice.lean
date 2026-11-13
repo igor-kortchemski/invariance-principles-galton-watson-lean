@@ -6,7 +6,7 @@ public import BGWLeaves.LocalEstimates.SizeTailKernel
 
 /-! Lattice 5.5(ii). Scale the forest mass by its span on permitted residues,
 then use the regular-variation comparison from `LocalEstimates.LeafWindow`.
-The comparison proofs below are copied and adapted from that provider. -/
+The comparison proofs below are copied and adapted from that module. -/
 
 @[expose] public section
 namespace BGWLeaves.LeafLimitsGeneral.ShiftLattice

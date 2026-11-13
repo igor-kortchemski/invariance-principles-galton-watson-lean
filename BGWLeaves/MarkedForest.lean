@@ -4,7 +4,7 @@ public import BGWLeaves.MarkedForest.Defs
 import BGWLeaves.MarkedForest.Proof
 
 /-!
-# The multiplied leaf-marked forest identity (M1)
+# The multiplied leaf-marked forest identity
 
 Source: arXiv:1110.2163v4, Section 1.3, `eq:kemperman` and its marked version used in the proof of
 Proposition 1.6 (`prop:K`, step 3): for `j ≥ 1` roots, `p` vertices and `n` leaves,

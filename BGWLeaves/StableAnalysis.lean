@@ -4,11 +4,10 @@ public import BGWLeaves.StableAnalysis.Defs
 import BGWLeaves.StableAnalysis.Proof
 
 /-!
-# Scalar stable analysis (M3): the results still to be proved
+# Scalar stable analysis
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`.  Each declaration here is a statement approved
-for freezing; its proof is to be supplied in the provider modules `BGWLeaves.StableAnalysis.*`
-(imported through `BGWLeaves.StableAnalysis.Proof`).  Definitions and proved bridges are in
+Source: arXiv:1110.2163v4.  The proofs are in the modules `BGWLeaves.StableAnalysis.*`
+(imported through `BGWLeaves.StableAnalysis.Proof`).  Definitions and bridges are in
 `BGWLeaves.StableAnalysis.Defs`; proved results depending on these statements are in
 `BGWLeaves.StableAnalysis.Consequences`.
 -/
@@ -60,6 +59,10 @@ theorem slow_representation (hmeas : Measurable L) (hnn : ∀ x, 0 < x → 0 ≤
 end SlowVariation
 
 /-! ## 4. Theorem 1.10 (`thm:locallimit`), with the corrected norming
+
+The norming `norming ν θ` is the corrected one (corrections 1 and 2 of `FORMALIZATION_REPORT.md`:
+`(-Γ(1-θ))^{1/θ}` for `θ < 2`, and the factor `1/2` under the root for `θ = 2` with infinite variance);
+see `printedConstant_neg` and `printedNorming_gauss`.
 
 Hypotheses of the paper: `W` has i.i.d. integer steps with law `ν`, `ν {z < -1} = 0`,
 finite mean (automatic for `θ > 1`), `ν` in the domain of attraction of the index-`θ` law

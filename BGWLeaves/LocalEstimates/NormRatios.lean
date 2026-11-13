@@ -5,11 +5,12 @@ import BGWLeaves.LeafMass.YLaw
 import BGWLeaves.StableAnalysis.TransformConvergence
 
 /-!
-# M7 provider `NormRatios`
+# The arithmetic of `Y` and the norming ratios
 
-Proofs of the arithmetic of `Y` and the norming ratios: `mu0_ne_one`, `nonLattice_etaLaw_iff`, `hS_of_nonLattice`, `normB_ratio_tendsto`, `normBp_ratio_tendsto`, `normBp_div_normB_infVar`, `normBp_div_normB_finVar`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.LocalEstimates`; they are exported in namespace `BGWLeaves.LocalEstimates.NormRatios` with exactly the types of the
-statements file.
+Proofs of the arithmetic of `Y` and the norming ratios: `mu0_ne_one`, `nonLattice_etaLaw_iff`,
+`hS_of_nonLattice`, `normB_ratio_tendsto`, `normBp_ratio_tendsto`, `normBp_div_normB_infVar`,
+`normBp_div_normB_finVar`.  The theorems are those stated in `BGWLeaves.LocalEstimates`; they are exported
+in namespace `BGWLeaves.LocalEstimates.NormRatios` with exactly the types stated there.
 -/
 
 @[expose] public section

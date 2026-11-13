@@ -9,22 +9,22 @@ import Mathlib.Probability.Independence.Integration
 import Mathlib.MeasureTheory.Function.AEMeasurableSequence
 
 /-!
-# M9 provider `Concentration`
+# Maximum degree: density bounds and tightness of the bridge midpoint
 
 Density bounds and tightness of the midpoint of the bridge (discrete replacement of `eq:trucsuperutile`):
-`chi_sup_bound`, `chi_zero_lower`, `wald_second_moment`, `bridge_midpoint_tight`.  The theorems are the registered holes of
-`BGWLeaves.MaxDegree`; they are exported in namespace `BGWLeaves.MaxDegree.Concentration` with exactly the types of the
-statements file.
+`chi_sup_bound`, `chi_zero_lower`, `wald_second_moment`, `bridge_midpoint_tight`.  The theorems are those
+stated in `BGWLeaves.MaxDegree`; they are exported in namespace `BGWLeaves.MaxDegree.Concentration` with
+exactly the types stated there.
 
 Proof outline.
-* `chi_zero_lower`: M7 `chi_zero_asymp` and `B_n = σ √(⌊n⌋/2)` (finite variance).
-* `chi_sup_bound`: M7 `chi_window` (localization to `|k - n/μ₀| ≤ εn`), M7 `bN_bounded` (which bounds
+* `chi_zero_lower`: `chi_zero_asymp` and `B_n = σ √(⌊n⌋/2)` (finite variance).
+* `chi_sup_bound`: `chi_window` (localization to `|k - n/μ₀| ≤ εn`), `bN_bounded` (which bounds
   `B'_n P[W'_{k-n} = x]` uniformly on the window), `B'_n = σ' √(n/2)`, and the total mass `∑_q binomProb = 1/μ₀`
   of the negative binomial (`hasSum_choose_mul_geometric_of_norm_lt_one`).
 * `wald_second_moment`: Wald's second identity.  `Z_k = 1{Λ(k) < m} (ω_k - 1)` are orthogonal in `L²` (independence of
   the first `k` coordinates and `ω_k`, `iIndepFun_infinitePi`), `E Z_k² = σ² P[Λ(k) < m]`, `∑_k P[Λ(k) < m] = m/μ₀` (Wald's
   first identity for `Λ`, bounded convergence), and the `L²` limit of the partial sums is `W_{T_m}` (Fatou).
-* `bridge_midpoint_tight`: the strong Markov property `lem_absolueC2_k` (M6) with `f = 1{|W_{T_m}| ≥ α√n}`,
+* `bridge_midpoint_tight`: the strong Markov property `lem_absolueC2_k` with `f = 1{|W_{T_m}| ≥ α√n}`,
   `chi_sup_bound`, `chi_zero_lower`, Chebyshev and `wald_second_moment`.
 -/
 
@@ -56,7 +56,7 @@ theorem memLp_of_integrable_sq_stepLaw {μ : PMF ℕ}
   push_cast
   nlinarith [sq_nonneg ((j : ℝ) - 2)]
 
-/-- The part of the hypothesis `𝓗` used by the providers `Concentration`, `Bridge` and `Principles`: critical,
+/-- The part of the hypothesis `𝓗` used by the modules `Concentration`, `Bridge` and `Principles`: critical,
 nondegenerate, aperiodic, finite variance (no condition on the radius of convergence).  It is obtainable from the
 hypotheses `hc hne hap hfin` of the principles (`HypW.of_integrable_sq`), and from `HypH` (`HypH.toW`). -/
 structure HypW (μ : PMF ℕ) : Prop where
@@ -1135,7 +1135,7 @@ theorem bridge_midpoint_tightW {μ : PMF ℕ} (h : HypW μ) (hnl : ¬ IsLatticeL
     nlinarith
   exact lt_of_le_of_lt (hb.trans hfin) hlt
 
-/-! ## The frozen exports (types with `h : HypH μ`) -/
+/-! ## The exported statements (types with `h : HypH μ`) -/
 
 theorem chi_sup_bound {μ : PMF ℕ} (h : HypH μ) (hnl : ¬ IsLatticeLaw (etaLaw μ)) :
     ∃ C : ℝ, 0 < C ∧ ∀ n : ℕ, 1 ≤ n → ∀ j : ℤ, (chi μ n j).toReal ≤ C / Real.sqrt n :=

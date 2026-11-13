@@ -10,15 +10,15 @@ public import BGWLeaves.Vervaat.Defs
 public import BGW.Tree.Height
 
 /-!
-# Conditioning on the number of leaves (M6): definitions and proved bridges
+# Conditioning on the number of leaves: definitions and bridges
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`: Lemma 4.3 (`lemma:passage`, line 1149),
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source): Lemma 4.3 (`lemma:passage`, line 1149),
 Proposition 4.4 (`prop:passage`, line 1200), Proposition 5.2 (`prop:abscon`, line 1384), Lemma 5.6
 (`lem:CVf`, line 1473) and Lemma 6.10 (`lem:absolueC2`, line 2185).
 
-This file contains every definition of milestone M6 and the proved bridges.  It contains no proof
-holes.  The statements still to be proved are in `BGWLeaves.Conditioning`; their proofs are supplied by
-the provider modules `BGWLeaves.Conditioning.*` (imported through `BGWLeaves.Conditioning.Proof`).
+This file contains the definitions for the conditioning on the number of leaves and the bridges.  The
+main statements are in `BGWLeaves.Conditioning`; their proofs are in the modules
+`BGWLeaves.Conditioning.*` (imported through `BGWLeaves.Conditioning.Proof`).
 
 Conventions.
 * Offspring law `μ : PMF ℕ`; one tree: `bienaymeLaw μ.toMeasure` on `LocallyFinite.Tree`; `j`
@@ -31,7 +31,7 @@ Conventions.
   trees, which are null in the critical case with `μ 1 ≠ 1`).
 * Conditioning is `ProbabilityTheory.cond`: conditioning on a null event gives the zero measure.
 * Events of "number of leaves / vertices" are events of FINITE trees (`finiteTreeEvent`, `forestEvent`),
-  except `sizeGeEvent` and `forestSizeGeEvent`, which contain the infinite trees (the sealed convention of
+  except `sizeGeEvent` and `forestSizeGeEvent`, which contain the infinite trees (the convention of
   `cor_GD2mieux`).  `psi μ p j = P_{μ,j}(λ = p)` and `psiStar μ p j = P_{μ,j}(λ ≥ p)` are `ℝ≥0∞`-valued
   (`LocalEstimates` uses their `.toReal`); `chi μ k j = P_j[W_{T_k} = -1]` likewise.
 * Two different clocks "`T_k`" (as in the paper): `treeLeafTime` (Section 5, index of the `k`-th leaf of a
@@ -81,7 +81,7 @@ theorem finiteTreeLift_of_infinite (g : PlaneTree → ℝ≥0∞) {T : LocallyFi
 
 open scoped Classical in
 /-- Real-valued version of `finiteTreeLift`, for real tests `U : Tree → ℝ` built from a functional of
-finite plane trees (e.g. `F(B_ζ/ζ · C_{2ζ·}(τ))` of Theorems 4.1/4.5, tranche 2); junk value `0` at infinite
+finite plane trees (e.g. `F(B_ζ/ζ · C_{2ζ·}(τ))` of Theorems 4.1/4.5); junk value `0` at infinite
 trees. -/
 noncomputable def finiteTreeLiftR (g : PlaneTree → ℝ) : LocallyFinite.Tree → ℝ :=
   fun T => if h : ∃ t : PlaneTree, t.toLocallyFinite = T then g h.choose else 0
@@ -131,19 +131,19 @@ noncomputable def psi (μ : PMF ℕ) (p j : ℕ) : ℝ≥0∞ := forestLaw μ j 
 /-- `ψ*_p(j) = P_{μ,j}(λ ≥ p)`. -/
 noncomputable def psiStar (μ : PMF ℕ) (p j : ℕ) : ℝ≥0∞ := forestLaw μ j (forestLeafGeEvent j p)
 
-/-- The real threshold of the paper is the ceiling: `λ ≥ a` iff `λ ≥ ⌈a⌉` for integer-valued `λ`.  PROVED. -/
+/-- The real threshold of the paper is the ceiling: `λ ≥ a` iff `λ ≥ ⌈a⌉` for integer-valued `λ`. -/
 theorem mem_forestLeafGeEvent_real_iff (j : ℕ) (a : ℝ) (F : Fin j → LocallyFinite.Tree) :
     F ∈ forestLeafGeEvent j ⌈a⌉₊ ↔ ∃ p m' : ℕ, a ≤ m' ∧ F ∈ forestEvent j p m' := by
   unfold forestLeafGeEvent
   simp only [Set.mem_ofPred_eq, Nat.ceil_le]
 
-/-- Same for one tree. PROVED. -/
+/-- Same for one tree. -/
 theorem mem_leafGeEvent_real_iff (a : ℝ) (T : LocallyFinite.Tree) :
     T ∈ leafGeEvent ⌈a⌉₊ ↔ ∃ t : PlaneTree, t.toLocallyFinite = T ∧ a ≤ t.degreeCount 0 := by
   unfold leafGeEvent finiteTreeEvent
   simp only [Set.mem_ofPred_eq, Nat.ceil_le]
 
-/-- `ψ_p(j) ≤ ψ*_p(j)`.  ROUTINE (`forestLeafCountEvent ⊂ forestLeafGeEvent`).  PROVED. -/
+/-- `ψ_p(j) ≤ ψ*_p(j)` (`forestLeafCountEvent ⊂ forestLeafGeEvent`). -/
 theorem psi_le_psiStar (μ : PMF ℕ) (p j : ℕ) : psi μ p j ≤ psiStar μ p j := by
   refine measure_mono ?_
   rintro F hF
@@ -167,8 +167,8 @@ theorem toReal_psi (μ : PMF ℕ) (p j : ℕ) :
 theorem toReal_psiStar (μ : PMF ℕ) (p j : ℕ) :
     (psiStar μ p j).toReal = (forestLaw μ j).real (forestLeafGeEvent j p) := rfl
 
-/-- Under `(H_θ)`, `P_μ[ζ = n] > 0` for all large `n` (Remark 1.12 with `d = 1`; sealed
-`sizeProb_pos_iff` and `aperiodic_iff_latticeSpan_eq_one`).  PROVED from the sealed results.  This is what
+/-- Under `(H_θ)`, `P_μ[ζ = n] > 0` for all large `n` (Remark 1.12 with `d = 1`;
+`sizeProb_pos_iff` and `aperiodic_iff_latticeSpan_eq_one`).  This is what
 makes the Lean convention (`E[U | ζ = n] := 0` for null `n`) harmless in Proposition 4.4(i). -/
 theorem sizeEvent_ne_zero_eventually {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hDA : ∃ a, StableDomain μ θ a) :
@@ -212,7 +212,7 @@ def ClockDev (n : ℕ) (target : ℝ) (T : ℕ∞) : Prop :=
 /-! ## 6.10 The walk, the leaf clock -/
 
 /-- The i.i.d. walk steps `ω i ∼ μ` (the walk of Proposition 1.4 has increments `ω i - 1`);
-`Measure.infinitePi`, as in M2b. -/
+`Measure.infinitePi`, as in `BGWLeaves.Passage`. -/
 noncomputable abbrev iidWalk (μ : PMF ℕ) : Measure (ℕ → ℕ) :=
   Measure.infinitePi fun _ : ℕ => μ.toMeasure
 

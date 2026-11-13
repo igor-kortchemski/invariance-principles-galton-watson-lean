@@ -11,16 +11,16 @@ public import BGW.StableTrees.DiscreteForestPrefixMass
 public import BGW.ContinuumTrees.VervaatBridge
 
 /-!
-# M13 provider `LeafGe`
+# Theorem 4.5 and Remark 4.6: conditioning on `λ ≥ n`
 
-Provider for the conditioning on `λ ≥ n`: the registered holes `thm_inv1` (Theorem 4.5) and
+Proofs for the conditioning on `λ ≥ n`: `thm_inv1` (Theorem 4.5) and
 `rem_inv1_finiteVariance` (Remark 4.6) of `BGWLeaves.LeafLimits`, exported in namespace
-`BGWLeaves.LeafLimits.LeafGe` with exactly the types of the statements file.
+`BGWLeaves.LeafLimits.LeafGe` with exactly the types stated there.
 
 Route (Theorem 4.5).  Fix a bounded continuous test `f` on `C([0,1])` and put
 `U τ = f((B_ζ/ζ) C(τ)) + ‖f‖`, a fixed bounded nonnegative measurable function of the tree.  On
 `{ζ = n}` the random-size contour is BGW's `treeContourPath B n 1` (`rescaledContour_eq_treeContourPath`),
-so Theorem 4.1 (M12 `thm_cv1`, along the eventually admissible sizes) gives `E[U | ζ = n] → ∫ f dH + ‖f‖`.
+so Theorem 4.1 (`thm_cv1`, along the eventually admissible sizes) gives `E[U | ζ = n] → ∫ f dH + ‖f‖`.
 Proposition 4.4(i) transfers this to `ζ ≥ n`, Proposition 4.4(ii) to `λ ≥ leafCutoff n`, and since
 `leafCutoff` hits every `m ≥ 1` (`leafCutoff_surjective`) the convergence holds along all `m`.
 Portmanteau: `ProbabilityMeasure.tendsto_iff_forall_integral_tendsto`.

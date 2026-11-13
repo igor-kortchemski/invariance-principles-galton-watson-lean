@@ -7,12 +7,12 @@ import Mathlib.MeasureTheory.Integral.Bochner.Set
 import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
 /-!
-# M6 provider `PassageProof`
+# Lemma 4.3 and Proposition 4.4(i)
 
-Proved providers of Lemma 4.3, its two deviation estimates and one-tree form,
+Proofs of Lemma 4.3, its two deviation estimates and one-tree form,
 the averaging formula `integral_cond_sizeGe`, and Proposition 4.4(i).
 The constants in Lemma 4.3 are uniform in both the bounded test and the number of trees.
-All exports have exactly the frozen types in `BGWLeaves.Conditioning`.
+All exports have exactly the types stated in `BGWLeaves.Conditioning`.
 -/
 
 @[expose] public section

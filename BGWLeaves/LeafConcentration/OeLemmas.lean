@@ -4,10 +4,10 @@ public import BGWLeaves.LeafConcentration.Defs
 import Mathlib.Analysis.PSeries
 
 /-!
-# Leaf concentration (M4a): calculus of `oe_ε`
+# Leaf concentration: calculus of `oe_ε`
 
-Provider of the frozen statement `IsOe.tail` (Remark 2.4 of arXiv:1110.2163v4, `rem:oe`) together
-with the helper lemmas `polyExp_absorb`, `IsOe.poly_mul`, `IsOe.add` used by the later providers.
+Proof of `IsOe.tail` (Remark 2.4 of arXiv:1110.2163v4, `rem:oe`) together
+with the helper lemmas `polyExp_absorb`, `IsOe.poly_mul`, `IsOe.add` used by the other modules.
 -/
 
 @[expose] public section

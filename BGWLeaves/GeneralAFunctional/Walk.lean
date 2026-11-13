@@ -8,7 +8,7 @@ public import BGWLeaves.ClassicalLimits.Cited
 public import BGW.Probability.WeakConvergence
 
 /-! Assembly interfaces for the arbitrary-mark walk limit.
-The full marked-bridge invariance principle remains a separate obligation.
+The full marked-bridge invariance principle is `WalkMain.tendsto_aBridgeWalkPath`.
 -/
 
 @[expose] public section

@@ -5,12 +5,12 @@ import BGWLeaves.Conditioning.Basics
 import BGW.Tree.Forest
 
 /-!
-# M6 provider `AbsCont`
+# Proposition 5.2: absolute continuity at the `k`-th leaf
 
 Proposition 5.2 (`prop:abscon`): `treeLeafTime_ne_top_iff`, `abscon_pending_nonneg`,
-`tree_markov_leafCount`, `tree_markov_leafGe`, `abscon_core`, `prop_abscon`.  The theorems proved here
-are the registered holes of `BGWLeaves.Conditioning`; they are exported in namespace
-`BGWLeaves.Conditioning.AbsCont` with exactly the types of the statements file.
+`tree_markov_leafCount`, `tree_markov_leafGe`, `abscon_core`, `prop_abscon`.  The theorems are those
+stated in `BGWLeaves.Conditioning`; they are exported in namespace
+`BGWLeaves.Conditioning.AbsCont` with exactly the types stated there.
 
 Route (purely combinatorial, no strong Markov property of a walk).  A finite plane tree `t` with
 `k ≤ λ(t)` is cut at its `k`-th leaf into the prefix word `P = pre k t` of the degree list (up to and

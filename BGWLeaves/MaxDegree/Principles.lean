@@ -11,11 +11,11 @@ import BGWLeaves.GeneralA.Arithmetic
 import BGWLeaves.StableAnalysis.DomainCriterion
 
 /-!
-# M9 provider `Principles`
+# Maximum degree: the principles and Theorem 7.1(ii)
 
-Provider for the maximum-degree principles (with `hnl`) and the inputs of the case split of Theorem 7.1(ii): `maxDegree_lower_principle`, `maxDegree_upper_principle`, `HypH.not_isLatticeLaw_etaLaw_of_unbounded`, `thm_max_ii_of_bounded`, `leafProb_ne_zero_frequently`, `displayedLaw_not_isLatticeLaw_etaLaw`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.MaxDegree`; they are exported in namespace `BGWLeaves.MaxDegree.Principles` with exactly the types of the
-statements file.
+Proofs of the maximum-degree principles (with `hnl`) and the inputs of the case split of Theorem 7.1(ii): `maxDegree_lower_principle`, `maxDegree_upper_principle`, `HypH.not_isLatticeLaw_etaLaw_of_unbounded`, `thm_max_ii_of_bounded`, `leafProb_ne_zero_frequently`, `displayedLaw_not_isLatticeLaw_etaLaw`.  The theorems are those stated in
+`BGWLeaves.MaxDegree`; they are exported in namespace `BGWLeaves.MaxDegree.Principles` with exactly the types
+stated there.
 -/
 
 @[expose] public section
@@ -116,7 +116,7 @@ theorem leafProb_ne_zero_frequently {μ : PMF ℕ} (hc : IsCritical μ) (hne : �
   · have hge : N ≤ arithFactor μ {0} * (N + a) := by nlinarith
     exact ((hN _ hge).2 (dvd_mul_right _ _)).ne'
 
-/-! ## Transfer of the cyclic maximum (`eq:Deltanon`), restated with the provider `Transfer` -/
+/-! ## Transfer of the cyclic maximum (`eq:Deltanon`), restated with the module `Transfer` -/
 
 theorem eqDeltanon_lt (μ : Measure ℕ) [IsProbabilityMeasure μ] {n : ℕ} (hn : 1 ≤ n) (p : ℝ) :
     ((bienaymeLaw μ)[|leafCountEvent n]) (finiteTreeEvent fun t => (maxDegree t : ℝ) < p + 1) =
@@ -142,7 +142,7 @@ theorem eqDeltanon_gt (μ : Measure ℕ) [IsProbabilityMeasure μ] {n : ℕ} (hn
 
 /-! ## Bounded support -/
 
-/-- A polynomial lower bound for the non-null leaf probabilities (sealed Theorem 3.1, finite variance). -/
+/-- A polynomial lower bound for the non-null leaf probabilities (Theorem 3.1, finite variance). -/
 theorem leafProb_poly_lower {μ : PMF ℕ} (h : HypH μ) :
     ∃ c : ℝ, 0 < c ∧ ∃ N : ℕ, ∀ n : ℕ, N ≤ n → leafProb μ n ≠ 0 →
       c / (n : ℝ) ^ 2 ≤ leafProb μ n := by
@@ -357,7 +357,7 @@ theorem thm_max_ii_of_bounded {μ : PMF ℕ} (h : HypH μ) {K : ℕ} (hK : μ K 
       _ = (n : ℝ) * r ^ n / c := by field_simp
   linarith
 
-/-! ## The two principles: the chain, with the provider facts as explicit inputs -/
+/-! ## The two principles: the chain, with the facts of the other modules as explicit inputs -/
 
 /-- The conclusion of `bridge_midpoint_tight` for the mark sequence `m`. -/
 def MidTight (μ : PMF ℕ) (m : ℕ → ℕ) : Prop :=
@@ -556,7 +556,7 @@ theorem midTight_of_hypW {μ : PMF ℕ} (h : Concentration.HypW μ) (hnl : ¬ Is
     (hm : ∀ n, n / 2 ≤ m n ∧ m n ≤ (n + 1) / 2) : MidTight μ m :=
   fun ε hε => Concentration.bridge_midpoint_tightW h hnl hm ε hε
 
-/-- The lower principle (frozen type: `hc hne hap hfin hnl`). -/
+/-- The lower principle (hypotheses `hc hne hap hfin hnl`). -/
 theorem maxDegree_lower_principle {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hfin : Integrable (fun z : ℤ => (z : ℝ) ^ 2) (stepLaw μ))
     (hnl : ¬ IsLatticeLaw (etaLaw μ)) {p : ℕ → ℝ}
@@ -570,7 +570,7 @@ theorem maxDegree_lower_principle {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 
     (midTight_of_hypW h hnl (m := fun n => n / 2) (fun n => ⟨le_rfl, by omega⟩))
     (fun α hα => Bridge.eq_i_lowerW h hnl (m := fun n => n / 2) (fun n => ⟨le_rfl, by omega⟩) hα) hp
 
-/-- The upper principle (frozen type: `hc hne hap hfin hnl`). -/
+/-- The upper principle (hypotheses `hc hne hap hfin hnl`). -/
 theorem maxDegree_upper_principle {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hfin : Integrable (fun z : ℤ => (z : ℝ) ^ 2) (stepLaw μ))
     (hnl : ¬ IsLatticeLaw (etaLaw μ)) {q : ℕ → ℝ}

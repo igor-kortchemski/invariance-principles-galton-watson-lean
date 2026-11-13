@@ -5,9 +5,10 @@ public import BGWLeaves.LeafLimits.Bridge
 public import BGWLeaves.LeafLimits.VervaatLaw
 
 /-!
-# M13 provider `Walk`
+# Theorem 6.1: the Łukasiewicz path under `λ = n`
 
-Theorem 6.1 from the bridge invariance principle, Corollary 6.7 and C9 with M12 Proposition 6.9(i).
+Theorem 6.1 from the bridge invariance principle, Corollary 6.7 and the continuous mapping theorem
+with Proposition 6.9(i) (`prop_bridge_i`).
 The law identity is first proved for positive normings; finite modification and the stopped-clock
 lower bound then handle arbitrary admissible normings, whose positivity is only eventual.
 -/

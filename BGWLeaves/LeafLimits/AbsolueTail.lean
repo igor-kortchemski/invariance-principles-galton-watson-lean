@@ -14,10 +14,10 @@ public import BGW.StableTrees.UnitExcursionLawBasic
 public import BGW.Skorokhod.Measurable
 
 /-!
-# M13 provider `AbsolueTail`: stopped-tail convergence (first step of Lemma 5.8)
+# Stopped-tail convergence (first step of Lemma 5.8)
 
-Source: arXiv:1110.2163v4 (`.orchestration/t2-arch/paper_utf8.tex`), proof of Lemma 5.8
-(`lem:absolue`, lines 1505-1530).
+Source: arXiv:1110.2163v4, proof of Lemma 5.8
+(`lem:absolue`, lines 1505-1530 of the LaTeX source).
 
 Under `P_μ[· | ζ ≥ n]`, the pair of Lemma 5.8 at `r = n` (walk and height read up to the tree leaf
 clock `T_{a μ₀ n}`, time change `t/a`) converges on `[0,a]` to `(X, H)` under `N(· | ζ > 1)`.

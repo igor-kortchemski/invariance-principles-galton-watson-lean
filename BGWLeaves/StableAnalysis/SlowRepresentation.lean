@@ -5,9 +5,9 @@ public import BGWLeaves.StableAnalysis.SlowVariation
 /-!
 # Bingham representation of slowly varying functions
 
-Bingham–Goldie–Teugels, Theorem 1.3.1, in the eventual form frozen in
+Bingham–Goldie–Teugels, Theorem 1.3.1, in the eventual form stated in
 `BGWLeaves.StableAnalysis.slow_representation` (the printed text has `∫₁ˣ` for all `x ≥ 0`;
-the corrected eventual form is formalized, see `MANUSCRIPT_RECOMMENDATIONS.md`, R5).
+the corrected eventual form is formalized).
 -/
 
 @[expose] public section
@@ -301,7 +301,7 @@ private theorem representation_of_slow (hmeas : Measurable L) (hnn : ∀ x, 0 < 
 /-- Bingham's representation theorem (Bingham–Goldie–Teugels, Theorem 1.3.1), in the eventual
 form: a measurable nonnegative `L` is slowly varying iff `L x = c x * exp (∫_X^x e u / u du)`
 for `x ≥ X`, with `c → cinf ∈ (0, ∞)` and `e → 0`.  The printed statement is for all `x ≥ 0`;
-the corrected eventual form is the one formalized (`MANUSCRIPT_RECOMMENDATIONS.md`, R5). -/
+the corrected eventual form is the one formalized. -/
 theorem slow_representation (hmeas : Measurable L) (hnn : ∀ x, 0 < x → 0 ≤ L x) :
     SlowlyVarying L ↔
       ∃ (c e : ℝ → ℝ) (cinf X : ℝ), 0 < cinf ∧ 1 ≤ X ∧ Measurable c ∧ Measurable e ∧

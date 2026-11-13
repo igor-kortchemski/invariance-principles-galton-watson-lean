@@ -10,20 +10,20 @@ import BGW.Tree.Vertices
 import BGW.ContinuumTrees.LeafMeasure
 
 /-!
-# M13 provider `Helpers`
+# Discrete glue and in-probability inputs for the leaf-conditioned limits
 
-Provider for the discrete glue and the in-probability inputs: the registered holes
+Proofs of the discrete glue and the in-probability inputs
 `vervaatD_stepPath_vervaat`, `tendsto_treeSize_div_leaf` and `tendsto_leafIndex_discrepancy` of
-`BGWLeaves.LeafLimits`, exported in namespace `BGWLeaves.LeafLimits.Helpers` with exactly the types of
-the statements file.
+`BGWLeaves.LeafLimits`, exported in namespace `BGWLeaves.LeafLimits.Helpers` with exactly the types
+stated there.
 
-* `vervaatD_stepPath_vervaat` (C33.5 at the path level): BGW `vervaatD_stepPath` and the identity
-  `vervaat x = x.rotate (vervaatIndex x)` (tranche 1's `vervaat` is the cyclic shift at `vervaatIdx`,
-  whose defining set is BGW's `vervaatIndex` set; this module proves its own copy of the M12 glue
-  `vervaat_eq_rotate_vervaatIndex` and does not import the statements file `BGWLeaves.ClassicalLimits`).
+* `vervaatD_stepPath_vervaat` (the Vervaat transform at the path level): BGW `vervaatD_stepPath` and the
+  identity `vervaat x = x.rotate (vervaatIndex x)` (the project's `vervaat` is the cyclic shift at
+  `vervaatIdx`, whose defining set is BGW's `vervaatIndex` set; this module proves its own copy of
+  `vervaat_eq_rotate_vervaatIndex` and does not import `BGWLeaves.ClassicalLimits`).
 * `tendsto_treeSize_div_leaf` (`eq:lg`): Corollary 3.3 (`cor_Lambda_isOe`) read at time `t = 1`, where
   `Λ_τ(ζ)/ζ = λ/ζ = n/ζ`; `oe` sequences tend to `0` (`IsOe.tail`).
-* `tendsto_leafIndex_discrepancy` (C39.c): the leaves of BGW's DFS enumeration `vertices` are the zeros
+* `tendsto_leafIndex_discrepancy`: the leaves of BGW's DFS enumeration `vertices` are the zeros
   of the DFS degree list `degrees` (BGW `map_fringe?_vertices_rootDegree`), so `numLeaves = λ` and
   `Λ_τ(ℓ_j) = j + 1` for the DFS index `ℓ_j` of the `j`-th leaf.  Corollary 3.3 at the times
   `t = ℓ_j/ζ ≥ η` gives `(j + 1)/ℓ_j ≈ μ₀`, at `t = 1` gives `n/ζ ≈ μ₀`, and at `t = η` (with the
@@ -38,16 +38,16 @@ open MeasureTheory ProbabilityTheory Filter BGW
 open BGW.StableTrees BGW.LocallyFinite BGWLeaves.StableAnalysis
 open scoped ENNReal NNReal Topology
 
-/-! ## C33.5 at the path level -/
+/-! ## The Vervaat transform at the path level -/
 
-/-- Tranche 1's Vervaat transform is the rotation at BGW's discrete Vervaat index (private copy of the
-M12 glue `vervaat_eq_rotate_vervaatIndex`: the two defining sets coincide). -/
+/-- The project's Vervaat transform is the rotation at BGW's discrete Vervaat index (private copy of
+`vervaat_eq_rotate_vervaatIndex`: the two defining sets coincide). -/
 private theorem vervaat_eq_rotate (x : List ℤ) :
     vervaat x = x.rotate (Skorokhod.vervaatIndex x) := by
   rw [vervaat, cyclicShift_eq_rotate]
   rfl
 
-/-- **C33.5 at the path level**: `V(stepPath x B) = stepPath (V x) B`. -/
+/-- **The Vervaat transform at the path level**: `V(stepPath x B) = stepPath (V x) B`. -/
 theorem vervaatD_stepPath_vervaat {x : List ℤ}
     (hx : ∃ j, 1 ≤ j ∧ j ≤ x.length ∧ (x.take j).sum < 0) {B : ℝ} (hB : 0 < B) :
     Skorokhod.vervaatD (Skorokhod.stepPath x B) = Skorokhod.stepPath (vervaat x) B := by
@@ -208,7 +208,7 @@ private theorem count_take_degrees (t : PlaneTree) (p : List ℕ → Bool)
   rw [length_filter_eq_count_map, List.map_take, map_vertices_eq t p hp, ← List.map_take,
     count_map_eq_zero]
 
-/-- BGW's number of leaves is tranche 1's `λ(τ)`. -/
+/-- BGW's number of leaves is the project's `λ(τ)`. -/
 private theorem numLeaves_eq (t : PlaneTree) :
     ContinuumTrees.LeafMeasure.numLeaves t = t.degreeCount 0 := by
   obtain ⟨p, hp, hLA⟩ := leafAddrs_eq t
@@ -325,7 +325,7 @@ private theorem leaf_arith_small {μ₀ δ ε η z n l j Λη : ℝ} (hμ : 0 < 
   rw [abs_le]
   constructor <;> linarith
 
-/-- **C39.c**: under `P_μ[· | λ = n]`, `max_j |ℓ_j/ζ - j/λ| → 0` in probability. -/
+/-- **Leaf-index discrepancy**: under `P_μ[· | λ = n]`, `max_j |ℓ_j/ζ - j/λ| → 0` in probability. -/
 theorem tendsto_leafIndex_discrepancy {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hDA : ∃ a, StableDomain μ θ a) {q : ℕ → ℕ}
     (hqtop : Tendsto q atTop atTop) (hq : ∀ k, LeafAdmissible μ (q k)) {ε : ℝ} (hε : 0 < ε) :

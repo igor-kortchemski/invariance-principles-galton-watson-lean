@@ -18,7 +18,7 @@ import Mathlib.MeasureTheory.Integral.DominatedConvergence
 import BGWLeaves.StableAnalysis.EtaTransfer
 import Mathlib.Probability.Independence.InfinitePi
 
-/-! # M7 provider `Chi`: the signed stopped-walk estimates of Lemma 6.11. -/
+/-! # The signed stopped-walk estimates of Lemma 6.11. -/
 
 @[expose] public section
 
@@ -31,7 +31,7 @@ open scoped ENNReal NNReal Topology
 set_option linter.unusedSectionVars false
 
 /- The finite Bernoulli–η factorization below is restated privately for signed endpoints.
-The sealed forest version restricts its endpoint parameter to natural numbers. -/
+The forest version (`pi_leafMarkedBridges`) restricts its endpoint parameter to natural numbers. -/
 private theorem mu_zero_add_mu_Ici_one (μ : Measure ℕ) [IsProbabilityMeasure μ] :
     μ {0} + μ (Set.Ici 1) = 1 := by
   have hd : Disjoint ({0} : Set ℕ) (Set.Ici 1) := by

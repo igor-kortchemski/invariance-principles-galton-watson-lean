@@ -13,20 +13,23 @@ public import BGW.Skorokhod.ContinuousEmbedding
 public import BGW.Skorokhod.ScalingMultiplication
 
 /-!
-# M13 provider `Joint`
+# Introduction (II): the joint limit
 
-Introduction (II), its canonical corollary, and Remark 5.10, at the frozen signatures.
+Introduction (II), its canonical corollary, and Remark 5.10, with the types stated in
+`BGWLeaves.LeafLimits`.
 
 The local joint walk/height law is retained from Lemma 5.8 through the larger-horizon
 perturbation in ContourHeight. Stopping both coordinates extends this joint law to the
 whole interval. The proved marginal limits control only the stopping errors, using a bounded
 continuous distance cost and a.s. continuity at the terminal endpoint. Thus the argument
-retains the excursion coupling required by R7. The vanishing contour/height distance adds
+retains the excursion coupling that the joint statement needs (the printed proof gives only the
+walk marginal). The vanishing contour/height distance adds
 the contour coordinate to this joint pair.
 
 Remark 5.10 uses size concentration, uniform regular variation, and joint Slutsky for the
 two amplitude factors. The canonical corollary shifts beyond the finitely many inadmissible
-indices. Inputs are the provider modules of this package, and the sealed M11 and M12 packages.
+indices. Inputs are the other modules `BGWLeaves.LeafLimits.*`, `BGWLeaves.Coding` and
+`BGWLeaves.ClassicalLimits`.
 -/
 
 @[expose] public section

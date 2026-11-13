@@ -7,14 +7,14 @@ public import BGWLeaves.GeneralA
 public import BGWLeaves.LocalEstimates
 
 /-!
-# M11 provider `Admissible`
+# Admissible sizes: non-vacuity of the leaf-conditioned statements
 
-Provider for the non-vacuity of the leaf-conditioned statements: the registered holes
+Proofs of the non-vacuity of the leaf-conditioned statements:
 `infinite_leafAdmissible`, `exists_seq_leafAdmissible` and `eventually_leafAdmissible` of
-`BGWLeaves.Coding`, exported in namespace `BGWLeaves.Coding.Admissible` with exactly the types of the
-statements file.
+`BGWLeaves.Coding`, exported in namespace `BGWLeaves.Coding.Admissible` with exactly the types stated
+there.
 
-Route: Theorem 3.1(i) of tranche 1 (`ltn_i_arith`: for `n` large, `P_μ[λ = n + 1] > 0` iff
+Route: Theorem 3.1(i) (`ltn_i_arith`: for `n` large, `P_μ[λ = n + 1] > 0` iff
 `g ∣ n`, with `g = arithFactor μ {0} ≥ 1`) gives the admissible sizes `g (N + k) + 1`; under the
 non-lattice assumption on `etaLaw μ`, `g = 1` (otherwise every `k ≥ 1` of the support satisfies
 `g ∣ k - 1`, a lattice, by `nonLattice_etaLaw_iff`).  The analytic hypotheses `(H_θ)` (`hap`, `hDA`)

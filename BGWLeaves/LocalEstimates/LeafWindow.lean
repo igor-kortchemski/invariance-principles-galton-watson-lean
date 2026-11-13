@@ -12,7 +12,7 @@ import BGWLeaves.StableAnalysis.EtaTransfer
 import Mathlib.Order.Lattice.Nat
 import BGW.StableTrees.RegularVariation.Consequences
 
-/-! # M7 provider `LeafWindow`: short size windows, threshold inversion and Corollary 5.5. -/
+/-! # Short size windows, threshold inversion and Corollary 5.5. -/
 
 @[expose] public section
 

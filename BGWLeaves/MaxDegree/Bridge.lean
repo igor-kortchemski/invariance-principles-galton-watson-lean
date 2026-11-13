@@ -8,20 +8,20 @@ import BGWLeaves.MaxDegree.Transfer
 import Mathlib.Probability.Independence.InfinitePi
 
 /-!
-# M9 provider `Bridge`
+# Maximum degree: the two halves of the bridge
 
 The first half of the marks (`eq:i`) and the reverse half under the bridge: `bridge_reverse_half`, `eq_i_lower`,
-`eq_i_upper`.  The theorems are the registered holes of `BGWLeaves.MaxDegree`; they are exported in namespace
-`BGWLeaves.MaxDegree.Bridge` with exactly the types of the statements file.
+`eq_i_upper`.  The theorems are those stated in `BGWLeaves.MaxDegree`; they are exported in namespace
+`BGWLeaves.MaxDegree.Bridge` with exactly the types stated there.
 
 Proof outline.
 * `bridge_reverse_half`: decompose the bridge by `k = T_n`; `{T_n = k, W_k = -1} = {ω_{k-1} = 0} ∩ {W_{k-1} = 0, Λ(k-1) = n-1}`
   (the last coordinate is independent of the first `k-1`, `iIndepFun_infinitePi`).  Both events are written through the
   counts `Λ(i)` (`i ≥ T_m ⟺ Λ(i) ≥ m`, `i < T_{n-m} ⟺ Λ(i) < n-m`) as events of the path `(W_0, …, W_{k-1})`
-  and of its reversal; M5 `timeReversal_map` identifies the two laws.  For `q < -1` both events are the whole bridge.
-* `eq_i_lower`, `eq_i_upper`: the strong Markov property `lem_absolueC2_k` (M6) for events of the stopped path
-  (`stopEv`, encoded by the partial sums), the global density bounds `chi_sup_bound`, `chi_zero_lower` (provider
-  `Concentration`), the clock concentration `lem_CVf2_i` (M5) and the product law of the first `⌊n/(4μ₀)⌋` (resp.
+  and of its reversal; `timeReversal_map` identifies the two laws.  For `q < -1` both events are the whole bridge.
+* `eq_i_lower`, `eq_i_upper`: the strong Markov property `lem_absolueC2_k` for events of the stopped path
+  (`stopEv`, encoded by the partial sums), the global density bounds `chi_sup_bound`, `chi_zero_lower` (module
+  `Concentration`), the clock concentration `lem_CVf2_i` and the product law of the first `⌊n/(4μ₀)⌋` (resp.
   `⌊n/μ₀⌋`) steps.  The term `P[|W_{T_m}| ≥ α√n | W_{T_n} = -1]` of the statements is nonnegative and not needed.
 -/
 
@@ -1003,7 +1003,7 @@ theorem bridge_reverse_half (μ : Measure ℕ) [IsProbabilityMeasure μ] {n m : 
   rw [hL, hR, measure_iUnion hdisjL hmeasL, measure_iUnion hdisjR hmeasR]
   exact tsum_congr (rh_piece μ hm hmn q)
 
-/-! ## The frozen exports (types with `h : HypH μ`) -/
+/-! ## The exported statements (types with `h : HypH μ`) -/
 
 theorem eq_i_lower {μ : PMF ℕ} (h : HypH μ) (hnl : ¬ IsLatticeLaw (etaLaw μ))
     {m : ℕ → ℕ} (hm : ∀ n, n / 2 ≤ m n ∧ m n ≤ (n + 1) / 2) {α : ℝ} (hα : 0 < α) :

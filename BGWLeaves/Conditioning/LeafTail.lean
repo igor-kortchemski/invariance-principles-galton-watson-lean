@@ -9,14 +9,14 @@ import Mathlib.Analysis.SumIntegralComparisons
 import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 
 /-!
-# M6 provider `LeafTail`
+# Inputs of Proposition 4.4(ii): size and leaf tails
 
 Proved inputs of Proposition 4.4(ii): `sizeGe_poly_lower`, `sizeWindow_small`,
-`norming_leafCutoff_ratio`, `leafTail_asymp`, and `leafGe_sizeGe_ratio`, with the frozen
-types in `BGWLeaves.Conditioning`. The assembly `prop_passage_ii` is not supplied here.
+`norming_leafCutoff_ratio`, `leafTail_asymp`, and `leafGe_sizeGe_ratio`, with the
+types stated in `BGWLeaves.Conditioning`. The assembly `prop_passage_ii` is in `PassageII`.
 
-The private Karamata helpers are adapted from the sealed `StableAnalysis.SizeTail`
-provider. The lattice specialization cancels the local factor `g`; the leaf-event
+The private Karamata helpers are adapted from the module `StableAnalysis.SizeTail`.
+The lattice specialization cancels the local factor `g`; the leaf-event
 series identity and interpolation between neighboring lattice thresholds give the
 sharp leaf tail at every integer threshold.
 
@@ -49,7 +49,7 @@ private theorem norming_power_small {μ : PMF ℕ} {θ : ℝ} {a : ℕ → ℝ}
   simp only [Real.rpow_neg hnpos.le]
   ring
 
-/-- Polynomial lower bound for the size tail, with the frozen exponent. -/
+/-- Polynomial lower bound for the size tail, with the exponent of `sizeGe_poly_lower`. -/
 theorem sizeGe_poly_lower {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hDA : ∃ a, StableDomain μ θ a) {η : ℝ} (hη : 0 < η) :
     ∃ c₃ : ℝ, 0 < c₃ ∧ ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
@@ -212,7 +212,7 @@ private theorem sizeWindow_bound {μ : PMF ℕ} {μ0 s K : ℝ} (hμ0 : 0 < μ0)
       rw [Real.rpow_sub hn0, Real.rpow_neg hn0.le]
       ring
 
-/-- The size window is negligible with the frozen polynomial weight. -/
+/-- The size window is negligible with the polynomial weight of `sizeWindow_small`. -/
 theorem sizeWindow_small {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hDA : ∃ a, StableDomain μ θ a) {η : ℝ} (hη0 : 0 < η) (hη1 : η < 1 / 4) :
     Tendsto (fun n : ℕ => (n : ℝ) ^ (1 / θ + η) *

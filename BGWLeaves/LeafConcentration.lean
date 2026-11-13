@@ -4,14 +4,13 @@ public import BGWLeaves.LeafConcentration.Defs
 import BGWLeaves.LeafConcentration.Proof
 
 /-!
-# Leaf concentration (M4a): the results still to be proved
+# Leaf concentration
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Section 2: Definition 2.1 (`def:Lambda`),
+Source: arXiv:1110.2163v4, Section 2: Definition 2.1 (`def:Lambda`),
 Lemma 2.2 (`lem:phi`), Remark 2.4 (`rem:oe`), Lemma 2.5 (`lem:GdesDev`), Corollary 2.6
-(`cor:GD2mieux`), Lemma 2.7 (`lem:GdesDev2`).  Each declaration here is a statement approved for
-freezing; its proof is to be supplied in the provider modules `BGWLeaves.LeafConcentration.*`
-(imported through `BGWLeaves.LeafConcentration.Proof`).  Definitions and proved bridges are in
-`BGWLeaves.LeafConcentration.Defs`.  `lem_GdesDev_tree` is a proved assembly of the statements
+(`cor:GD2mieux`), Lemma 2.7 (`lem:GdesDev2`).  The proofs are in the modules
+`BGWLeaves.LeafConcentration.*` (imported through `BGWLeaves.LeafConcentration.Proof`).  Definitions and
+bridges are in `BGWLeaves.LeafConcentration.Defs`.  `lem_GdesDev_tree` is proved here from the statements
 above it.
 -/
 
@@ -23,7 +22,7 @@ open MeasureTheory ProbabilityTheory Filter Asymptotics BGW
 open BGW.StableTrees BGW.LocallyFinite BGWLeaves.StableAnalysis
 open scoped ENNReal Topology
 
-/-- **Remark 2.4 (`rem:oe`)** (`largetrees_final.tex`, Section 2.3): if `x_n ≥ 0` is `oe_ε(n)` then
+/-- **Remark 2.4 (`rem:oe`)** (Section 2.3): if `x_n ≥ 0` is `oe_ε(n)` then
 `y_n = ∑_{k ≥ n} x_k` is `oe_ε(n)`, with the same exponent `ε` (a smaller constant `c` is needed).
 The conclusion states `Summable x` explicitly, so that the `tsum` is not the junk value `0`; `IsOe`
 is the paper's definition of `oe_ε(n)` (`IsOe`, all `n : ℕ`). -/
@@ -108,9 +107,9 @@ theorem lem_GdesDev_tree_of_lower (μ : PMF ℕ) (h0 : μ 0 ≠ 0) (h1 : μ 0 �
   exact BGWLeaves.LeafConcentration.TreeDeviation.lem_GdesDev_tree_of_lower μ h0 h1 hη0 hη1 hδ A N hlow
 
 /-- The polynomial lower bound `P[ζ = n] ≥ n^{-1/θ-2}` for large `n` used in the proof of
-Lemma 2.5(ii) (`largetrees_final.tex`, Section 2.5): by Lemma 1.11 (`n B_n P[ζ = n] → p₁(0) > 0`,
+Lemma 2.5(ii) (Section 2.5): by Lemma 1.11 (`n B_n P[ζ = n] → p₁(0) > 0`,
 `B_n = h(n) n^{1/θ}`) and Proposition 1.7(i) (`h(n) ≤ n^ε` eventually; the paper cites 1.7(ii)).
-Under `(H_θ)`, formalized as in M3 (critical, `μ 1 ≠ 1`, aperiodic, in a stable domain of attraction
+Under `(H_θ)`, formalized as in `BGWLeaves.StableAnalysis` (critical, `μ 1 ≠ 1`, aperiodic, in a stable domain of attraction
 of index `θ`; aperiodicity gives positive mass for all large `n`). -/
 theorem sizeProb_poly_lower {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hDA : ∃ b, StableDomain μ θ b) :
@@ -118,11 +117,11 @@ theorem sizeProb_poly_lower {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne 
       (n : ℝ) ^ (-(1 / θ + 2)) ≤ (bienaymeLaw μ.toMeasure).real (sizeEvent n) := by
   exact BGWLeaves.LeafConcentration.SizeLower.sizeProb_poly_lower hc hne hap hDA
 
-/-- **Lemma 2.5(ii) (`lem:GdesDev`)** under `(H_θ)` (formalized as in M3: critical, `μ 1 ≠ 1`,
+/-- **Lemma 2.5(ii) (`lem:GdesDev`)** under `(H_θ)` (formalized as in `BGWLeaves.StableAnalysis`: critical, `μ 1 ≠ 1`,
 aperiodic, `∃ b, StableDomain μ θ b`): for `0 < η < 1`, `δ > 0`,
 `P[ sup_{η ≤ t ≤ 1} |Λ_τ(nt)/(nt) - μ₀| ≥ δ n^{-1/4} | ζ(τ) = n ]` is `oe_{1/2}(n)`.  The printed
 restriction to `n` with `P[ζ = n] > 0` is automatic (the conditional law of a null event is `0`).
-Assembled from `lem_GdesDev_tree_of_lower` and `sizeProb_poly_lower`; the assembly proof is kept. -/
+Assembled from `lem_GdesDev_tree_of_lower` and `sizeProb_poly_lower`. -/
 theorem lem_GdesDev_tree {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hDA : ∃ b, StableDomain μ θ b) {η δ : ℝ}
     (hη0 : 0 < η) (hη1 : η < 1) (hδ : 0 < δ) :

@@ -6,11 +6,11 @@ public import BGW.Tree.Height
 public import BGW.Tree.Excursion
 
 /-!
-# M11 provider `Discrete`
+# Discrete coding facts
 
-Provider for the discrete coding facts: the registered holes `prop_Hmes`,
+Proofs of the discrete coding facts `prop_Hmes`,
 `intro_enc_lukasiewicz_end` and `intro_enc_lukasiewicz_injective` of `BGWLeaves.Coding`, exported in
-namespace `BGWLeaves.Coding.Discrete` with exactly the types of the statements file.
+namespace `BGWLeaves.Coding.Discrete` with exactly the types stated there.
 -/
 
 @[expose] public section

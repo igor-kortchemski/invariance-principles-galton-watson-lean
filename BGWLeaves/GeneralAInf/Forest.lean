@@ -8,7 +8,7 @@ public import Mathlib.Probability.Distributions.Binomial
 public import Mathlib.Probability.StrongLaw
 
 /-!
-# M10 provider `Forest`
+# Forests and the discrete content of Theorem 8.1(II)
 
 Forests of `j` trees and the discrete content of 8.1(II): the marked-forest
 Kemperman identities, their binomial factorization, and the exact lattice

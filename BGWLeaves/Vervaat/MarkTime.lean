@@ -5,14 +5,14 @@ import BGWLeaves.LeafConcentration.WalkDeviation
 import Mathlib.Probability.Independence.InfinitePi
 
 /-!
-# M5 provider `MarkTime`
+# Concentration of the mark times (6.2(i))
 
-Provider for concentration of the mark times (6.2(i)).  The theorems proved here are the registered holes of
-`BGWLeaves.Vervaat`; they are exported in namespace `BGWLeaves.Vervaat.MarkTime` with exactly the types of the
-statements file.
+Proofs of the concentration of the mark times (6.2(i)).  The theorems are those stated in
+`BGWLeaves.Vervaat`; they are exported in namespace `BGWLeaves.Vervaat.MarkTime` with exactly the types
+stated there.
 
 Proof of `lem_CVf2_i`: `{T_n > a} ⊆ {Λ(⌊a⌋) < n}`, `{T_n < b} ⊆ {n ≤ Λ(⌈b⌉ - 1)}` for
-`a, b = n/μ₀ ± n^{3/4}` (this includes `T_n = ∞`), then the Chernoff bound `lem_phi_i` of M4a at the
+`a, b = n/μ₀ ± n^{3/4}` (this includes `T_n = ∞`), then the Chernoff bound `lem_phi_i` at the
 scales `⌊a⌋` and `⌈b⌉ - 1` (both `≍ n/μ₀`) with the deviation `μ₀² n^{-1/4} / 4` and `phiStar_lower`.
 (The printed citation of Lemma 2.5(i) is incomplete: its window is times `≤ n`, while `T_n ≈ n/μ₀`.)
 -/

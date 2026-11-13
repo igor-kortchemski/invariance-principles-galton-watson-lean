@@ -4,16 +4,18 @@ public import BGWLeaves.GeneralAInf.Defs
 public import BGWLeaves.GeneralAInf.BlockLocal
 
 /-!
-# M10 provider `Asymptotic`
+# Theorem 8.1(I): consequences and calibrations
 
-Provider for the consequences of the target and the calibrations: `thm81_corrected_general_finiteVariance_iff`, `thm81_printed_form`, `thm81_pos_iff`, `zetaA_eq_zero_of_measure_zero`, `arithFactor_univ_eq_latticeSpan`, `zetaA_univ_eq_sizeEvent`, `zetaA_zero_eq_leafCount`.  The theorems to be proved here are the registered holes of
-`BGWLeaves.GeneralAInf`; they are exported in namespace `BGWLeaves.GeneralAInf.Asymptotic` with exactly the types of the
-statements file.
+Proofs of the consequences of `thm81_corrected_general` and of the calibrations:
+`thm81_corrected_general_finiteVariance_iff`, `thm81_printed_form`, `thm81_pos_iff`,
+`zetaA_eq_zero_of_measure_zero`, `arithFactor_univ_eq_latticeSpan`, `zetaA_univ_eq_sizeEvent`,
+`zetaA_zero_eq_leafCount`.  The theorems are those stated in `BGWLeaves.GeneralAInf`; they are exported
+in namespace `BGWLeaves.GeneralAInf.Asymptotic` with exactly the types stated there.
 
 The four calibrations `zetaA_eq_zero_of_measure_zero`, `arithFactor_univ_eq_latticeSpan`,
 `zetaA_univ_eq_sizeEvent` and `zetaA_zero_eq_leafCount` are proved here, together with the three
 consequences `thm81_corrected_general_finiteVariance_iff`, `thm81_printed_form` and
-`thm81_pos_iff` of the proved main target `BlockLocal.thm81_corrected_general`.
+`thm81_pos_iff` of the main theorem `BlockLocal.thm81_corrected_general`.
 -/
 
 @[expose] public section
@@ -126,7 +128,7 @@ private theorem tendsto_lattice_of_tendsto_mul_add_one {e : ℕ} (he : 0 < e)
   dsimp [g]
   rw [hdiv, hj]
 
-/-- Consistency of the general corrected theorem with the sealed finite-variance local limit. -/
+/-- Consistency of the general corrected theorem with the finite-variance local limit. -/
 theorem thm81_corrected_general_finiteVariance_iff {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ)
     (hne : μ 1 ≠ 1) (hDA : ∃ a, StableDomain μ θ a)
     (hvar : Integrable (fun z : ℤ => (z : ℝ) ^ 2) (stepLaw μ)) {A : Set ℕ}
@@ -271,7 +273,7 @@ theorem thm81_pos_iff {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1
 
 /-- Edge case `A ≠ ∅` but `μ(A) = 0` (the printed hypothesis "non-empty" does not exclude it): `ζ_A = 0`
 almost surely, so `P[ζ_A = n] = 0` for every `n ≥ 1` and the printed statement is vacuous (there is no
-`n` with positive probability; the printed constant would be `0^{1/θ} = 0`).  ROUTINE. -/
+`n` with positive probability; the printed constant would be `0^{1/θ} = 0`). -/
 theorem zetaA_eq_zero_of_measure_zero {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) {A : Set ℕ}
     (hA : μ.toMeasure A = 0) {n : ℕ} (hn : 1 ≤ n) :
     bienaymeLaw μ.toMeasure {T | zetaA A T = (n : ℕ∞)} = 0 := by
@@ -295,7 +297,7 @@ theorem zetaA_eq_zero_of_measure_zero {μ : PMF ℕ} (hc : IsCritical μ) (hne :
   · rw [ite_eq_right ht]
 
 /-- Calibration `A = ℕ` (`ζ_A = ` total progeny, `μ(A) = 1`): `arithFactor μ ℕ = gcd supp μ`
-is the lattice span `d` of Remark 1.12 (`1` for aperiodic `μ`).  ROUTINE. -/
+is the lattice span `d` of Remark 1.12 (`1` for aperiodic `μ`). -/
 theorem arithFactor_univ_eq_latticeSpan {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) :
     arithFactor μ Set.univ = Scalar.latticeSpan μ := by
   have hdiv : ∀ k : ℕ, μ k ≠ 0 → ((Scalar.latticeSpan μ : ℕ) : ℤ) ∣ (k : ℤ) := by
@@ -330,7 +332,7 @@ theorem arithFactor_univ_eq_latticeSpan {μ : PMF ℕ} (hc : IsCritical μ) (hne
 set_option linter.unusedVariables false in
 /-- Calibration `A = ℕ`: `ζ_ℕ(T)` is the size of `T`; the events `{ζ_ℕ = n}` and `{ζ = n}` agree up to the
 null set of infinite trees (so `thm81_corrected_general` at `A = ℕ` is Lemma 1.11 / Remark 1.12,
-sealed `sizeProb_lattice_asymp`). ROUTINE. -/
+`sizeProb_lattice_asymp`). -/
 theorem zetaA_univ_eq_sizeEvent {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) (n : ℕ) :
     {T : LocallyFinite.Tree | zetaA Set.univ T = (n : ℕ∞)} =ᵐ[bienaymeLaw μ.toMeasure]
       sizeEvent n := by
@@ -347,7 +349,7 @@ theorem zetaA_univ_eq_sizeEvent {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 
     rw [← hfin.cast_ncard_eq, hn]
 
 /-- Calibration `A = {0}` (`ζ_A = ` number of leaves, up to the null set of infinite trees):
-with it the corrected 8.1(I) is Theorem 3.1(ii) (sealed `ltn_ii_tendsto`), `arithFactor μ {0}` being its `g`. -/
+with it the corrected 8.1(I) is Theorem 3.1(ii) (`ltn_ii_tendsto`), `arithFactor μ {0}` being its `g`. -/
 theorem zetaA_zero_eq_leafCount {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) (n : ℕ) :
     bienaymeLaw μ.toMeasure {T | zetaA {0} T = (n : ℕ∞)} =
       bienaymeLaw μ.toMeasure (leafCountEvent n) := by

@@ -458,7 +458,7 @@ private theorem bridgeSum_add_eq_iff {p : ℕ} (ω : Fin p → ℕ) (a b : ℕ) 
   rw [← hc]
   constructor <;> intro h <;> exact_mod_cast h
 
-/-- Bernoulli-by-`η` factorization of the leaf-marked forest bridge set under `Measure.pi`: with `n` leaves among `p` coordinates, the mass is `C(p,n) μ₀ⁿ (1-μ₀)^{p-n}` times the `η`-bridge mass. The binder `_hj : 1 ≤ j` is part of the frozen statement and unused. -/
+/-- Bernoulli-by-`η` factorization of the leaf-marked forest bridge set under `Measure.pi`: with `n` leaves among `p` coordinates, the mass is `C(p,n) μ₀ⁿ (1-μ₀)^{p-n}` times the `η`-bridge mass. The binder `_hj : 1 ≤ j` is part of the statement and unused. -/
 theorem pi_leafMarkedBridges (μ : Measure ℕ) [IsProbabilityMeasure μ] (h0 : μ {0} ≠ 1)
     {j p n : ℕ} (_hj : 1 ≤ j) (hn : n ≤ p) :
     Measure.pi (fun _ : Fin p => μ) (leafMarkedForestBridges j p n) =

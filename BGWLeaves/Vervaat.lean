@@ -4,36 +4,35 @@ public import BGWLeaves.Vervaat.Defs
 import BGWLeaves.Vervaat.Proof
 
 /-!
-# Vervaat transform, time reversal, uniform trees (M5): the results still to be proved
+# Vervaat transform, time reversal, uniform trees
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`: Lemma 6.2(i) (`lem:CVf2`, line 2004: the concentration
-part; the functional limit (ii) is tranche 2), Definition 6.3 (`def:vervaat`), Lemma 6.4 (`lem:cool`),
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source): Lemma 6.2(i) (`lem:CVf2`, line 2004:
+the concentration part; the functional limit (ii) is in `BGWLeaves.ClassicalLimits`), Definition 6.3 (`def:vervaat`), Lemma 6.4 (`lem:cool`),
 Proposition 6.5 (`prop:vervaatdiscrete`, lines 2073-2146), Proposition 6.8 (`prop:timereversal`,
 lines 2147-2160) and Remark 7.3 (`rem:uniformtree`, lines 2459-2486).
 
-Each declaration here is a statement audited for freezing; its proof is to be supplied in the provider
-modules `BGWLeaves.Vervaat.*` (imported through `BGWLeaves.Vervaat.Proof`).  Definitions and proved
-bridges are in `BGWLeaves.Vervaat.Defs`.  The declarations `prop_vervaatdiscrete`,
-`isProbabilityMeasure_cond_timeReversalEvent` and `prop_timereversal` are proved assemblies of other
-statements of this file and need no provider declaration.
+The proofs are in the modules `BGWLeaves.Vervaat.*` (imported through `BGWLeaves.Vervaat.Proof`).
+Definitions and bridges are in `BGWLeaves.Vervaat.Defs`.  The declarations `prop_vervaatdiscrete`,
+`isProbabilityMeasure_cond_timeReversalEvent` and `prop_timereversal` are proved here from other
+statements of this file.
 
 Layout.
 * 6.3 and the Cyclic Lemma bridge: `vervaatIdx_mem`, `mem_SBar_iff`, `vervaat_mem_SBar`,
-  `vervaatIdx_unique`, `walkWord_atom`, `sum_walkWord` (provider `Cyclic`).
-* 6.4: `lem_cool_i_joint` (working form), `lem_cool_i`, `lem_cool_ii`, `vervaat_prob_eq` (provider
+  `vervaatIdx_unique`, `walkWord_atom`, `sum_walkWord` (module `Cyclic`).
+* 6.4: `lem_cool_i_joint` (working form), `lem_cool_i`, `lem_cool_ii`, `vervaat_prob_eq` (module
   `Cyclic`).
 * 6.5: helpers `vervaatAtMark_eq`, `vervaatAtMark_eq_empty`, `treeWordLeaves_prob`,
   `bridgeAtMark_eq_iUnion`, `leafCountEvent_eq_iUnion`, `measurableSet_*`, then
-  `prop_vervaatdiscrete_joint`, `prop_vervaatdiscrete_total`, `prop_vervaatdiscrete` (provider
+  `prop_vervaatdiscrete_joint`, `prop_vervaatdiscrete_total`, `prop_vervaatdiscrete` (module
   `Discrete`).
-* 6.8: `measurable_*`, `timeReversal_atom`, `timeReversal_map`, `prop_timereversal` (provider
+* 6.8: `measurable_*`, `timeReversal_atom`, `timeReversal_map`, `prop_timereversal` (module
   `TimeReversal`).
-* 6.2(i): `ae_exists_markTime`, `exists_isMarkTime_iff`, `IsMarkTime.unique`, `lem_CVf2_i` (provider
+* 6.2(i): `ae_exists_markTime`, `exists_isMarkTime_iff`, `IsMarkTime.unique`, `lem_CVf2_i` (module
   `MarkTime`).
-* 7.3: the displayed law, its constants and `rem_uniformtree_iff`, the three displayed limits (provider
+* 7.3: the displayed law, its constants and `rem_uniformtree_iff`, the three displayed limits (module
   `UniformTree`).
-* Not in this package (they depend on tranche-2 input; see the README): `maxDegree_lower_principle`,
-  `maxDegree_upper_principle`, `rem_uniformtree_window`.
+* In `BGWLeaves.MaxDegree`, not here: `maxDegree_lower_principle`, `maxDegree_upper_principle`,
+  `rem_uniformtree_window`.
 -/
 
 @[expose] public section
@@ -45,7 +44,7 @@ open BGW.StableTrees BGW.LocallyFinite BGWLeaves.StableAnalysis
 open scoped ENNReal Topology
 
 /-- The law of the walk `W_n = ∑_{i<n} (ω i - 1)` with step law `μ(k)` for the step `k - 1`
-(`Measure.infinitePi`, as in M2b `stoppedWord_atom`).  Notation only. -/
+(`Measure.infinitePi`, as in `stoppedWord_atom`).  Notation only. -/
 local notation "𝐏w[" μ "]" => Measure.infinitePi (fun _ : ℕ => μ)
 
 /-! ## 6.3 The Vervaat transform: bridges to the Cyclic Lemma -/
@@ -155,7 +154,7 @@ theorem leafCountEvent_eq_iUnion (n : ℕ) :
     leafCountEvent n = ⋃ x : List ℤ, treeWordLeaves n x := by
   exact BGWLeaves.Vervaat.Discrete.leafCountEvent_eq_iUnion n
 
-/-- Measurability of the conditioning events (needed to unfold `cond`; ROUTINE: countable unions of
+/-- Measurability of the conditioning events (needed to unfold `cond`; countable unions of
 the atoms `{walkWord ω k = y}`, resp. of the finite-tree atoms). -/
 theorem measurableSet_bridgeAtMark (n : ℕ) : MeasurableSet (bridgeAtMark n) := by
   exact BGWLeaves.Vervaat.Discrete.measurableSet_bridgeAtMark n
@@ -251,7 +250,8 @@ theorem prop_timereversal (μ : Measure ℕ) [IsProbabilityMeasure μ] {m n : �
       Measure.map (reversedPath m) ((𝐏w[μ])[|timeReversalEvent m n]) :=
   timeReversal_map μ m n
 
-/-! ## 6.2 Lemma `lem:CVf2`, part (i) ONLY (part (ii), the functional limit, is deferred) -/
+/-! ## 6.2 Lemma `lem:CVf2`, part (i) ONLY (part (ii), the functional limit, is `lem_CVf2_ii` in
+`BGWLeaves.ClassicalLimits`) -/
 
 /-- Helper: `T_n < ∞` almost surely when `μ(0) > 0` (so the event of `lem_CVf2_i` is the printed one
 up to a null set; as stated it already counts `T_n = ∞` as a deviation). -/
@@ -270,8 +270,8 @@ theorem IsMarkTime.unique {n : ℕ} {ω : ℕ → ℕ} {k k' : ℕ} (h : IsMarkT
 
 /-- **Lemma 6.2(i) (`lem:CVf2`)**: `P[|T_n/n - 1/μ₀| > 1/n^{1/4}] = oe_{1/2}(n)` for the iid walk, `T_n = inf{k ; Λ(k) = n}`.
 `T_n = ∞` counts as a deviation (probability `0`, `ae_exists_markTime`).  Only `0 < μ₀ < 1` is used (as in
-M4a `lem_GdesDev_walk`), instead of `(H_θ)`; this implies the printed statement.  `IsOe` is the M4a
-definition (`∃ C c > 0, ∀ n, x_n ≤ C exp(-c n^{1/2})`). -/
+`lem_GdesDev_walk`), instead of `(H_θ)`; this implies the printed statement.  `IsOe` is the
+definition of `BGWLeaves.LeafConcentration.Defs` (`∃ C c > 0, ∀ n, x_n ≤ C exp(-c n^{1/2})`). -/
 theorem lem_CVf2_i (μ : PMF ℕ) (h0 : μ 0 ≠ 0) (h1 : μ 0 ≠ 1) :
     IsOe (1 / 2) fun n : ℕ =>
       ((Measure.infinitePi fun _ : ℕ => μ.toMeasure).real
@@ -328,7 +328,7 @@ such that `τ_n` is uniformly distributed over the set of all rooted plane trees
 that no vertex has exactly one child"): for a critical `μ`, `μ` is the displayed law iff `τ_n` is uniform
 over `uniformTrees n` for every `n ≥ 1` with `P_μ[λ = n] > 0`. The hypothesis `hne : μ 1 ≠ 1` excludes
 `δ₁`, which is critical and satisfies the uniformity condition vacuously (the tree is the infinite path,
-`P[λ = n] = 0` for all `n ≥ 1`); the printed remark implicitly assumes it (audit M5, 5 Nov 2026). -/
+`P[λ = n] = 0` for all `n ≥ 1`); the printed remark implicitly assumes it. -/
 theorem rem_uniformtree_iff {μ : PMF ℕ} (hc : IsCritical μ) (hne : μ 1 ≠ 1) :
     IsDisplayedLaw μ ↔ IsUniformConditioned μ := by
   exact BGWLeaves.Vervaat.UniformTree.rem_uniformtree_iff hc hne

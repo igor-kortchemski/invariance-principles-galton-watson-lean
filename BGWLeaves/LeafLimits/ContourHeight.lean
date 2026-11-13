@@ -18,15 +18,16 @@ public import BGW.StableTrees.RealAttractionBounds
 public import BGW.StableTrees.UnitExcursionDensity
 
 /-!
-# M13 provider `ContourHeight`
+# Theorem 5.9: contour and height under `λ = n`
 
-Theorems 5.9(i) and 5.9(ii), with the frozen signatures. The local joint walk/height limit
-uses Lemma 5.8 on a strictly larger horizon and Lemma 5.7. At random tree size, compact
+Theorems 5.9(i) and 5.9(ii), with the types stated in `BGWLeaves.LeafLimits`. The local joint
+walk/height limit uses Lemma 5.8 on a strictly larger horizon and Lemma 5.7. At random tree size, compact
 height sets give the local contour comparison. Leaf-conditioned mirror invariance, reflection
-at the true contour duration, and zero padding give terminal control; C11 then gives the
+at the true contour duration, and zero padding give terminal control;
+`Skorokhod.tendsto_continuous_of_tendsto_restrict_of_oscillation` then gives the
 whole-interval contour limit. The global contour/height comparison gives the diagonal limit.
 An equivalent monotone stable norming supplies the discrete estimates, and a scalar Slutsky
-argument transfers the result to every norming in the frozen statement.
+argument transfers the result to every admissible norming.
 -/
 
 @[expose] public section

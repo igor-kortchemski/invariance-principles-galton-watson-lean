@@ -8,7 +8,7 @@ public import Mathlib.Probability.ConditionalProbability
 /-!
 # The forest law and the jump law of `W'`: definitions
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Definitions 1.1–1.2 (forests of independent
+Source: arXiv:1110.2163v4, Definitions 1.1–1.2 (forests of independent
 Galton–Watson trees) and Proposition 1.6 (`prop:K`).
 
 * `eta μ` is the law of `K - 1` given `K > 0` for `K ∼ μ`, that is the jump law

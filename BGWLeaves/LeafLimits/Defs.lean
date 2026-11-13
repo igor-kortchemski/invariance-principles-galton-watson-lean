@@ -13,19 +13,19 @@ public import BGW.ContinuumTrees.LeafLawConvergence
 public import BGW.MetricMeasure.RootedUnderlyingGH
 
 /-!
-# Tranche 2, package M13 `LeafLimits`: definitions and proved bridges
+# `LeafLimits`: definitions and bridges
 
-Source: arXiv:1110.2163v4 (`.orchestration/t2-arch/paper_utf8.tex`): Lemma 5.8 (`lem:absolue`,
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source): Lemma 5.8 (`lem:absolue`,
 line 1505; the tree clock `T_u` of §5, lines 1280 and 1471), Corollary 6.7 (`cor:vervaatC`, line 2128;
 the walk clock `T_n` of line 1999), the GH claim after Remark 5.10 (lines 1593-1597) and the GHP claim
 of the Introduction (lines 326-328).
 
-This file contains the definitions of package M13 and the PROVED bridges: measurability of every map
-pushed forward in the statements of `BGWLeaves.LeafLimits` (the tree maps are constant on the infinite
+This file contains the definitions for `BGWLeaves.LeafLimits` and the bridges: measurability of every map
+pushed forward in its statements (the tree maps are constant on the infinite
 trees, `measurable_of_eq_of_not_finiteVertices`; the walk maps factor through the countable-valued
-clock `T_n`, `measurable_comp_nat`), the conditional-law bridges `coe_bridgeWalkLaw`, and audit B's B-5,
+clock `T_n`, `measurable_comp_nat`), the conditional-law bridges `coe_bridgeWalkLaw`, and
 `iidWalk_bridgeAtMark_ne_zero_iff` (`P[W_{T_n} = -1] > 0 ↔ P_μ[λ = n] > 0` for `n ≥ 1`, from
-tranche 1's `prop_vervaatdiscrete_total`).  No proof hole, no axiom.  It will be frozen whole.
+`prop_vervaatdiscrete_total`).
 -/
 
 @[expose] public section
@@ -38,7 +38,7 @@ open scoped ENNReal NNReal Topology
 
 /-! ## Definitions -/
 
-/-- `T_u(τ) = T_{⌊u⌋}(τ)` of §5 (tree leaf clock, tranche 1's `treeLeafTime`, lines 1280 and 1471) as a
+/-- `T_u(τ) = T_{⌊u⌋}(τ)` of §5 (tree leaf clock `treeLeafTime`, lines 1280 and 1471) as a
 natural number; junk `0` when `T = ∞` (fewer than `⌊u⌋` leaves). -/
 noncomputable def treeLeafClock (τ : LocallyFinite.Tree) (u : ℝ) : ℕ :=
   (treeLeafTime (toPlaneTree τ) ⌊u⌋₊).toNat
@@ -60,18 +60,18 @@ noncomputable def absPair (μ0 : ℝ) (B : ℕ → ℝ) (r : ℕ) (a : ℝ≥0) 
       continuous_const.mul ((TailPair.continuous_treeHeightLin τ).comp
         ((continuous_const.mul continuous_subtype_val).div_const _))⟩)
 
-/-- `T_n` of the walk (time just after the `n`-th step `-1`, tranche 1's `walkLeafTime`, line 1999) as a
+/-- `T_n` of the walk (time just after the `n`-th step `-1`, `walkLeafTime`, line 1999) as a
 natural number; junk `0` if `T_n = ∞` (null for `μ 0 ≠ 0`). -/
 noncomputable def markTime (n : ℕ) (ω : ℕ → ℕ) : ℕ := (walkLeafTime ω n).toNat
 
 /-- `(W_{⌊T_n t⌋} / B_{T_n})_{0 ≤ t ≤ 1}` (Corollary 6.7), as BGW's word step path of
-`(W_1, …, W_{T_n} - W_{T_n - 1})` (`walkWord`, tranche 1).  Its value at `t = 1` is `-1/B_{T_n}` on
+`(W_1, …, W_{T_n} - W_{T_n - 1})` (`walkWord`).  Its value at `t = 1` is `-1/B_{T_n}` on
 `{W_{T_n} = -1}`. -/
 noncomputable def bridgeWalkPath (B : ℕ → ℝ) (n : ℕ) (ω : ℕ → ℕ) : Skorokhod.D 1 ℝ :=
   Skorokhod.stepPath (walkWord ω (markTime n ω)) (B (markTime n ω))
 
 open Classical in
-/-- `P[· | W_{T_n} = -1]` (`bridgeAtMark n`, tranche 1) as a probability measure; junk Dirac at the
+/-- `P[· | W_{T_n} = -1]` (`bridgeAtMark n`) as a probability measure; junk Dirac at the
 constant sequence `0` when the event is null (never for `n ≥ 1` admissible:
 `iidWalk_bridgeAtMark_ne_zero_iff`). -/
 noncomputable def bridgeWalkLaw (μ : PMF ℕ) (n : ℕ) : ProbabilityMeasure (ℕ → ℕ) :=
@@ -81,8 +81,8 @@ noncomputable def bridgeWalkLaw (μ : PMF ℕ) (n : ℕ) : ProbabilityMeasure (�
   else ⟨Measure.dirac (fun _ => 0), inferInstance⟩
 
 open Classical in
-/-- The rooted measured tree `(τ, c · d_gr, uniform measure on the vertices)` (BGW C38 objects;
-`c > 0`, else unscaled junk). -/
+/-- The rooted measured tree `(τ, c · d_gr, uniform measure on the vertices)` (BGW's
+`FiniteTree.rootedCompactMeasuredSpace`; `c > 0`, else unscaled junk). -/
 noncomputable def scaledTreeGHP (c : ℝ) (τ : LocallyFinite.Tree) :
     MetricMeasure.RootedMeasuredGHSpace.{0} :=
   if h : 0 < c then
@@ -92,7 +92,8 @@ noncomputable def scaledTreeGHP (c : ℝ) (τ : LocallyFinite.Tree) :
       (ContinuumTrees.FiniteTree.rootedCompactMeasuredSpace (toPlaneTree τ))
 
 open Classical in
-/-- The rooted measured tree `(τ, c · d_gr, uniform measure on the LEAVES)` (BGW C39 objects). -/
+/-- The rooted measured tree `(τ, c · d_gr, uniform measure on the LEAVES)` (BGW's
+`LeafMeasure.leafRootedCompactMeasuredSpace`). -/
 noncomputable def scaledLeafTreeGHP (c : ℝ) (τ : LocallyFinite.Tree) :
     MetricMeasure.RootedMeasuredGHSpace.{0} :=
   if h : 0 < c then
@@ -131,7 +132,7 @@ theorem measurable_scaledLeafTreeGHP (c : ℝ) : Measurable (scaledLeafTreeGHP c
       toPlaneTree_of_not_finiteVertices h']
 
 /-- The underlying GH space of the rescaled tree is measurable, for ANY σ-algebra on `GHSpace` (in
-particular the local Borel structure of the statements file). -/
+particular the local Borel structure of `BGWLeaves.LeafLimits`). -/
 theorem measurable_forgetToGH_scaledTreeGHP [MeasurableSpace GromovHausdorff.GHSpace] (c : ℝ) :
     Measurable (fun τ => ContinuumTrees.Coding.forgetToGH (scaledTreeGHP c τ)) :=
   measurable_of_eq_of_not_finiteVertices fun τ τ' h h' => by
@@ -178,8 +179,8 @@ theorem measurable_vervaatD_bridgeWalkPath (B : ℕ → ℝ) (n : ℕ) :
 
 /-! ## Conditional-law bridges -/
 
-/-- **Audit B, B-5**: for `n ≥ 1`, `P[W_{T_n} = -1] ≠ 0 ↔ P_μ[λ = n] ≠ 0` (tranche 1
-`prop_vervaatdiscrete_total`: `P[W_{T_n} = -1] = n P_μ[λ = n]`), so `bridgeWalkLaw μ n` is the genuine
+/-- For `n ≥ 1`, `P[W_{T_n} = -1] ≠ 0 ↔ P_μ[λ = n] ≠ 0`
+(`prop_vervaatdiscrete_total`: `P[W_{T_n} = -1] = n P_μ[λ = n]`), so `bridgeWalkLaw μ n` is the genuine
 conditional law along admissible `n`. -/
 theorem iidWalk_bridgeAtMark_ne_zero_iff (μ : PMF ℕ) {n : ℕ} (hn : 1 ≤ n) :
     iidWalk μ (bridgeAtMark n) ≠ 0 ↔ LeafAdmissible μ n := by

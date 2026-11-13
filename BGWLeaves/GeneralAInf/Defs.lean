@@ -8,18 +8,18 @@ public import BGWLeaves.StableAnalysis
 public import BGWLeaves.StableAnalysis.StableDomainTail
 
 /-!
-# Theorem 8.1(I), corrected, all variances (M10): definitions
+# Theorem 8.1(I), corrected, all variances: definitions
 
-Source: arXiv:1110.2163v4, Section 8, Theorem 8.1(I) (`thm:general`, `largetrees_final.tex` lines 2494-2515)
+Source: arXiv:1110.2163v4, Section 8, Theorem 8.1(I) (`thm:general`, lines 2494-2515 of the LaTeX source)
 and the non-functional pieces of Theorem 8.1(II) (`eq:gen`, `eq:gen2`, lines 2512-2540).
 
-This file contains every definition of milestone M10, all of them abbreviations of sealed expressions of
-`BGWLeaves.GeneralA` (the sealed finite-variance package) and of `BGWLeaves.StableAnalysis`; it contains no
-proof holes.  The statements still to be proved are in `BGWLeaves.GeneralAInf`; their proofs are supplied by
-the provider modules `BGWLeaves.GeneralAInf.*` (imported through `BGWLeaves.GeneralAInf.Proof`).
+This file contains the definitions for `BGWLeaves.GeneralAInf`, all of them abbreviations of expressions of
+`BGWLeaves.GeneralA` (the finite-variance case) and of `BGWLeaves.StableAnalysis`.  The main statements are
+in `BGWLeaves.GeneralAInf`; their proofs are in the modules `BGWLeaves.GeneralAInf.*` (imported through
+`BGWLeaves.GeneralAInf.Proof`).
 
-Conventions as in the sealed modules: `B_n = norming (stepLaw μ) θ n` is the corrected norming (R2, R4 of
-`MANUSCRIPT_RECOMMENDATIONS.md`), `p₁ = Scalar.stableDensity θ`, and `P_μ[ζ_A = n]` is the
+Conventions as in `BGWLeaves.GeneralA`: `B_n = norming (stepLaw μ) θ n` is the corrected norming
+(corrections 1 and 2 of `FORMALIZATION_REPORT.md`), `p₁ = Scalar.stableDensity θ`, and `P_μ[ζ_A = n]` is the
 real-valued mass of `{T | zetaA A T = n}` under `bienaymeLaw μ.toMeasure` (infinite trees are null in the
 critical case).  No conditional measure is used.
 -/
@@ -33,10 +33,10 @@ open scoped ENNReal
 open BGW BGW.StableTrees BGW.LocallyFinite BGWLeaves.StableAnalysis
 open BGWLeaves.GeneralA.MarkedWalk BGWLeaves.GeneralA.Regroup BGWLeaves.GeneralA.MarkedTime
 
-/-- The step law `ν = ν^A` of the A-time walk of the sealed finite-variance proof:
+/-- The step law `ν = ν^A` of the A-time walk of the finite-variance proof:
 `ν = α * ∑ₖ β^{*k}` with `α = markedStep` (the part of `K - 1` carried by `K ∈ A`, mass `μ(A)`) and
 `β = unmarkedStep` (the part carried by `K ∉ A`).  It is the law of one marked step followed by a
-geometric number of unmarked steps.  The sealed `MarkedSeries.zetaA_blockLaw` states
+geometric number of unmarked steps.  `MarkedSeries.zetaA_blockLaw` states
 `P[ζ_A = n] = (1/n) P[W^ν_n = -1]`. -/
 noncomputable abbrev blockStep (μ : PMF ℕ) (A : Set ℕ) : Measure ℤ :=
   blockLaw (markedStep (fun k => μ k) A) (unmarkedStep (fun k => μ k) A)

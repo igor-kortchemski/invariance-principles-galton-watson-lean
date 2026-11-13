@@ -8,28 +8,30 @@ public import BGWLeaves.ForestLaw
 public import BGWLeaves.StableAnalysis
 
 /-!
-# Local estimates for forests and marked walks (M7): definitions and proved bridges
+# Local estimates for forests and marked walks: definitions and bridges
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Section 5 (conditioning on exactly `n` leaves):
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source), Section 5 (conditioning on exactly
+`n` leaves):
 Lemma 5.4 (`lem:technical`, lines 1412-1470), Corollary 5.5 (`cor:tejhnique`, with `eq:amontrer`), Lemma
 5.11 (`lem:technical2`), Lemma 5.12 (`lem:g`, with `eq:e`), Lemma 5.13 (`lem:techniqueutile`, with
 `eq:psi` .. `eq:lemtechnique4`), and Section 6, Lemma 6.11 (`lem:technic3`).
 
-This file contains the definitions of milestone M7 and the proved bridges.  It contains no proof
-holes.  The shared definitions of `BGWLeaves.Conditioning.Defs` (`forestLaw`, `forestLeafCountEvent`,
+This file contains the definitions for the local estimates and the bridges.  The shared definitions of
+`BGWLeaves.Conditioning.Defs` (`forestLaw`, `forestLeafCountEvent`,
 `forestLeafGeEvent`, `forestSizeGeEvent`, `forestSizeWindow`, `leafCutoff`, `psi`, `psiStar`, `chi`) are
-used as they are: they are `ℝ≥0∞`-valued, and the real-valued forms of this milestone are their
-`.toReal` (`toReal_psi`, `toReal_psiStar`).  The statements still to be proved are in
-`BGWLeaves.LocalEstimates`; their proofs are supplied by the provider modules
-`BGWLeaves.LocalEstimates.*` (imported through `BGWLeaves.LocalEstimates.Proof`); the providers use the
-proved milestones `BGWLeaves.Conditioning` (Lemma 4.3 with `U ≡ 1`, `M = 1`) and `BGWLeaves.Vervaat`
+used as they are: they are `ℝ≥0∞`-valued, and the real-valued forms used here are their
+`.toReal` (`toReal_psi`, `toReal_psiStar`).  The main statements are in
+`BGWLeaves.LocalEstimates`; their proofs are in the modules
+`BGWLeaves.LocalEstimates.*` (imported through `BGWLeaves.LocalEstimates.Proof`), which use
+`BGWLeaves.Conditioning` (Lemma 4.3 with `U ≡ 1`, `M = 1`) and `BGWLeaves.Vervaat`
 (Lemma 6.2(i), `lem_CVf2_i`).
 
 Conventions.
-* `B_n = norming (stepLaw μ) θ n` (the CORRECTED norming, R2/R4), `B'_n = norming (etaLaw μ) θ n`,
+* `B_n = norming (stepLaw μ) θ n` (the CORRECTED norming, corrections 1 and 2 of `FORMALIZATION_REPORT.md`),
+  `B'_n = norming (etaLaw μ) θ n`,
   `B_u = B_{⌊u⌋}` for real `u ≥ 1` as printed (`normB`, `normBp`), `p₁ = Scalar.stableDensity θ`.
 * `(H_θ)` is spelled out as `IsCritical μ`, `μ 1 ≠ 1`, `Aperiodic μ`, `∃ b, StableDomain μ θ b`.  Section 5
-  also assumes (page 1267) that `supp μ ∖ {0}` is non-lattice: `¬ IsLatticeLaw (etaLaw μ)` (named `hnl`;
+  also assumes (line 1269) that `supp μ ∖ {0}` is non-lattice: `¬ IsLatticeLaw (etaLaw μ)` (named `hnl`;
   `nonLattice_etaLaw_iff` links it with the printed phrase).
 * Uniform convergence `sup_{1 ≤ j ≤ αB_n} |f_n(j)| → 0` is written `ε`-`N`.
 * All probabilities are real masses of events (`Measure.real`); conditioning on a null event is never used.
@@ -70,7 +72,7 @@ noncomputable def qKernel (θ s x : ℝ) : ℝ := x / s * pDens θ s (-x)
 noncomputable def sizeTailKernel (θ a x : ℝ) : ℝ := ∫ s in Set.Ioi a, qKernel θ s x
 
 /--  `P[S_p = n]` for `S_p` a sum of `p` independent Bernoulli(`m`) variables (`m = μ₀`): the
-binomial point mass `C(p,n) m^n (1-m)^{p-n}` (the form used by the sealed `prop_K`).  It is `0` for `n > p`. -/
+binomial point mass `C(p,n) m^n (1-m)^{p-n}` (the form used by `prop_K`).  It is `0` for `n > p`. -/
 noncomputable def binomProb (m : ℝ) (p n : ℕ) : ℝ := (p.choose n : ℝ) * m ^ n * (1 - m) ^ (p - n)
 
 /--  `c = μ₀/(1-μ₀) = E[Y]`. -/

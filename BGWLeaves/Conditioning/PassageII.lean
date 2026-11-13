@@ -8,9 +8,9 @@ import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 /-!
 # Proposition 4.4(ii): passage from size-tail to leaf-tail conditioning
 
-This extension imports the finished passage and tail providers without introducing
+This module imports the passage and tail modules without introducing
 an import cycle. It exports `BGWLeaves.Conditioning.LeafTail.prop_passage_ii`
-with the frozen type. The error is normalized by the size tail, bounded by the
+with the type stated in `BGWLeaves.Conditioning`. The error is normalized by the size tail, bounded by the
 polynomial lower estimate, and sent to zero using the size-window estimate and
 exponential decay. The remaining normalization is `leafGe_sizeGe_ratio`.
 -/
@@ -43,7 +43,7 @@ private theorem passageII_poly_exp {c : ℝ} (hc : 0 < c) (q : ℝ) :
     (Eventually.of_forall hb)
   simpa only [Function.comp_apply, neg_mul] using he
 
-/-- Proposition 4.4(ii), assembled after the passage and tail providers to keep imports acyclic. -/
+/-- Proposition 4.4(ii), assembled after the passage and tail modules to keep imports acyclic. -/
 theorem prop_passage_ii {μ : PMF ℕ} {θ : ℝ} (hc : IsCritical μ) (hne : μ 1 ≠ 1)
     (hap : Aperiodic μ) (hDA : ∃ a, StableDomain μ θ a) {M : ℝ} {U : ℕ → LocallyFinite.Tree → ℝ}
     (hU : ∀ n, IsBoundedTest M (U n)) {L : ℝ}

@@ -7,10 +7,10 @@ import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
-# M7 provider `SizeTailKernel`
+# Lemma 5.11: the uniform size-tail kernel
 
-Proofs of the nine registered `SizeTailKernel` holes of `BGWLeaves.LocalEstimates`, exported
-with their frozen types in namespace `BGWLeaves.LocalEstimates.SizeTailKernel`.
+Proofs of the nine `SizeTailKernel` statements of `BGWLeaves.LocalEstimates`, exported
+with exactly the types stated there in namespace `BGWLeaves.LocalEstimates.SizeTailKernel`.
 
 The unmarked Kemperman formula gives the discrete tail identity, and the uniform local limit
 theorem with Karamata domination gives `sizeTail_llt`. For the Riemann step, the discrete sum
@@ -18,7 +18,7 @@ is exactly the integral of its floor-step extension. The scalar error `gridError
 approximation simultaneously for all spatial arguments in `[0, α]`. Potter bounds dominate
 this error by a constant times `s ^ (-1 - 1 / θ / 2)`, an integrable function on `(1, ∞)`.
 Dominated convergence therefore gives the uniform Riemann tail and Lemma 5.11, with no
-variance-regime restriction beyond the frozen stable-domain hypotheses.
+variance-regime restriction beyond the stable-domain hypotheses of the statement.
 -/
 
 @[expose] public section
@@ -761,7 +761,7 @@ theorem tailSum_bound :
   · rw [hN p (hnN.trans hp)]
   · rfl
 
-/-- Pointwise rescaling needed by the Riemann-sum argument, using only sealed inputs. -/
+/-- Pointwise rescaling needed by the Riemann-sum argument. -/
 private theorem norming_floor_ratio {s : ℝ} (hs : 0 < s) :
     Tendsto (fun n : ℕ => norming (stepLaw μ) θ ⌊s * (n : ℝ)⌋₊ /
       norming (stepLaw μ) θ n) atTop (𝓝 (s ^ (1 / θ))) := by
@@ -832,7 +832,7 @@ private theorem sizeTail_llt {α ε : ℝ} (hα : 0 < α) (hε : 0 < ε) :
       exact (div_le_iff₀ hnB).mpr hjα
     _ = ε := by dsimp [δ]; field_simp
 
-/-- The Riemann-sum step, uniform in the full frozen spatial range. -/
+/-- The Riemann-sum step, uniform in the full spatial range of the statement. -/
 theorem sizeTail_riemann {α : ℝ} (hα : 0 < α) {ε : ℝ} (hε : 0 < ε) :
     ∃ N : ℕ, ∀ n : ℕ, N ≤ n → ∀ j : ℕ, 1 ≤ j → (j : ℝ) ≤ α * norming (stepLaw μ) θ n →
       |(∑' p : ℕ, if n ≤ p then ((j : ℝ) / p) * (1 / norming (stepLaw μ) θ p) *

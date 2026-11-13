@@ -13,18 +13,19 @@ public import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
 public import Mathlib.MeasureTheory.Group.Integral
 
 /-!
-# Scalar stable analysis (M3): definitions and proved bridges
+# Scalar stable analysis: definitions and bridges
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Section 1 (Proposition 1.7, Definitions 1.8,
+Source: arXiv:1110.2163v4, Section 1 (Proposition 1.7, Definitions 1.8,
 Theorem 1.10, Lemma 1.11, Remarks 1.9 and 1.12) and Sections 3 and 6 (Lemma 3.4, Theorem 3.5,
 the Gaussian convolution of Section 6).
 
-This file contains every definition of milestone M3 and every proved lemma that does not depend on
-the statements still to be proved (those are in `BGWLeaves.StableAnalysis`, and the proved results
-that use them are in `BGWLeaves.StableAnalysis.Consequences`).  It contains no proof holes.
+This file contains the definitions of the scalar stable analysis and the lemmas that do not depend on
+the main statements (those are in `BGWLeaves.StableAnalysis`, and the results that use them are in
+`BGWLeaves.StableAnalysis.Consequences`).
 
 The paper's norming constant `Γ(1-θ)^{1/θ}` and the norming `√(n K(z_n))` are not correct as
-printed; `norming` is the corrected one (`printedConstant_neg`, `printedNorming_gauss`).
+printed; `norming` is the corrected one (`printedConstant_neg`, `printedNorming_gauss`; corrections 1 and 2
+of `FORMALIZATION_REPORT.md`).
 -/
 
 @[expose] public section
@@ -162,7 +163,7 @@ theorem gamma_one_sub_neg {θ : ℝ} (h1 : 1 < θ) (h2 : θ < 2) : Real.Gamma (1
 /-- The printed real power `Γ(1-θ)^{1/θ}`, read with Lean's `rpow` on a negative base, is
 negative (`exp(..)·cos(π/θ) < 0`), so the printed formula is not a norming as written. Reading it as
 `|Γ(1-θ)|^{1/θ}` gives a positive constant, which is the correct one: the norming is
-`(-Γ(1-θ))^{1/θ}` times the tail quantile (`negGamma_eq`). -/
+`(-Γ(1-θ))^{1/θ}` times the tail quantile (`negGamma_eq`; correction 1 of `FORMALIZATION_REPORT.md`). -/
 theorem printedConstant_neg {θ : ℝ} (h1 : 1 < θ) (h2 : θ < 2) :
     Real.Gamma (1 - θ) ^ (1 / θ) < 0 := by
   have hg := gamma_one_sub_neg h1 h2
@@ -225,7 +226,8 @@ noncomputable def printedNorming (ν : Measure ℤ) (θ : ℝ) (n : ℕ) : ℝ :
   else Real.sqrt (n * truncSecondMoment ν (gaussQuantile ν n))
 
 /-- In the case `σ² = ∞`, `θ = 2` the printed norming is `√2` times the corrected one.
-(With `K ≡ σ²` the printed formula would give `σ√n`, not `σ√(n/2)`.) -/
+(With `K ≡ σ²` the printed formula would give `σ√n`, not `σ√(n/2)`; correction 2 of
+`FORMALIZATION_REPORT.md`.) -/
 theorem printedNorming_gauss (ν : Measure ℤ) (hν : ¬ Integrable (fun z : ℤ => (z : ℝ) ^ 2) ν)
     (n : ℕ) : printedNorming ν 2 n = Real.sqrt 2 * norming ν 2 n := by
   simp only [printedNorming, norming, hν, ite_false, lt_irrefl]
@@ -468,7 +470,7 @@ theorem finiteVariance_ratio_sq_lt {m σ2 : ℝ} (hm0 : 0 < m) (hm1 : m < 1) (h�
 /-- The Gaussian `p₁` at `θ = 2`: `e^{-x²/4}/√(4π)` (line 3 of 1.3). -/
 noncomputable def gaussDensity (x : ℝ) : ℝ := Real.exp (-x ^ 2 / 4) / Real.sqrt (4 * Real.pi)
 
-/-! ## 9. Additions after audit -/
+/-! ## 9. The Gaussian convolution -/
 
 section GaussianConvolution
 

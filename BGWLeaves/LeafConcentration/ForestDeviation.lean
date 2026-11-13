@@ -7,12 +7,12 @@ import BGWLeaves.Passage
 import Mathlib.Probability.Independence.InfinitePi
 
 /-!
-# Leaf concentration (M4a): forest deviations (Lemma 2.7)
+# Leaf concentration: forest deviations (Lemma 2.7)
 
-Provider of the frozen statements `lem_GdesDev2_i` and `lem_GdesDev2_ii` (Lemma 2.7 of
+Proofs of `lem_GdesDev2_i` and `lem_GdesDev2_ii` (Lemma 2.7 of
 arXiv:1110.2163v4, `lem:GdesDev2`).
 
-Route.  By `firstHit_leaves_law` (M2b) the joint law `P_j[ζ = p, λ = n]` of a forest of `j` trees is
+Route.  By `firstHit_leaves_law` (`BGWLeaves.Passage`) the joint law `P_j[ζ = p, λ = n]` of a forest of `j` trees is
 the probability that the walk first hits `-j` at time `p` with `n` zero steps among the first `p`;
 it is therefore at most the probability that `n` of the first `p` steps are zero (no use of
 `j ≤ p`, which is not needed).  The indicators `1{ω i = 0}` are iid Bernoulli(`μ₀`) under

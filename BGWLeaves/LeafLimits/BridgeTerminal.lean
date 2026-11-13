@@ -11,7 +11,7 @@ public import Mathlib.Probability.Independence.InfinitePi
 public import Mathlib.MeasureTheory.Measure.Portmanteau
 
 /-!
-# M13: terminal oscillation control of the bridge path (part (O) of the bridge principle)
+# Terminal oscillation control of the bridge path (part (O) of the bridge principle)
 
 Source: arXiv:1110.2163v4, proof of Theorem 6.1, lines 2279-2312 (`eq:montrertension`).
 
@@ -610,7 +610,7 @@ theorem bridge_terminal_oscillation_of_half {μ : PMF ℕ} {θ : ℝ} {B : ℕ �
 -- bridge principle and are not needed for (O): see `bridge_terminal_oscillation_of_half`.
 set_option linter.unusedVariables false in
 /-- (O) Terminal oscillation control of the bridge path, in the form of the hypothesis `hosc` of BGW's
-`Skorokhod.tendsto_of_tendsto_restrict_of_oscillation` (C11b), derived from the prefix convergence (P) by the
+`Skorokhod.tendsto_of_tendsto_restrict_of_oscillation`, derived from the prefix convergence (P) by the
 time reversal of the increments (paper lines 2279-2312). -/
 theorem bridge_terminal_oscillation {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} (hc : IsCritical μ)
     (hne : μ 1 ≠ 1) (hap : Aperiodic μ)

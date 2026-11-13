@@ -20,12 +20,12 @@ public import BGW.StableTrees.ExactPrefixLimit
 public import BGW.StableTrees.KendallAdapter
 
 /-!
-# M13 provider `Absolue`
+# Lemma 5.8
 
-Provider for Lemma 5.8.  It proves the registered hole `lem_absolue` of `BGWLeaves.LeafLimits`,
-exported in namespace `BGWLeaves.LeafLimits.Absolue` with exactly the type of the statements file.
-Inputs: tranche 1 `prop_abscon`, `cor_tejhnique_i/ii`, `lem_CVf_i`, `prop_passage_ii`; M12 `thm_cvW`,
-`prop_Gamma`, `gammaA_eq_paper`, `lem_CVproba_pair`.
+Proof of Lemma 5.8: `lem_absolue` of `BGWLeaves.LeafLimits`, exported in namespace
+`BGWLeaves.LeafLimits.Absolue` with exactly the type stated there.
+Inputs: `prop_abscon`, `cor_tejhnique_i/ii`, `lem_CVf_i`, `prop_passage_ii`; from
+`BGWLeaves.ClassicalLimits`: `thm_cvW`, `prop_Gamma`, `gammaA_eq_paper`, `lem_CVproba_pair`.
 
 Lemma 5.8 is proved by transferring the stopped-tail law through Proposition 4.4(ii),
 identifying the exact endpoint density, and applying atom-free cutoffs to nonnegative bounded

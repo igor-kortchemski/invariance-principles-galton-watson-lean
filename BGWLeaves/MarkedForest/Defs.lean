@@ -6,7 +6,7 @@ public import BGW.LocallyFinite.ForestWalkLaw
 /-!
 # Leaf-marked forests: definitions
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Section 1.3 (`eq:kemperman`) and
+Source: arXiv:1110.2163v4, Section 1.3 (`eq:kemperman`) and
 Proposition 1.6 (`prop:K`, `eq:LambdaUtile`), step 3 of the proof.
 
 * `forestLeafCount ts` is the number of leaves (vertices without children) of the ordered forest

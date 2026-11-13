@@ -20,10 +20,11 @@ public import BGWLeaves.Coding
 public import BGWLeaves.Conditioning.Defs
 
 /-!
-# M12 provider `Cited`
+# The cited results, restated on BGW's objects
 
-The cited results, restated on BGW's objects. The statements have exactly the types of the frozen
-interface. The printed-norming version `thm_cv1_printed` uses M11's sealed `isRealStableAttracted_norming`.
+The cited results, restated on BGW's objects. The statements have exactly the types stated in
+`BGWLeaves.ClassicalLimits`. The printed-norming version `thm_cv1_printed` uses
+`isRealStableAttracted_norming` (`BGWLeaves.Coding`).
 -/
 
 @[expose] public section
@@ -223,18 +224,18 @@ theorem prop_Gamma {θ : ℝ} (hθ : 1 < θ ∧ θ ≤ 2) (a : ℝ≥0) (ha : a 
         ∂(tailExcLaw θ 1).toMeasure := by
   exact (gamma_identity hθ a ha F hF hFb).2.2
 
-/-- Tranche 1's density is exactly BGW's time-scaled stable density. -/
+/-- The project's density is exactly BGW's time-scaled stable density. -/
 theorem pDens_eq_stableDensityAt (θ s x : ℝ) : BGWLeaves.pDens θ s x = stableDensityAt θ s x := by
   unfold BGWLeaves.pDens stableDensityAt
   rw [neg_div, mul_comm x]
 
-/-- Tranche 1's downward-jump kernel is exactly BGW's. -/
+/-- The project's downward-jump kernel is exactly BGW's. -/
 theorem qKernel_eq_kernel (θ s x : ℝ) :
     BGWLeaves.qKernel θ s x = BGW.StableTrees.qKernel θ s x := by
   unfold BGWLeaves.qKernel BGW.StableTrees.qKernel
   rw [pDens_eq_stableDensityAt]
 
-/-- Tranche 1's integrated size-biased tail kernel is exactly BGW's. -/
+/-- The project's integrated size-biased tail kernel is exactly BGW's. -/
 theorem sizeTailKernel_eq_kernel (θ s x : ℝ) :
     BGWLeaves.sizeTailKernel θ s x = BGW.StableTrees.sizeTailKernel θ s x := by
   unfold BGWLeaves.sizeTailKernel BGW.StableTrees.sizeTailKernel

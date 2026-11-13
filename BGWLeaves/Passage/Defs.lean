@@ -6,8 +6,8 @@ public import Mathlib.Probability.ProductMeasure
 /-!
 # Stopped walk words and forests: definitions
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Definition 1.3, Proposition 1.4 (`prop:RW`),
-`eq:kemperman` and the Introduction's formula `eq:f` (lines 291, 471–542).
+Source: arXiv:1110.2163v4, Definition 1.3, Proposition 1.4 (`prop:RW`),
+`eq:kemperman` and the Introduction's formula `eq:f` (lines 291, 471–542 of the LaTeX source).
 
 * `IsFirstHit j ω p`: `p` is the first time at which the walk `W_n = ∑_{i<n} (ω i - 1)` hits `-j`.
 * `stoppedWordEvent j x`: the walk first hits `-j` at time `x.length` and its steps up to then

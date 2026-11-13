@@ -16,31 +16,31 @@ import BGW.Probability.WeakConvergence
 import BGW.MetricMeasure.WeakPerturbation
 
 /-!
-# M14 provider `Jump`
+# Theorem 7.1(i): the largest jump
 
-Provider for Theorem 7.1(i).  It provides the registered holes `maxJump_rescaledLuka` (C36.N14),
+Proofs for Theorem 7.1(i): `maxJump_rescaledLuka`,
 `thm_max_i`, `thm_max_i_pos` and `thm_max_two_zero` of `BGWLeaves.MaxDegreeLimit`, exported in namespace
-`BGWLeaves.MaxDegreeLimit.Jump` with exactly the types of the statements file.
+`BGWLeaves.MaxDegreeLimit.Jump` with exactly the types stated there.
 
 * `maxJump_rescaledLuka`: for a finite tree with at least two vertices, the Łukasiewicz path at its
   own size is BGW's word step path of the increment word `(k_u - 1)_u` (`rescaledLuka_eq_stepPath`);
   the positive jumps of a word step path are its letters (the jump at time `(i+1)/k` is the `i`-th
   letter, and no jump exceeds the largest letter), and the largest letter is `Δ(τ) - 1 ≥ 0` (the root
   has a child).
-* `thm_max_i_pos`: BGW `ae_maxJump_pos_levyExcLaw` (C22.E3).
+* `thm_max_i_pos`: BGW `ae_maxJump_pos_levyExcLaw`.
 * `tendsto_scaledMaxDegree` (any `θ`), hence `thm_max_i` and `thm_max_two_zero`.  Only the walk part of
-  the coding is used (Theorem 6.1, M13 provider `Walk`), not the joint Remark 5.10.  With
+  the coding is used (Theorem 6.1, `BGWLeaves.LeafLimits.Walk`), not the joint Remark 5.10.  With
   `ζ = treeSize τ`, `n = q k`, `c = μ₀^{1/θ}`:
   `c Δ/B_n = (c B_ζ/B_n) · Δ̄(W/B_ζ) + c/B_n` on `{ζ ≥ 2, B_ζ > 0}` (`maxJump_rescaledLuka`).  Under
   `P_μ[· | λ = n]`, `ζ ≥ λ = n` almost surely, so this event is almost sure for `n` large and the error
   `c/B_n` is deterministic.  Theorem 6.1 and the continuity of `Δ̄` (BGW `lipschitzWith_two_maxJump`)
-  give `Δ̄(W/B_ζ) → Δ̄(X^exc)`; `ζ/n → 1/μ₀` in probability (M13 provider `Helpers`) and the uniform
+  give `Δ̄(W/B_ζ) → Δ̄(X^exc)`; `ζ/n → 1/μ₀` in probability (`BGWLeaves.LeafLimits.Helpers`) and the uniform
   regular variation of `B` (BGW `IsRealStableAttracted.uniform_ratio`) give `c B_ζ/B_n → 1` in
   probability; Slutsky (BGW `tendsto_map_prodMk_of_tendsto_of_error`,
   `tendsto_probabilityMap_of_error_probability`) concludes.  For `θ = 2` the limit is `δ_0`
   (BGW `ae_maxJump_eq_zero_levyExcLaw_two`).
 
-This module does not import the statements file `BGWLeaves.LeafLimits`.
+This module does not import `BGWLeaves.LeafLimits`.
 -/
 
 @[expose] public section
@@ -215,9 +215,9 @@ private theorem one_le_maxDegree {t : PlaneTree} (h2 : 2 ≤ t.size) : 1 ≤ max
       simp
     exact hts.trans (le_maxDegree hmem)
 
-/-! ## C36.N14 and the positivity of the limit -/
+/-! ## The largest jump of the Łukasiewicz path and the positivity of the limit -/
 
-/-- **C36.N14**: `Δ̄(W(τ)) = Δ(τ) - 1` for a finite tree with at least two vertices, at every positive
+/-- **Largest jump of the Łukasiewicz path**: `Δ̄(W(τ)) = Δ(τ) - 1` for a finite tree with at least two vertices, at every positive
 scale. -/
 theorem maxJump_rescaledLuka (τ : LocallyFinite.Tree) (hτ : FiniteVertices τ)
     (h2 : 2 ≤ treeSize τ) {b : ℝ} (hb : 0 < b) :
@@ -251,7 +251,7 @@ theorem maxJump_rescaledLuka (τ : LocallyFinite.Tree) (hτ : FiniteVertices τ)
     simp [maxDegree]
 
 /-- **Theorem 7.1(i), discussion (line 2349)**: the limit `Δ̄(X^exc)` is a.s. positive for `θ < 2`
-(BGW `ae_maxJump_pos_levyExcLaw`, C22.E3). -/
+(BGW `ae_maxJump_pos_levyExcLaw`). -/
 theorem thm_max_i_pos {θ : ℝ} (hθ : 1 < θ ∧ θ ≤ 2) (hθ2 : θ < 2) :
     ∀ᵐ x : Skorokhod.D 1 ℝ ∂(levyExcLaw θ).toMeasure, 0 < Skorokhod.maxJump x :=
   ae_maxJump_pos_levyExcLaw hθ hθ2

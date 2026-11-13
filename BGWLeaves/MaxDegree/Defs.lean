@@ -6,15 +6,15 @@ public import BGWLeaves.LocalEstimates.Defs
 public import BGWLeaves.StableAnalysis.Consequences
 
 /-!
-# Maximum degree (M9): definitions and proved bridges
+# Maximum degree: definitions and bridges
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Section 7: Theorem 7.1(ii) (`thm:max`, finite variance,
+Source: arXiv:1110.2163v4 (line numbers refer to its LaTeX source), Section 7: Theorem 7.1(ii) (`thm:max`, finite variance,
 hypothesis `𝓗`), Lemma 7.2 (`lem:MM`) and the discrete lemmas of the proof of 7.1 (lines 2328-2486); Remark 7.3
 (`eq:better`).
 
-This file contains every definition of milestone M9 and the proved elementary bridges.  It contains no proof
-holes.  The statements still to be proved are in `BGWLeaves.MaxDegree`; their proofs are supplied by the
-provider modules `BGWLeaves.MaxDegree.*` (imported through `BGWLeaves.MaxDegree.Proof`).
+This file contains the definitions for the maximum degree and the elementary bridges.  The main statements
+are in `BGWLeaves.MaxDegree`; their proofs are in the modules `BGWLeaves.MaxDegree.*` (imported through
+`BGWLeaves.MaxDegree.Proof`).
 
 Conventions.
 * Walk laws as in `BGWLeaves.Vervaat.Defs`: `Measure.infinitePi (fun _ : ℕ => μ)` on `ℕ → ℕ`, step `ω i - 1`.
@@ -36,7 +36,7 @@ open scoped ENNReal NNReal Topology
 /-- Notation only (the Vervaat notation is `local`): the law of the iid walk, steps `ω i - 1`. -/
 local notation "𝐏w[" μ "]" => Measure.infinitePi (fun _ : ℕ => μ)
 
-/-! ## 0. The hypothesis `𝓗` of Section 7 (lines 2344-2347 of `largetrees_final.tex`) -/
+/-! ## 0. The hypothesis `𝓗` of Section 7 (lines 2344-2347) -/
 
 /-- The radius of convergence `R ∈ [0, ∞]` of `∑ μ(i) z^i`: the supremum of the `r ≥ 0` for which
 `∑ μ(i) r^i` converges (the definition; no Cauchy-Hadamard is used). -/
@@ -45,7 +45,7 @@ noncomputable def genFunRadius (μ : PMF ℕ) : ℝ≥0∞ :=
 
 /-- **Hypothesis `𝓗`** of Section 7: `ν` is critical, aperiodic, of finite variance, with `R > 1`, and
 if `R < ∞` then `ν(n)^{1/n} → 1/R`, while if `R = ∞` there is `N` with `(ν(k)^{1/k})_{k ≥ N}` decreasing.
-Spelled out (as in M4a/M4b for `(H_θ)`): `IsCritical`, `μ 1 ≠ 1` (part (i) of `(H_θ)`: "`μ(1) < 1`"),
+Spelled out (as `(H_θ)` in `BGWLeaves.LeafConcentration` and `BGWLeaves.LeafMass`): `IsCritical`, `μ 1 ≠ 1` (part (i) of `(H_θ)`: "`μ(1) < 1`"),
 `Aperiodic`, finite variance (`MemLp (fun j => j) 2`, the form of `HthetaTail`), then the two clauses on `R`.
 "Decreasing" is read as non-increasing (`AntitoneOn`); this is the weaker reading, which includes laws with bounded
 support (`ν(k) = 0` eventually), and it makes the theorem stronger.  `finiteVariance` is redundant under
@@ -69,7 +69,7 @@ theorem HypH.integrable_sq {μ : PMF ℕ} (h : HypH μ) :
 /-- `𝓗` implies `(H_2)` in the sense of `HthetaTail` (the standing hypothesis of Section 7 with `θ = 2`). -/
 theorem HypH.hthetaTail {μ : PMF ℕ} (h : HypH μ) : HthetaTail μ 2 := Or.inl ⟨rfl, h.finiteVariance⟩
 
-/-- `𝓗` implies `∃ a, StableDomain μ 2 a` (the form of `(H_θ)(ii)` of the sealed M4a/M4b statements). -/
+/-- `𝓗` implies `∃ a, StableDomain μ 2 a` (the form of `(H_θ)(ii)` in `BGWLeaves.LeafConcentration` and `BGWLeaves.LeafMass`). -/
 theorem HypH.stableDomain {μ : PMF ℕ} (h : HypH μ) : ∃ a : ℕ → ℝ, StableDomain μ 2 a :=
   ⟨_, Scalar.stableDomain_of_finiteVariance h.critical h.nondegenerate h.finiteVariance⟩
 

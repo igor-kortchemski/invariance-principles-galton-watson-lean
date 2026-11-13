@@ -6,9 +6,9 @@ import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
 /-!
-# Leaf concentration (M4a): Chernoff-Cramér bounds (Lemma 2.2)
+# Leaf concentration: Chernoff-Cramér bounds (Lemma 2.2)
 
-Provider of the frozen statements `lem_phi_i` and `lem_phi_ii` (Lemma 2.2 of arXiv:1110.2163v4)
+Proofs of `lem_phi_i` and `lem_phi_ii` (Lemma 2.2 of arXiv:1110.2163v4)
 and of the helper lemmas `chernoff_threshold_trivial` and `phiStar_lower`.
 
 Proof of (i): for `x = p + a ∈ (p, 1)`, the Chernoff bound `measure_ge_le_exp_mul_mgf` with the

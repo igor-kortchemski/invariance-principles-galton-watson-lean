@@ -17,26 +17,22 @@ public import BGWLeaves.StableAnalysis.Defs
 import BGWLeaves.GeneralAFunctional.Proof
 
 /-!
-# Theorem 8.1(II), functional part (M15): the statements
+# Theorem 8.1(II), functional part
 
-Source: arXiv:1110.2163v4, `largetrees_final.tex`, Theorem 8.1 (`thm:general`), part (II) (line 2502 of the
-UTF-8 copy `.orchestration/t2-arch/paper_utf8.tex`; the paper sketches the proof, lines 2510–2540).
+Source: arXiv:1110.2163v4, Theorem 8.1 (`thm:general`), part (II) (line 2502; the paper sketches the proof,
+lines 2510–2540).  Line numbers refer to the LaTeX source of arXiv:1110.2163v4.
 
-The type of `thm_general_II` was approved by the read-only Astra review of 13 Nov 2026
-(`.orchestration/astra-81II/attempt-1/result.md`: APPROVE WITH AMENDMENTS, on the owner's overnight delegation "ask astra
-if you have questions"); the amendments are in the docstrings; `thm_general_II_canonical` is Astra's amendment 1. Registered as an OPTIONAL-SCOPE package after the owner's deferral (Q3, 12 Nov 2026)
-was lifted by the sealing of M11–M14. A statement registered here is NOT a proved theorem until its hole is
-sealed and re-audited.
+The proofs are in the modules `BGWLeaves.GeneralAFunctional.*` (imported through
+`BGWLeaves.GeneralAFunctional.Proof`).
 
 Conventions. `m = μ(A)`, `ζ = ζ(τ)` the total size, `ζ_A` the number of vertices with a number of children in `A`.
 * `m = 0`: `ζ_A = 0` almost surely, there is no admissible sequence tending to infinity, and the statements are
   vacuously true (not a convergence claim about the junk Dirac law).
-* `m = 1`: `ζ_A = ζ` almost surely (also when `A ≠ ℕ`); the case is included, and the proof must identify the
+* `m = 1`: `ζ_A = ζ` almost surely (also when `A ≠ ℕ`); the case is included, and the proof identifies the
   conditioning events rather than divide by `1 − m`.
 * `0 < m < 1`: the substantive marked case.
 No lattice or non-lattice hypothesis is needed: the arithmetic of `A` enters only the intermediate local
 estimates, through `arithFactor μ A`.
-The remaining difficulty is the functional conditioning machinery, including the random final marked increment.
 -/
 
 @[expose] public section
@@ -53,13 +49,12 @@ when `σ² = ∞`, as printed) and `τ_n ∼ P_μ[· | ζ_A = n]`, the three cod
 `(X^exc, H^exc, H^exc)` (`excTripleLaw θ`, the joint excursion law with the height duplicated), along every
 sequence `q k → ∞` of admissible sizes (`P_μ[ζ_A = q k] > 0`). `B` is ANY admissible norming for the paper's
 specified stable law (`IsRealStableAttracted`, which includes `1 < θ ≤ 2` and eventual positivity); the printed
-explicit norming formula of Theorem 1.10 needs the corrections R2/R4, so the corrected canonical norming is the
-corollary `thm_general_II_canonical`. Form: STRONGER than printed in the norming; the printed index set
+explicit norming formula of Theorem 1.10 needs corrections 1 and 2 of `FORMALIZATION_REPORT.md`, so the
+corrected canonical norming is the corollary `thm_general_II_canonical`. Form: STRONGER than printed in the norming; the printed index set
 ("for `n` with `P[ζ_A = n] > 0`") is kept; no lattice hypothesis. Measurability: `measurable_codingTriple`
 (`BGWLeaves/Coding/Defs.lean`); the conditioning event is measurable (`measurableSet_zetaAEvent`). Boundary
 cases: if `μ(A) = 0` then `ζ_A = 0` almost surely, no admissible `q k ≥ 1` exists and the statement is vacuous;
-if `μ(A) = 1` then `ζ_A = ζ` almost surely and the statement is the size-conditioned one. Statement approved
-(Astra, 13 Nov 2026); the proof is a registered hole until sealed. -/
+if `μ(A) = 1` then `ζ_A = ζ` almost surely and the statement is the size-conditioned one. -/
 theorem thm_general_II {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} {A : Set ℕ} (hA : A.Nonempty)
     (hc : IsCritical μ) (hne : μ 1 ≠ 1) (hap : Aperiodic μ)
     (hB : IsRealStableAttracted (realOffspringStepLaw μ) θ B)
@@ -70,8 +65,8 @@ theorem thm_general_II {μ : PMF ℕ} {θ : ℝ} {B : ℕ → ℝ} {A : Set ℕ}
   exact BGWLeaves.GeneralAFunctional.Main.thm_general_II hA hc hne hap hB hAfin hqtop hq
 
 /-- **Theorem 8.1(II), canonical-norming corollary**: as `thm_general_II` with the CORRECTED canonical norming
-`B_n = norming (stepLaw μ) θ n` of tranche 1 (R2, R4), under `(H_θ)` in tranche 1's form. ROUTINE from
-`thm_general_II` and `isRealStableAttracted_norming` (M11). `hne` and `hap` are carried for uniformity with
+`B_n = norming (stepLaw μ) θ n` (corrections 1 and 2 of `FORMALIZATION_REPORT.md`), under `(H_θ)` in the
+form `∃ a, StableDomain μ θ a`. Proof: from `thm_general_II` and `isRealStableAttracted_norming`. `hne` and `hap` are carried for uniformity with
 `thm_general_II`. -/
 theorem thm_general_II_canonical {μ : PMF ℕ} {θ : ℝ} {A : Set ℕ} (hA : A.Nonempty)
     (hc : IsCritical μ) (hne : μ 1 ≠ 1) (hap : Aperiodic μ) (hDA : ∃ a, StableDomain μ θ a)

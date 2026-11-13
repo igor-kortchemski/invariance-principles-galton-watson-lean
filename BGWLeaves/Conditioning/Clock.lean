@@ -7,11 +7,11 @@ import BGWLeaves.LeafConcentration.OeLemmas
 import BGWLeaves.Vervaat.Discrete
 
 /-!
-# M6 provider `Clock`
+# Lemma 5.6: concentration of the leaf clock
 
-Provider for Lemma 5.6: `clock_unconditioned_oe`, `clock_leafConditioned_oe`, `lem_CVf_i`, `lem_CVf_ii`.  The theorems proved here are the registered holes of
-`BGWLeaves.Conditioning`; they are exported in namespace `BGWLeaves.Conditioning.Clock` with exactly the types of the
-statements file.
+Proof of Lemma 5.6: `clock_unconditioned_oe`, `clock_leafConditioned_oe`, `lem_CVf_i`, `lem_CVf_ii`.  The theorems are
+those stated in `BGWLeaves.Conditioning`; they are exported in namespace `BGWLeaves.Conditioning.Clock` with exactly
+the types stated there.
 
 Proof outline.  A deterministic inversion lemma (`clock_gen`) turns the two-sided control
 `|c(m) - ρ (m - 1)| ≤ E` of an integer counter `c` on a window `[m1, m2]` into the control of the first index

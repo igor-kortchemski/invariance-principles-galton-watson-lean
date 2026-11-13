@@ -246,7 +246,7 @@ theorem gaussian_norming_centeredLaplace_limit
   field_simp
 
 /-- A one-step centered Laplace expansion gives attraction after taking powers.
-The centering factor here is exactly the one used by the continuity provider. -/
+The centering factor here is exactly the one used by the continuity module. -/
 theorem isStableAttracted_of_centered_one_step_limit
     {θ : ℝ} (hθ : 1 < θ ∧ θ ≤ 2)
     (hstep : ν {z : ℤ | z < -1} = 0)

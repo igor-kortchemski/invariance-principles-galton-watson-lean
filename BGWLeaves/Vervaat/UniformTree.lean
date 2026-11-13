@@ -5,11 +5,11 @@ import BGW.StableTrees.CriticalSupport
 import Mathlib.Analysis.SpecificLimits.Normed
 
 /-!
-# M5 provider `UniformTree`
+# The displayed law and the uniform trees (7.3)
 
-Provider for the displayed law and the uniform trees (7.3).  The theorems proved here are the registered holes of
-`BGWLeaves.Vervaat`; they are exported in namespace `BGWLeaves.Vervaat.UniformTree` with exactly the types of the
-statements file.
+Proofs for the displayed law and the uniform trees (7.3).  The theorems are those stated in
+`BGWLeaves.Vervaat`; they are exported in namespace `BGWLeaves.Vervaat.UniformTree` with exactly the types
+stated there.
 -/
 
 @[expose] public section

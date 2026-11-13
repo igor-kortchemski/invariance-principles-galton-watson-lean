@@ -4,9 +4,9 @@ public import BGWLeaves.Passage.Defs
 import BGWLeaves.Passage.Proof
 
 /-!
-# Proposition 1.4, `eq:kemperman` and `eq:f` (M2b)
+# Proposition 1.4, `eq:kemperman` and `eq:f`
 
-Source: arXiv:1110.2163v4, Section 1.3 (lines 291, 471–542): the stopped walk and the forest of
+Source: arXiv:1110.2163v4, Section 1.3 (lines 291, 471–542 of the LaTeX source): the stopped walk and the forest of
 `j` independent Galton–Watson trees, the marked and unmarked Kemperman formulas, and the
 Introduction's one-tree formula.
 -/

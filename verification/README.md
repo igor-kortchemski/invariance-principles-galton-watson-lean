@@ -73,13 +73,17 @@ axiom audit on 6,705 declarations.
 The same workflow also passed at the preparation baseline `73edc6f`
 ([run 43387354297](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/runs/43387354297)),
 before the new interface and helper-proof adaptations. The new Linux
-[Comparator workflow](../.github/workflows/comparator.yml) is prepared but has
-not run.
+[Comparator workflow](../.github/workflows/comparator.yml) runs the sandboxed
+NanoDa-backed check on demand. The [full-preflight workflow](../.github/workflows/palomar-full.yml)
+calls the pinned official verifier on an explicitly selected public commit.
+Their Actions runs identify the checked source revision and preserve diagnostics.
 
-## Not run
+## Checks outside the local record
 
-- Official sandboxed Linux Comparator for the new discrete interface.
-- Full Palomar mechanical preflight on an exact public candidate commit.
+- Official sandboxed Linux Comparator for the new discrete interface: see
+  the corresponding exact-commit Actions runs.
+- Full Palomar mechanical preflight on an exact public candidate commit:
+  see the corresponding Actions run and its mechanical report.
 - Independent review of the new single-file Challenge presentation; the
   existing development audits are retained and its mathematical interface
   has been self-reviewed against the paper.

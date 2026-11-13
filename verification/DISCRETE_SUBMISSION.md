@@ -72,20 +72,21 @@ Actual results are recorded in [README.md](README.md). Local comparison and
 kernel replay are diagnostics, not the official sandboxed Linux Comparator
 or the full Palomar verifier. The prepared
 [Comparator workflow](../.github/workflows/comparator.yml) runs the former;
-the inactive [full workflow template](palomar-full.workflow.yml.template)
-uses the official reusable verifier with `mode: full`.
+the [full-preflight workflow](../.github/workflows/palomar-full.yml) uses the
+official reusable verifier with `mode: full`. The inactive
+[template](palomar-full.workflow.yml.template) records the same call.
 
 The pipeline revision was checked on 13 November 2026:
 `14aa8d6b3c2f14a8540605e37144560b9a00e7e7`.
 The [submission policy](https://github.com/PalomarRegistry/PalomarPolicy/blob/main/CONTRIBUTING.md)
 and Challenge allowlist were checked on the same date.
 
-The source repository remains private. Publishing it would expose the
-vendored BGW source slice from `ce30db3f3563cd6ce35dd3f6e7d19107baef813a`,
-including material not available at a compatible public upstream revision.
+The public source repository includes the vendored BGW source slice from
+`ce30db3f3563cd6ce35dd3f6e7d19107baef813a`, including material for which a
+compatible public upstream revision was unavailable during preparation.
 The two existing commits use the maintainer's GitHub noreply identity; a
 targeted scan found no private filesystem paths or common credential-token
 markers in their first-party contents. Registration additionally preserves the full Git
 history and publishes the returned review, under the Palomar publication
-contract. No visibility change, push, workflow dispatch, intake or registration
-has been performed by this preparation.
+contract. GitHub publication and mechanical verification are separate from
+registry intake and the later decision about registering the returned review.

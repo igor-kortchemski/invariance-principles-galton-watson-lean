@@ -91,9 +91,9 @@ review:
     The new Challenge has not received an independent statement review.
     Local exact comparison, Lean and NanoDa replays, and the 6,705-declaration
     transitive axiom audit passed on 13 November 2026; evidence is recorded
-    in verification/README.md. These diagnostics are distinct from the
-    unrun official Linux Comparator and full Palomar verification.
-    No Palomar registration is claimed.
+    in verification/README.md. Exact-commit official Linux Comparator and
+    full Palomar mechanical reports are provided by the corresponding
+    GitHub Actions runs. These checks do not imply Palomar registration.
 alignment:
   namespace: BGWLeaves
   statements:

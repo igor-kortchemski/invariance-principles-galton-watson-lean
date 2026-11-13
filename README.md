@@ -2,8 +2,10 @@
 
 [![Lean build and axiom audit](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml?query=branch%3Amain)
 [![Comparator](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml?query=branch%3Amain)
-Local comparison and Lean/NanoDa replays pass for the seven selected statements;
-the Linux workflow and full Palomar preflight have not run.
+Local comparison and Lean/NanoDa replays pass for the seven selected statements.
+[Linux Comparator runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml)
+and [full Palomar preflight runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml)
+identify the exact commits they check.
 
 Lean 4 and Mathlib formalization of *Invariance principles for Galton–Watson
 trees conditioned on the number of leaves* by Igor Kortchemski

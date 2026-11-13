@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: >-
+  To cite the mathematics, cite the paper (preferred citation below). To cite
+  the formalization itself, cite this repository.
+title: "Invariance principles for Galton–Watson trees conditioned on the number of leaves: Lean formalization"
+type: software
+authors:
+  - family-names: Kortchemski
+    given-names: Igor
+repository-code: https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean
+license: Apache-2.0
+keywords:
+  - Lean 4
+  - Mathlib
+  - formalization
+  - Galton–Watson trees
+  - invariance principles
+  - stable Lévy processes
+abstract: >-
+  Lean 4 and Mathlib formalization of every numbered result of "Invariance
+  principles for Galton–Watson trees conditioned on the number of leaves" by
+  Igor Kortchemski, Theorems 1.10 and 8.1(I) in corrected form, using only the
+  axioms propext, Classical.choice and Quot.sound. Produced with AI agents; the
+  Lean kernel checks the proofs.
+preferred-citation:
+  type: article
+  title: Invariance principles for Galton–Watson trees conditioned on the number of leaves
+  authors:
+    - family-names: Kortchemski
+      given-names: Igor
+  journal: Stochastic Processes and their Applications
+  volume: 122
+  year: 2012
+  start: 3126
+  end: 3172
+  doi: 10.1016/j.spa.2012.05.013
+  url: https://doi.org/10.1016/j.spa.2012.05.013

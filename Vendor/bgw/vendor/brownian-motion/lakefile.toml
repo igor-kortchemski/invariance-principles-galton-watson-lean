@@ -1,0 +1,9 @@
+name = "BrownianMotion"
+requiresModuleSystem = true
+[leanOptions]
+autoImplicit = false
+[[require]]
+name = "kolmogorov_extension4"
+path = "../kolmogorov-extension4"
+[[lean_lib]]
+name = "BrownianMotion"

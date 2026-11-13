@@ -1,0 +1,18 @@
+{
+  "lean_files": 1015,
+  "missing_module_headers": [],
+  "lean_symlinks": [],
+  "largest_file": [
+    2214,
+    "BGWLeaves/LocalEstimates/Technique.lean"
+  ],
+  "challenge_lines": 999,
+  "challenge_bytes": 87054,
+  "theorem_targets": 79,
+  "principal_theorems": 9,
+  "construction_theorems": 70,
+  "characterized_definition_targets": [
+    "BGW.Skorokhod.instFunLikeDElemRealIccOfNat",
+    "BGW.Skorokhod.instMetricSpace"
+  ]
+}

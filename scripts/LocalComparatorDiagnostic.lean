@@ -48,6 +48,12 @@ public def reportMismatches (challenge solution : LeanExport.ExportedEnv)
       | IO.println s!"missing from solution: {n}"; continue
     let cc := challenge.constMap[n]?
     let selected := targets.contains n || holes.contains n
+    if selected then
+      if let some cc := cc then
+        if cc.type != sc.type then
+          let (a, b) := firstDifference cc.type sc.type
+          IO.println s!"selected type mismatch: {n}"
+          IO.println s!"  first type difference: {a} / {b}"
     if !selected && cc != some sc then
       IO.println s!"reached mismatch: {n}"
       if let some cc := cc then

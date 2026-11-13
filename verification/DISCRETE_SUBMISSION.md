@@ -1,5 +1,8 @@
 # Discrete submission candidate
 
+Historical account of the initial seven-result interface. The current expanded
+scope is described in [FUNCTIONAL_SUBMISSION.md](FUNCTIONAL_SUBMISSION.md).
+
 Prepared from the curated export at
 `73edc6fee68b05eb89a448ba5f2fddab39869b56` on 13 November 2026.
 The development checkout is separate and was not edited by this preparation.

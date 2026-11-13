@@ -8,9 +8,13 @@ project:
     their probability asymptotics (Theorem 3.1, Introduction (I)), maximum
     degree concentration under the paper's hypothesis H (Theorem 7.1(ii)),
     and corrected probability asymptotics for the number of vertices with
-    degree in an arbitrary set (Theorem 8.1(I)). Seven declarations are
-    selected for comparison. The repository also contains the functional
-    invariance principles, which are outside this submission's scope.
+    degree in an arbitrary set (Theorem 8.1(I)). The principal functional
+    results are the joint convergence of the rescaled Lukasiewicz path,
+    contour and height under leaf conditioning (Introduction (II), including
+    lattice laws) and under offspring-mark conditioning (Theorem 8.1(II)).
+    Nine principal declarations and their explicit construction lemmas are
+    selected for comparison. Tree laws, codings and limit laws are concrete;
+    evaluation and J1 metric instances are fixed by checked characterizations.
   authors:
     - Igor Kortchemski
   license: Apache-2.0
@@ -45,12 +49,21 @@ status:
     Theorem 3.1(i–ii) including lattice cases, Theorem 7.1(ii), and corrected
     Theorem 8.1(I). The last is proved for arbitrary degree sets of positive
     offspring mass, without the printed finite-or-cofinite restriction or
-    aperiodicity assumption. The exact seven declarations are listed in
-    comparator.json and restated in Challenge.lean with concrete definitions.
-    Its seven deliberate theorem placeholders are excluded from sorry_count;
-    no definition is left unspecified. The full development and its broader
-    coverage record remain in the repository; functional convergence and
-    Gromov–Hausdorff–Prokhorov claims are outside the comparison and submission.
+    aperiodicity assumption. It also selects Introduction (II) in its lattice
+    generality and Theorem 8.1(II): joint walk, contour and height convergence
+    to the coupled normalized stable excursion and height, with any
+    admissible norming and along every admissible sequence tending to infinity.
+    Theorem 8.1(II) retains the finite-or-cofinite restriction on marks in
+    infinite variance. The nine principal results and their supporting
+    construction lemmas are listed in comparator.json and restated in
+    Challenge.lean. Deliberate Challenge placeholders are excluded from
+    sorry_count: theorem proofs and two typeclass instances supplied by
+    Solution. The instances are characterized by coe_mk (evaluation is the
+    underlying path) and dist_eq_j1Dist (the metric has the explicit J1
+    distance); these conditions determine their values. No tree law, coding,
+    stable law, excursion law or height law is left unspecified. Other functional
+    statements and the Gromov–Hausdorff–Prokhorov claims remain outside this
+    comparison and submission. The broader coverage record is in the repository.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
@@ -83,15 +96,18 @@ fidelity:
     of k−1 for degrees outside A, and is strengthened as stated in status.scope.
     The printed false versions are not claimed proved. Theorem 3.1(ii)
     follows the walk indexed by leaves, including the lattice case omitted
-    from the printed proof. See FORMALIZATION_REPORT.md for the full record.
+    from the printed proof. The two selected functional principles also
+    include lattice laws, and retain the joint coupling of the excursion
+    with its height. See FORMALIZATION_REPORT.md for the full record.
 review:
   status: agent-audited; proofs kernel-checked, not human-reviewed
   reviewers: [Claude Sonnet 5.5, Claude Opus 5.5, GPT-6.1 Sol and GPT-6 Astra audit agents]
   notes: >-
-    The new Challenge has not received an independent statement review.
-    Local exact comparison, Lean and NanoDa replays, and the 6,705-declaration
-    transitive axiom audit passed on 13 November 2026; evidence is recorded
-    in verification/README.md. Exact-commit official Linux Comparator and
+    The expanded Challenge is self-reviewed, not independently reviewed.
+    The original proof development and its 6,705-declaration transitive
+    axiom audit are unchanged. Verification of the expanded interface,
+    including exact comparison and kernel replay, is recorded in
+    verification/README.md. Exact-commit official Linux Comparator and
     full Palomar mechanical reports are provided by the corresponding
     GitHub Actions runs. These checks do not imply Palomar registration.
 alignment:
@@ -116,6 +132,16 @@ alignment:
       module: BGWLeaves.GeneralAInf
       status: proved in corrected form
       note: The factor gcd(b−1, d) is replaced by the gcd of the degrees in supp μ ∩ A and of k−1 for k ∈ supp μ ∖ A, along n ≡ 1 modulo it.
+    - source: Introduction (II)
+      lean: BGWLeaves.intro_II_general
+      module: BGWLeaves.LeafLimitsGeneral
+      status: proved
+      note: Joint convergence in D(J1) times two uniform continuous-path spaces, with any admissible norming; no extra non-lattice assumption.
+    - source: Theorem 8.1 (II)
+      lean: BGWLeaves.thm_general_II
+      module: BGWLeaves.GeneralAFunctional
+      status: proved
+      note: Joint convergence under offspring-mark conditioning along admissible sizes; marks are finite or cofinite in infinite variance, as in the paper.
 acknowledgements: >-
   Lean, Mathlib, the Bienaymé–Galton–Watson trees formalization, and Rémy
   Degenne's brownian-motion and kolmogorov_extension4 projects, whose notices

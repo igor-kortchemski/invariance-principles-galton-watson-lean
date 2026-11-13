@@ -96,7 +96,7 @@ the checks.
 | Lemma 7.2 | `lem_MM` | [MaxDegree](BGWLeaves/MaxDegree.lean) | proved |
 | Remark 7.3 | `rem_uniformtree_iff`, `rem_uniformtree_tail_upper`, `rem_uniformtree_window` | [Vervaat](BGWLeaves/Vervaat.lean), [MaxDegree](BGWLeaves/MaxDegree.lean) | proved, precise form |
 | Theorem 8.1(I) | `thm81_corrected_general`, `thm81_corrected`, `thm81_infiniteVariance_A_finite`, `thm81_infiniteVariance_A_cofinite` | [GeneralAInf](BGWLeaves/GeneralAInf.lean) | proved, corrected |
-| Theorem 8.1(II) | `thm_general_II`, `thm_general_II_canonical` | [GeneralAFunctional](BGWLeaves/GeneralAFunctional.lean) | proved, for every `A` |
+| Theorem 8.1(II) | `thm_general_II`, `thm_general_II_canonical` | [GeneralAFunctional](BGWLeaves/GeneralAFunctional.lean) | proved; `A` finite or cofinite in infinite variance, as in the paper |
 
 Definitions 1.1–1.3, 1.8, 2.1, 2.3 and 6.3 are Lean definitions (in the vendored
 library for trees, in the `Defs` modules here otherwise), with proved

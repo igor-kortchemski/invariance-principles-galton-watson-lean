@@ -1,0 +1,8 @@
+{
+  "official_palomar_report": false,
+  "solution_export_sha256": "9077193e7b8d1399afa3b3eda9eab0866e192aafa99e0010fc25c12fdd1386c2",
+  "checks": {
+    "leanchecker": 0,
+    "nanoda": 0
+  }
+}

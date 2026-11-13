@@ -2,7 +2,8 @@
 
 [![Lean build and axiom audit](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml?query=branch%3Amain)
 [![Comparator and full Palomar preflight](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml?query=branch%3Amain)
-Local comparison and Lean/NanoDa replays pass for the seven selected statements.
+Comparison, kernel replay and exact-commit verification evidence is recorded
+in [verification/](verification/README.md).
 [Linux Comparator runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml)
 and [full Palomar preflight runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml)
 identify the exact commits they check.
@@ -15,12 +16,18 @@ trees conditioned on the number of leaves* by Igor Kortchemski
 **Every numbered theorem, proposition, lemma and corollary of the paper is
 proved, Theorems 1.10 and 8.1(I) in corrected form, using only the axioms
 `propext`, `Classical.choice` and `Quot.sound`, with no proof holes in the development.**
-The [Palomar candidate](Challenge.lean) selects seven discrete statements:
-Theorems 1.10(i–iii), 3.1(i–ii), 7.1(ii), and corrected 8.1(I).
-The functional invariance principles remain part of the repository and are
-outside this comparison and submission. No Palomar registration is claimed.
+The [Palomar candidate](Challenge.lean) selects nine principal statements:
+Theorems 1.10(i–iii), 3.1(i–ii), 7.1(ii), corrected 8.1(I), Introduction (II)
+including lattice laws, and Theorem 8.1(II). Supporting construction lemmas
+are also compared so that the statement file gives concrete tree laws,
+codings, the J1 topology, and the coupled excursion/height law without
+repeating their construction proofs. Two typeclass construction holes are
+fixed by checked equations: evaluation is the underlying path and the metric
+has the explicit J1 distance. The limiting laws are concrete. No Palomar
+registration is claimed.
 Links: [comparison statements](Challenge.lean) · [functional statements](BGWLeaves/LeafLimits.lean) ·
 [correspondence record](FORMALIZATION_REPORT.md) ·
+[submission interface](verification/FUNCTIONAL_SUBMISSION.md) ·
 [verification](verification/README.md).
 
 ## Main results
@@ -40,7 +47,7 @@ step law ($W_n/B_n\to X_1$, `IsRealStableAttracted`).
 | Theorem 6.1 | [`thm_cvW3`](BGWLeaves/LeafLimits.lean) | Łukasiewicz path of $\tau_n$ on $[0,1]$ |
 | Theorem 7.1 | [`thm_max_i`](BGWLeaves/MaxDegreeLimit.lean), [`thm_max_ii`](BGWLeaves/MaxDegree.lean) | maximum degree: $\mu_0^{1/\theta}\Delta(\tau_n)/B_n\to\bar\Delta(X^{exc})$ for $\theta<2$; concentration around $D(n)$ under (H) |
 | Theorem 8.1(I), corrected | [`thm81_corrected_general`](BGWLeaves/GeneralAInf.lean) | $\mathbb P_\mu[\zeta_{\mathcal A}=n]\sim\mu(\mathcal A)^{1/\theta}p_1(0)\,e/(h(n)n^{1/\theta+1})$ for $n\equiv1\bmod e$ |
-| Theorem 8.1(II) | [`thm_general_II`](BGWLeaves/GeneralAFunctional.lean) | the joint limit under the conditioning $\zeta_{\mathcal A}(\tau)=n$, for every $\mathcal A$ |
+| Theorem 8.1(II) | [`thm_general_II`](BGWLeaves/GeneralAFunctional.lean) | the joint limit under the conditioning $\zeta_{\mathcal A}(\tau)=n$; $\mathcal A$ finite or cofinite in infinite variance |
 | GHP claim, Introduction | [`intro_GHP_leaf`](BGWLeaves/LeafLimits.lean) | $\tau_n$, with distances multiplied by $\mu_0^{1-1/\theta}B_n/n$ and the uniform measure on its leaves, converges to the stable tree |
 
 The norming of Theorem 1.10 is corrected (the constant
@@ -59,9 +66,11 @@ the [correspondence record](FORMALIZATION_REPORT.md).
 
 ## Where to start
 
-- [Challenge.lean](Challenge.lean): the seven selected statements and their
-  concrete mathematical definitions, importing only Mathlib; their proofs
-  are deliberate placeholders supplied by [Solution.lean](Solution.lean).
+- [Challenge.lean](Challenge.lean): the nine principal statements, their
+  construction lemmas and concrete mathematical definitions, importing only
+  Mathlib and Lean core; the theorem proofs are deliberate placeholders
+  supplied by [Solution.lean](Solution.lean), as are the two characterized
+  typeclass instances.
 - [BGWLeaves/LeafLimits.lean](BGWLeaves/LeafLimits.lean): the invariance
   principles (Theorems 4.5, 5.9, 6.1, Introduction (II)).
 - [BGWLeaves/LeafMass.lean](BGWLeaves/LeafMass.lean): the number of leaves
@@ -97,7 +106,8 @@ lake comparator --config comparator.json
 ```
 
 Do not run `lake update`. A full build compiles about 1,000 project and
-vendored modules on top of Mathlib. Only the seven deliberate placeholders in
+vendored modules on top of Mathlib. Only the deliberate Challenge placeholders
+for theorem proofs and two characterized typeclass constructions in
 `Challenge.lean` use `sorry`; that module is separate from the proved library. The axiom audit
 fails if any project or vendored declaration depends on an axiom other than
 the three above. To browse
@@ -105,7 +115,7 @@ the code, open the cloned folder in VS Code with the Lean 4 extension.
 
 The [build workflow](.github/workflows/lean.yml) runs these checks on every
 push. The [Comparator workflow](.github/workflows/comparator.yml) checks the
-seven discrete statements with the Linux sandbox and NanoDa. It covers only
+selected statements with the Linux sandbox and NanoDa. It covers only
 the declarations in [comparator.json](comparator.json). Local comparison and
 kernel replay are diagnostics; the official full Palomar verification remains
 separate. Actual results are dated in [verification/](verification/README.md).

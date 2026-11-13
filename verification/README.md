@@ -63,6 +63,41 @@ passing full-candidate build. The completed checks above apply to the selected
 discrete interface. A clean whole-repository build remains part of the final
 Linux verification and official full preflight on the public candidate commit.
 
+## 13 November 2026, expanded functional submission (local)
+
+The [expanded interface](FUNCTIONAL_SUBMISSION.md) adds Introduction (II) in
+its lattice generality and Theorem 8.1(II), keeping the seven discrete results.
+The configuration compares nine principal theorems, 70 construction theorems,
+and two typeclass constructions characterized by checked evaluation and
+distance equations. The laws, codings and joint limiting law are concrete.
+
+- **Build:** `lake build Solution` passes (4,495 jobs), as does
+  `lake build Challenge` (9,048 jobs including canonical Mathlib).
+- **Exact comparison:** Lake's `compareAt` accepts all selected statements,
+  definitions and reached constants; `checkAxioms` accepts the three permitted
+  axioms. See the [comparison log](2026-11-13-functional/comparison.log).
+- **Kernel replay:** Lean's `leanchecker` and NanoDa both exit successfully on
+  the same actual candidate Solution export. NanoDa treats unpermitted axioms
+  as hard errors. The [replay record](2026-11-13-functional/kernel-replays.json)
+  binds both checks to that export's SHA-256.
+- **Layout:** Challenge is 999 lines and 87,054 bytes. All 1,015 committed Lean
+  files have module headers, no Lean file is a symlink, and the largest has
+  2,214 lines. See [layout](2026-11-13-functional/layout.json).
+- **Preservation:** every original proof and dependency file is byte-identical
+  to the earlier complete Linux build and audit at `3fd1915`
+  ([run 43402042414](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/runs/43402042414)).
+  The [preservation record](2026-11-13-functional/proof-preservation.json)
+  records the individual hashes. The development checkout and its freeze
+  records were not edited.
+
+The [machine record](2026-11-13-functional/local-comparison.json) binds the
+comparison and replays to the final Lean inputs, toolchain, Lake files and
+configuration. Large exports and compiled tools are not committed. These are
+local macOS diagnostics, without the Linux sandbox; the exact-commit official
+full preflight is recorded by the [workflow runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml).
+The expanded Challenge is self-reviewed, not independently reviewed. No
+Palomar submission or registration is claimed by these checks.
+
 ## Continuous integration
 
 The [build workflow](../.github/workflows/lean.yml) runs a clean build with

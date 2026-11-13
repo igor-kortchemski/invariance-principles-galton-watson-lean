@@ -4,9 +4,11 @@ public import BGWLeaves.StableAnalysis.Consequences
 public import BGWLeaves.LeafMass
 public import BGWLeaves.GeneralAInf
 public import BGWLeaves.MaxDegree
+public import BGWLeaves.LeafLimitsGeneral
+public import BGWLeaves.GeneralAFunctional
 
 /-!
-# Solution: discrete asymptotics for conditioned Galton–Watson trees
+# Solution: invariance principles and asymptotics for conditioned Galton–Watson trees
 
 Exports the proved declarations selected by `comparator.json`. The independent
 statement interface is `Challenge.lean`; this module does not import it.

@@ -55,7 +55,7 @@ jobs:
           lake build BGWLeaves Solution 2>&1 | tee "$RUNNER_TEMP/proved-build.log"
           if grep -n "declaration uses 'sorry'" "$RUNNER_TEMP/proved-build.log"; then exit 1; fi
           lake env lean scripts/AxiomAudit.lean 2>&1 | tee "$RUNNER_TEMP/axiom-audit.log"
-      - name: Compare the seven statements with NanoDa
+      - name: Compare the selected statements with NanoDa
         run: |
           set -o pipefail
           lake comparator --config comparator.json 2>&1 | tee "$RUNNER_TEMP/comparator.log"

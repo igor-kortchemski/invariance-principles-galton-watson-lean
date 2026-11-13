@@ -55,11 +55,11 @@ $(-\Gamma(1-\theta))^{1/\theta}$ for $\theta<2$, and a factor $1/2$ under the
 square root for $\theta=2$, $\sigma^2=\infty$); every statement holds for any
 admissible norming, and corollaries give the corrected one. In Theorem 8.1(I)
 the factor $\gcd(b-1,d)$ is replaced by $e$, the gcd of the degrees in
-$\operatorname{supp}\mu\cap\mathcal A$ and of $k-1$ for the others. Where a
+$\mathrm{supp}\mu\cap\mathcal A$ and of $k-1$ for the others. Where a
 printed display is ill-posed (Theorem 5.1, Proposition 5.3, Lemma 5.7,
 Remark 7.3), the Lean statement is a precise version of it. Theorems
 5.9, 6.1, 7.1(i) and the steps leading to them carry the paper's Section 5
-assumption that $\operatorname{supp}\mu\setminus\{0\}$ is non-lattice (`hnl`);
+assumption that $\mathrm{supp}\mu\setminus\{0\}$ is non-lattice (`hnl`);
 Introduction (II) and Theorem 8.1(II) are also proved without it. The full
 correspondence, the proof-route differences and what is not formalized are in
 the [correspondence record](FORMALIZATION_REPORT.md).

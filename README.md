@@ -1,7 +1,7 @@
 # Invariance principles for Galton–Watson trees conditioned on the number of leaves
 
 [![Lean build and axiom audit](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/lean.yml?query=branch%3Amain)
-[![Comparator](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml?query=branch%3Amain)
+[![Comparator and full Palomar preflight](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml/badge.svg?branch=main)](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml?query=branch%3Amain)
 Local comparison and Lean/NanoDa replays pass for the seven selected statements.
 [Linux Comparator runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/comparator.yml)
 and [full Palomar preflight runs](https://github.com/igor-kortchemski/invariance-principles-galton-watson-lean/actions/workflows/palomar-full.yml)
@@ -109,6 +109,8 @@ seven discrete statements with the Linux sandbox and NanoDa. It covers only
 the declarations in [comparator.json](comparator.json). Local comparison and
 kernel replay are diagnostics; the official full Palomar verification remains
 separate. Actual results are dated in [verification/](verification/README.md).
+The Comparator badge reports the aggregate official full preflight, including
+comparison and kernel replays; the standalone Linux workflow is a diagnostic.
 
 ## How it was made
 

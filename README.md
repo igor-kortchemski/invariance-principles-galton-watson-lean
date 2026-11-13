@@ -46,7 +46,7 @@ step law ($W_n/B_n\to X_1$, `IsRealStableAttracted`).
 | Theorem 5.9 | [`thm_cvG_i`, `thm_cvG_ii`](BGWLeaves/LeafLimits.lean) | contour and height functions of $\tau_n$ |
 | Theorem 6.1 | [`thm_cvW3`](BGWLeaves/LeafLimits.lean) | Łukasiewicz path of $\tau_n$ on $[0,1]$ |
 | Theorem 7.1 | [`thm_max_i`](BGWLeaves/MaxDegreeLimit.lean), [`thm_max_ii`](BGWLeaves/MaxDegree.lean) | maximum degree: $\mu_0^{1/\theta}\Delta(\tau_n)/B_n\to\bar\Delta(X^{exc})$ for $\theta<2$; concentration around $D(n)$ under (H) |
-| Theorem 8.1(I), corrected | [`thm81_corrected_general`](BGWLeaves/GeneralAInf.lean) | $\mathbb P_\mu[\zeta_{\mathcal A}=n]\sim\mu(\mathcal A)^{1/\theta}p_1(0)\,e/(h(n)n^{1/\theta+1})$ for $n\equiv1\bmod e$ |
+| Theorem 8.1(I), corrected | [`thm81_corrected_general`](BGWLeaves/GeneralAInf.lean) | $\mathbb P_\mu[\zeta_{\mathcal A}=n]\sim\mu(\mathcal A)^{1/\theta}p_1(0)e/(h(n)n^{1/\theta+1})$ for $n\equiv1\bmod e$ |
 | Theorem 8.1(II) | [`thm_general_II`](BGWLeaves/GeneralAFunctional.lean) | the joint limit under the conditioning $\zeta_{\mathcal A}(\tau)=n$; $\mathcal A$ finite or cofinite in infinite variance |
 | GHP claim, Introduction | [`intro_GHP_leaf`](BGWLeaves/LeafLimits.lean) | $\tau_n$, with distances multiplied by $\mu_0^{1-1/\theta}B_n/n$ and the uniform measure on its leaves, converges to the stable tree |
 
@@ -59,7 +59,7 @@ $\mathrm{supp}\mu\cap\mathcal A$ and of $k-1$ for the others. Where a
 printed display is ill-posed (Theorem 5.1, Proposition 5.3, Lemma 5.7,
 Remark 7.3), the Lean statement is a precise version of it. Theorems
 5.9, 6.1, 7.1(i) and the steps leading to them carry the paper's Section 5
-assumption that $\mathrm{supp}\mu\setminus\{0\}$ is non-lattice (`hnl`);
+assumption that $\mathrm{supp}\mu\setminus\lbrace0\rbrace$ is non-lattice (`hnl`);
 Introduction (II) and Theorem 8.1(II) are also proved without it. The full
 correspondence, the proof-route differences and what is not formalized are in
 the [correspondence record](FORMALIZATION_REPORT.md).
